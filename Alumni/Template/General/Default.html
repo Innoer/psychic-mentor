@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>哈尔滨工业大学（威海）校友会</title>
+</head>
+<body>
+    <ul>
+        {% for top in TopColumns -%}
+        <li>
+            {% if top.IsExternalLink -%} 
+                <a href="{{ top.ExternalLinkURL }}">{{ top.ColumnName }}</a> 
+            {% else -%} 
+                {{ top.ColumnName }} 
+            {% endif -%}
+            
+            {% if top.SubColumns.size > 0 -%}
+                <ul>
+                {% for child in top.SubColumns -%}
+                    <li><a href="/ShowColumn.aspx?ColumnID={{ child.ColumnID }}">{{ child.ColumnName }}</a></li>
+                {% endfor -%}
+                </ul>
+            {% endif -%}
+        </li>
+        {% endfor -%}
+    </ul>
+    
+    校友新闻：
+    <ul>
+        {% for item in ColumnArticleGetter['校友新闻'].Result -%}
+            <li>
+                {% if forloop.first -%}
+                    <h3>{{ item.Title }}</h3> 
+                    <p>{{ item.Content }}</p>
+                {% else -%}
+                    {{ item.Title }}
+                {% endif -%}
+            </li>
+        {% endfor -%}
+    </ul>
+    
+    <ul>
+        {% for link in Links -%}
+            <li><a href="{{ link.LinkURL }}">{{ link.LinkName }}</a></li>
+        {% endfor -%}
+    </ul>
+</body>
+</html>
