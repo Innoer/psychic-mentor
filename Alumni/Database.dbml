@@ -21,12 +21,6 @@
       <Association Name="Columns_Articles" Member="Articles" ThisKey="ColumnID" OtherKey="ColumnID" Type="Articles" />
     </Type>
   </Table>
-  <Table Name="dbo.Configs" Member="Configs">
-    <Type Name="Configs">
-      <Column Name="GlobalTemplateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Templates_Configs" Member="Templates" ThisKey="GlobalTemplateID" OtherKey="TemplateID" Type="Templates" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Donations" Member="Donations">
     <Type Name="Donations">
       <Column Name="DonationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -51,6 +45,13 @@
       <Association Name="Templates_Configs" Member="Configs" ThisKey="TemplateID" OtherKey="GlobalTemplateID" Type="Configs" />
     </Type>
   </Table>
+  <Table Name="dbo.Configs" Member="Configs">
+    <Type Name="Configs">
+      <Column Name="GlobalTemplateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ArticlesPerPage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Templates_Configs" Member="Templates" ThisKey="GlobalTemplateID" OtherKey="TemplateID" Type="Templates" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Articles" Member="Articles">
     <Type Name="Articles">
       <Column Name="ArticleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -59,8 +60,9 @@
       <Column Name="PublishUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PublishDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="VisitCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsStickTop" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="PictureURL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PictureURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Columns_Articles" Member="Columns" ThisKey="ColumnID" OtherKey="ColumnID" Type="Columns" IsForeignKey="true" />
       <Association Name="Users_Articles" Member="Users" ThisKey="PublishUserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <ul>
+        {% for top in TopColumns %}
+        <li>
+            {% if top.IsExternalLink %} 
+                <a href="{{ top.ExternalLinkURL }}">{{ top.ColumnName }}</a> 
+            {% else %} 
+                <a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}">{{ top.ColumnName }}</a>
+            {% endif %}
+            
+            {% if top.SubColumns.size > 0 %}
+                <ul>
+                {% for child in top.SubColumns %}
+                    {% if child.IsExternalLink %}
+                        <li><a href="{{ child.ExternalLinkURL }}">{{ child.ColumnName }}</a></li>
+                    {% else %}
+                        <li><a href="/ShowColumn.aspx?ColumnID={{ child.ColumnID }}">{{ child.ColumnName }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    
+    {% block container %}{% endblock %}
+    
+    <p>版权所有 哈尔滨工业大学(威海) 2014-2015</p>
+</body>
+</html>

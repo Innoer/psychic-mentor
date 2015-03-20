@@ -93,14 +93,6 @@ namespace Alumni
 			}
 		}
 		
-		public System.Data.Linq.Table<Configs> Configs
-		{
-			get
-			{
-				return this.GetTable<Configs>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Donations> Donations
 		{
 			get
@@ -122,6 +114,14 @@ namespace Alumni
 			get
 			{
 				return this.GetTable<Templates>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Configs> Configs
+		{
+			get
+			{
+				return this.GetTable<Configs>();
 			}
 		}
 		
@@ -506,33 +506,6 @@ namespace Alumni
 		}
 	}
 	
-	[Table(Name="dbo.Configs")]
-	public partial class Configs
-	{
-		
-		private int _GlobalTemplateID;
-		
-		public Configs()
-		{
-		}
-		
-		[Column(Storage="_GlobalTemplateID", DbType="Int NOT NULL")]
-		public int GlobalTemplateID
-		{
-			get
-			{
-				return this._GlobalTemplateID;
-			}
-			set
-			{
-				if ((this._GlobalTemplateID != value))
-				{
-					this._GlobalTemplateID = value;
-				}
-			}
-		}
-	}
-	
 	[Table(Name="dbo.Donations")]
 	public partial class Donations
 	{
@@ -864,6 +837,51 @@ namespace Alumni
 		}
 	}
 	
+	[Table(Name="dbo.Configs")]
+	public partial class Configs
+	{
+		
+		private int _GlobalTemplateID;
+		
+		private int _ArticlesPerPage;
+		
+		public Configs()
+		{
+		}
+		
+		[Column(Storage="_GlobalTemplateID", DbType="Int NOT NULL")]
+		public int GlobalTemplateID
+		{
+			get
+			{
+				return this._GlobalTemplateID;
+			}
+			set
+			{
+				if ((this._GlobalTemplateID != value))
+				{
+					this._GlobalTemplateID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ArticlesPerPage", DbType="Int NOT NULL")]
+		public int ArticlesPerPage
+		{
+			get
+			{
+				return this._ArticlesPerPage;
+			}
+			set
+			{
+				if ((this._ArticlesPerPage != value))
+				{
+					this._ArticlesPerPage = value;
+				}
+			}
+		}
+	}
+	
 	[Table(Name="dbo.Articles")]
 	public partial class Articles : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -881,6 +899,8 @@ namespace Alumni
 		private System.DateTime _PublishDate;
 		
 		private int _VisitCount;
+		
+		private bool _IsStickTop;
 		
 		private string _Title;
 		
@@ -908,6 +928,8 @@ namespace Alumni
     partial void OnPublishDateChanged();
     partial void OnVisitCountChanging(int value);
     partial void OnVisitCountChanged();
+    partial void OnIsStickTopChanging(bool value);
+    partial void OnIsStickTopChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
     partial void OnPictureURLChanging(string value);
@@ -1051,6 +1073,26 @@ namespace Alumni
 			}
 		}
 		
+		[Column(Storage="_IsStickTop", DbType="Bit NOT NULL")]
+		public bool IsStickTop
+		{
+			get
+			{
+				return this._IsStickTop;
+			}
+			set
+			{
+				if ((this._IsStickTop != value))
+				{
+					this.OnIsStickTopChanging(value);
+					this.SendPropertyChanging();
+					this._IsStickTop = value;
+					this.SendPropertyChanged("IsStickTop");
+					this.OnIsStickTopChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_Title", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Title
 		{
@@ -1071,7 +1113,7 @@ namespace Alumni
 			}
 		}
 		
-		[Column(Storage="_PictureURL", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_PictureURL", DbType="NVarChar(MAX)")]
 		public string PictureURL
 		{
 			get

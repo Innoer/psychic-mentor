@@ -1,0 +1,7 @@
+﻿{% extends /Template/General/Layout.html %} 
+{% block title %}{{ Article.Title }}{% endblock %} 
+{% block container %} 
+    <p>相关文章：</p>
+    <h3>{{ Article.Title }}</h3>
+    {{ Article.Content }}
+{% endblock %}

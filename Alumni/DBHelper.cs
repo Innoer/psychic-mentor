@@ -19,12 +19,17 @@ namespace Alumni
                 var configs = from item in context.Configs
                               select item;
 
-                _Config = configs.ToList()[0];
+                _Config = configs.Single();
             }
 
             public int GlobalTemplateID
             {
                 get { return _Config.GlobalTemplateID; }
+            }
+
+            public int ArticlesPerPage
+            {
+                get { return _Config.ArticlesPerPage; }
             }
         }
 
@@ -52,14 +57,14 @@ namespace Alumni
             public static DotLiquid.Template GetSubTemplate(DBDataContext context, int subTemplateID)
             {
                 String cacheKey = getSubTemplateCacheKey(subTemplateID);
-                DotLiquid.Template template = HttpContext.Current.Cache[cacheKey] as DotLiquid.Template;
+                DotLiquid.Template template =  HttpRuntime.Cache[cacheKey] as DotLiquid.Template;
                 if (template == null)
                 {
                     String path = HttpContext.Current.Server.MapPath(GetSubTemplatePath(context, subTemplateID));
                     template = DotLiquid.Template.Parse(File.ReadAllText(path, Encoding.UTF8));
 
                     CacheDependency dependency = new CacheDependency(path);
-                    HttpContext.Current.Cache.Add(cacheKey, template, dependency, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, CacheItemPriority.Default, null);
+                    HttpRuntime.Cache.Add(cacheKey, template, dependency, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, CacheItemPriority.Default, null);
                 }
                 return template;
             }
@@ -67,83 +72,70 @@ namespace Alumni
 
         public class ColumnItem : DotLiquid.Drop
         {
-            public List<SubColumnItem> SubColumns { get; set; }
-        }
-
-        public class SubColumnItem : ColumnItem, ICloneable
-        {
             public int ColumnID { get; set; }
-            public bool IsTopColumn { get; set; }
-            public String TemplatePath { get; set; }
+            //public bool IsTopColumn { get; set; }
+            public int TemplateID { get; set; }
             public String ColumnName { get; set; }
             public bool IsExternalLink { get; set; }
             public String ExternalLinkURL { get; set; }
 
-            public object Clone()
+            public List<ColumnItem> SubColumns 
             {
-                return MemberwiseClone();
+                get
+                {
+                    DBDataContext context = new DBDataContext();
+                    return ColumnHelper.GetSubColumnsByID(context, ColumnID);
+                }
             }
         }
 
         public static class ColumnHelper
         {
-            private static void getSubColumns(DBDataContext context, ColumnItem col)
+            public static List<ColumnItem> GetSubColumnsByID(DBDataContext context, int columnID)
             {
-                int baseColID = col is SubColumnItem ? (col as SubColumnItem).ColumnID : SharedConfig.TopLevelParentID;
-
                 var childs = from item in context.Columns
-                             where item.ParentColumnID == baseColID
-                             select new SubColumnItem
+                             where item.ParentColumnID == columnID
+                             select new ColumnItem
                              {
                                  ColumnID = item.ColumnID,
-                                 IsTopColumn = item.ParentColumnID == SharedConfig.TopLevelParentID ? true : false,
-                                 TemplatePath = TemplateHelper.GetSubTemplatePath(context, item.SubTemplateID),
+                                 TemplateID = item.SubTemplateID,
                                  ColumnName = item.ColumnName,
                                  IsExternalLink = item.IsExternalLink,
                                  ExternalLinkURL = item.ExternalLinkURL,
                              };
 
-                col.SubColumns = new List<SubColumnItem>();
-                if (childs.Count() > 0) // have sub columns
-                {
-                    col.SubColumns.AddRange(childs.ToList()); // deep copy
-                    col.SubColumns.ForEach(item => getSubColumns(context, item));
-                }
+                return childs.ToList();
             }
 
-            public static ColumnItem GetColumnRoot(DBDataContext context)
-            {
-                var root = new ColumnItem();
-                getSubColumns(context, root);
-                return root;
-            }
-
-            public static SubColumnItem GetSubColumnByID(DBDataContext context, int columnID)
+            public static ColumnItem GetColumnByID(DBDataContext context, int columnID)
             {
                 var col = from item in context.Columns
                           where item.ColumnID == columnID
-                          select new SubColumnItem
+                          select new ColumnItem
                           {
                               ColumnID = item.ColumnID,
-                              IsTopColumn = item.ParentColumnID == SharedConfig.TopLevelParentID ? true : false,
-                              TemplatePath = TemplateHelper.GetSubTemplatePath(context, item.SubTemplateID),
+                              TemplateID = item.SubTemplateID,
                               ColumnName = item.ColumnName,
                               IsExternalLink = item.IsExternalLink,
                               ExternalLinkURL = item.ExternalLinkURL,
                           };
 
-                if (col.Count() == 0) 
+                try
+                {
+                    return col.Single();
+                }
+                catch (ArgumentNullException)
+                {
                     return null;
-                else
-                    return col.ToList()[0].Clone() as SubColumnItem; // TODO: check if clone works
+                }
             }
         }
 
-        public class Article : DotLiquid.Drop
+        public class ArticleType : DotLiquid.Drop
         {
             public int ArticleID { get; set; }
             public String ColumnName { get; set; }
-            public String TemplatePath { get; set; }
+            public int TemplateID { get; set; }
             public String PublishUserName { get; set; }
             public System.DateTime PublishDate { get; set; }
             public int VisitCount { get; set; }
@@ -154,15 +146,56 @@ namespace Alumni
 
         public static class ArticleHelper
         {
-            public static IQueryable<Article> GetArticlesByColumnID(DBDataContext context, int columnID)
+            public static ArticleType ErrorArticle = new ArticleType
+            {
+                ArticleID = 0,
+                ColumnName = String.Empty,
+                TemplateID = 0,
+                PublishUserName = String.Empty,
+                PublishDate = DateTime.MinValue,
+                VisitCount = 0,
+                Title = String.Empty,
+                PictureURL = String.Empty,
+                Content = String.Empty
+            };
+
+            public static ArticleType GetArticleByID(DBDataContext context, int articleID)
+            {
+                var query = from item in context.Articles
+                            where item.ArticleID == articleID
+                            select new ArticleType
+                            {
+                                ArticleID = item.ArticleID,
+                                ColumnName = item.Columns.ColumnName,
+                                TemplateID = item.SubTemplateID,
+                                PublishUserName = item.Users.UserName,
+                                PublishDate = item.PublishDate,
+                                VisitCount = item.VisitCount,
+                                Title = item.Title,
+                                PictureURL = item.PictureURL,
+                                Content = item.Content
+                            };
+
+                try
+                {
+                    return query.Single();
+                }
+                catch (ArgumentNullException)
+                {
+                    return ErrorArticle;
+                }
+            }
+
+            public static IQueryable<ArticleType> GetArticlesByColumnIDs(DBDataContext context, int[] colIDs)
             {
                 var articles = from item in context.Articles
-                               where item.ColumnID == columnID
-                               select new Article
+                               where colIDs.Contains(item.ColumnID)
+                               orderby item.IsStickTop descending, item.PublishDate descending
+                               select new ArticleType
                                {
                                    ArticleID = item.ArticleID,
                                    ColumnName = item.Columns.ColumnName,
-                                   TemplatePath = TemplateHelper.GetSubTemplatePath(context, item.SubTemplateID),
+                                   TemplateID = item.SubTemplateID,
                                    PublishUserName = item.Users.UserName,
                                    PublishDate = item.PublishDate,
                                    VisitCount = item.VisitCount,
@@ -173,47 +206,70 @@ namespace Alumni
 
                 return articles;
             }
+
+            public static IQueryable<ArticleType> GetArticlesByColumnID(DBDataContext context, int columnID)
+            {
+                return GetArticlesByColumnIDs(context, new int[] { columnID });
+                /*var articles = from item in context.Articles
+                               where item.ColumnID == columnID
+                               orderby item.IsStickTop descending, item.PublishDate descending
+                               select new ArticleType
+                               {
+                                   ArticleID = item.ArticleID,
+                                   ColumnName = item.Columns.ColumnName,
+                                   TemplateID = item.SubTemplateID,
+                                   PublishUserName = item.Users.UserName,
+                                   PublishDate = item.PublishDate,
+                                   VisitCount = item.VisitCount,
+                                   Title = item.Title,
+                                   PictureURL = item.PictureURL,
+                                   Content = item.Content
+                               };
+
+                return articles;*/
+            }
         }
 
-        public class ColumnArticleGetter : DotLiquid.Drop
+        public class TableGetter<T> : DotLiquid.Drop
         {
-            protected IQueryable<Article> articles;
+            protected IQueryable<T> collections;
 
-            public ColumnArticleGetter(IQueryable<Article> articles)
+            public TableGetter(IQueryable<T> collections)
             {
-                this.articles = articles;
-                this.Skip = new ColumnArticleSkipper(articles);
-                this.Take = new ColumnArticleTaker(articles);
+                this.collections = collections;
+                this.Skip = new TableSkipper<T>(collections);
+                this.Take = new TableTaker<T>(collections);
             }
 
-            public ColumnArticleSkipper Skip { get; set; }
-            public ColumnArticleTaker Take { get; set; }
+            public TableSkipper<T> Skip { get; set; }
+            public TableTaker<T> Take { get; set; }
 
-            public List<Article> Result
+            public List<T> Result
             {
                 get
                 {
-                    List<Article> ret = new List<Article>();
-                    ret.AddRange(articles.ToList()); // deep copy
-                    return ret;
+                    return collections.ToList();
+                    //List<T> ret = new List<T>();
+                    //ret.AddRange(collections.ToList()); // deep copy
+                    //return ret;
                 }
                 set { }
             }
         }
 
-        public class ColumnArticleOperator : DotLiquid.IIndexable, DotLiquid.ILiquidizable
+        public class TableOperator<T> : DotLiquid.IIndexable, DotLiquid.ILiquidizable
         {
-            protected IQueryable<Article> articles;
+            protected IQueryable<T> collections;
 
-            public ColumnArticleOperator(IQueryable<Article> articles)
+            public TableOperator(IQueryable<T> collections)
             {
-                this.articles = articles;
+                this.collections = collections;
             }
 
             public bool ContainsKey(object key)
             {
                 int id = Convert.ToInt32(key);
-                if (id < 0 || id > articles.Count() - 1)
+                if (id < 0 || id > collections.Count() - 1)
                     return false;
                 else
                     return true;
@@ -229,34 +285,34 @@ namespace Alumni
                 get { return GetNewGetter(Convert.ToInt32(key)); }
             }
 
-            public virtual ColumnArticleGetter GetNewGetter(int operateCount)
+            public virtual TableGetter<T> GetNewGetter(int operateCount)
             {
                 return null;
             }
         }
 
-        public class ColumnArticleSkipper : ColumnArticleOperator
+        public class TableSkipper<T> : TableOperator<T>
         {
-            public ColumnArticleSkipper(IQueryable<Article> articles) : base(articles) { }
+            public TableSkipper(IQueryable<T> collections) : base(collections) { }
 
-            public override ColumnArticleGetter GetNewGetter(int skipCount)
+            public override TableGetter<T> GetNewGetter(int skipCount)
             {
-                ColumnArticleGetter ret = new ColumnArticleGetter(articles.Skip(skipCount));
-                ret.Skip = new ColumnArticleSkipper(articles.Skip(skipCount));
-                ret.Take = new ColumnArticleTaker(articles.Skip(skipCount));
+                TableGetter<T> ret = new TableGetter<T>(collections.Skip(skipCount));
+                ret.Skip = new TableSkipper<T>(collections.Skip(skipCount));
+                ret.Take = new TableTaker<T>(collections.Skip(skipCount));
                 return ret;
             }
         }
 
-        public class ColumnArticleTaker : ColumnArticleOperator
+        public class TableTaker<T> : TableOperator<T>
         {
-            public ColumnArticleTaker(IQueryable<Article> articles) : base(articles) { }
+            public TableTaker(IQueryable<T> collections) : base(collections) { }
 
-            public override ColumnArticleGetter GetNewGetter(int takeCount)
+            public override TableGetter<T> GetNewGetter(int takeCount)
             {
-                ColumnArticleGetter ret = new ColumnArticleGetter(articles.Take(takeCount));
-                ret.Skip = new ColumnArticleSkipper(articles.Take(takeCount));
-                ret.Take = new ColumnArticleTaker(articles.Take(takeCount));
+                TableGetter<T> ret = new TableGetter<T>(collections.Take(takeCount));
+                ret.Skip = new TableSkipper<T>(collections.Take(takeCount));
+                ret.Take = new TableTaker<T>(collections.Take(takeCount));
                 return ret;
             }
         }
