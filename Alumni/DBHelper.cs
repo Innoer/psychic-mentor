@@ -12,7 +12,7 @@ namespace Alumni
     {
         public class ConfigHelper
         {
-            private Configs _Config;
+            private Database.Configs _Config;
 
             public ConfigHelper(DBDataContext context)
             {
@@ -73,7 +73,6 @@ namespace Alumni
         public class ColumnItem : DotLiquid.Drop
         {
             public int ColumnID { get; set; }
-            //public bool IsTopColumn { get; set; }
             public int TemplateID { get; set; }
             public String ColumnName { get; set; }
             public bool IsExternalLink { get; set; }
@@ -107,6 +106,18 @@ namespace Alumni
                 return childs.ToList();
             }
 
+            public static ColumnItem GetColumnByRawColumn(Database.Columns col)
+            {
+                return new ColumnItem
+                {
+                    ColumnID = col.ColumnID,
+                    TemplateID = col.SubTemplateID,
+                    ColumnName = col.ColumnName,
+                    IsExternalLink = col.IsExternalLink,
+                    ExternalLinkURL = col.ExternalLinkURL
+                };
+            }
+
             public static ColumnItem GetColumnByID(DBDataContext context, int columnID)
             {
                 var col = from item in context.Columns
@@ -134,7 +145,7 @@ namespace Alumni
         public class ArticleType : DotLiquid.Drop
         {
             public int ArticleID { get; set; }
-            public String ColumnName { get; set; }
+            public ColumnItem Column { get; set; }
             public int TemplateID { get; set; }
             public String PublishUserName { get; set; }
             public System.DateTime PublishDate { get; set; }
@@ -149,7 +160,7 @@ namespace Alumni
             public static ArticleType ErrorArticle = new ArticleType
             {
                 ArticleID = 0,
-                ColumnName = String.Empty,
+                Column = null,
                 TemplateID = 0,
                 PublishUserName = String.Empty,
                 PublishDate = DateTime.MinValue,
@@ -166,7 +177,7 @@ namespace Alumni
                             select new ArticleType
                             {
                                 ArticleID = item.ArticleID,
-                                ColumnName = item.Columns.ColumnName,
+                                Column = ColumnHelper.GetColumnByRawColumn(item.Columns),
                                 TemplateID = item.SubTemplateID,
                                 PublishUserName = item.Users.UserName,
                                 PublishDate = item.PublishDate,
@@ -194,7 +205,7 @@ namespace Alumni
                                select new ArticleType
                                {
                                    ArticleID = item.ArticleID,
-                                   ColumnName = item.Columns.ColumnName,
+                                   Column = ColumnHelper.GetColumnByRawColumn(item.Columns),
                                    TemplateID = item.SubTemplateID,
                                    PublishUserName = item.Users.UserName,
                                    PublishDate = item.PublishDate,
@@ -246,13 +257,7 @@ namespace Alumni
 
             public List<T> Result
             {
-                get
-                {
-                    return collections.ToList();
-                    //List<T> ret = new List<T>();
-                    //ret.AddRange(collections.ToList()); // deep copy
-                    //return ret;
-                }
+                get { return collections.ToList(); }
                 set { }
             }
         }

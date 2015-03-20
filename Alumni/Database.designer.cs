@@ -18,8 +18,6 @@ namespace Alumni
 	using System.Reflection;
 	using System.Linq;
 	using System.Linq.Expressions;
-	using System.ComponentModel;
-	using System;
 	
 	
 	[System.Data.Linq.Mapping.DatabaseAttribute(Name="Database")]
@@ -30,21 +28,21 @@ namespace Alumni
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertUsers(Users instance);
-    partial void UpdateUsers(Users instance);
-    partial void DeleteUsers(Users instance);
-    partial void InsertColumns(Columns instance);
-    partial void UpdateColumns(Columns instance);
-    partial void DeleteColumns(Columns instance);
-    partial void InsertLinks(Links instance);
-    partial void UpdateLinks(Links instance);
-    partial void DeleteLinks(Links instance);
-    partial void InsertTemplates(Templates instance);
-    partial void UpdateTemplates(Templates instance);
-    partial void DeleteTemplates(Templates instance);
-    partial void InsertArticles(Articles instance);
-    partial void UpdateArticles(Articles instance);
-    partial void DeleteArticles(Articles instance);
+    partial void InsertUsers(Database.Users instance);
+    partial void UpdateUsers(Database.Users instance);
+    partial void DeleteUsers(Database.Users instance);
+    partial void InsertColumns(Database.Columns instance);
+    partial void UpdateColumns(Database.Columns instance);
+    partial void DeleteColumns(Database.Columns instance);
+    partial void InsertLinks(Database.Links instance);
+    partial void UpdateLinks(Database.Links instance);
+    partial void DeleteLinks(Database.Links instance);
+    partial void InsertTemplates(Database.Templates instance);
+    partial void UpdateTemplates(Database.Templates instance);
+    partial void DeleteTemplates(Database.Templates instance);
+    partial void InsertArticles(Database.Articles instance);
+    partial void UpdateArticles(Database.Articles instance);
+    partial void DeleteArticles(Database.Articles instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -77,62 +75,70 @@ namespace Alumni
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Users> Users
+		public System.Data.Linq.Table<Database.Users> Users
 		{
 			get
 			{
-				return this.GetTable<Users>();
+				return this.GetTable<Database.Users>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Columns> Columns
+		public System.Data.Linq.Table<Database.Columns> Columns
 		{
 			get
 			{
-				return this.GetTable<Columns>();
+				return this.GetTable<Database.Columns>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Donations> Donations
+		public System.Data.Linq.Table<Database.Donations> Donations
 		{
 			get
 			{
-				return this.GetTable<Donations>();
+				return this.GetTable<Database.Donations>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Links> Links
+		public System.Data.Linq.Table<Database.Links> Links
 		{
 			get
 			{
-				return this.GetTable<Links>();
+				return this.GetTable<Database.Links>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Templates> Templates
+		public System.Data.Linq.Table<Database.Templates> Templates
 		{
 			get
 			{
-				return this.GetTable<Templates>();
+				return this.GetTable<Database.Templates>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Configs> Configs
+		public System.Data.Linq.Table<Database.Configs> Configs
 		{
 			get
 			{
-				return this.GetTable<Configs>();
+				return this.GetTable<Database.Configs>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Articles> Articles
+		public System.Data.Linq.Table<Database.Articles> Articles
 		{
 			get
 			{
-				return this.GetTable<Articles>();
+				return this.GetTable<Database.Articles>();
 			}
 		}
 	}
+}
+namespace Database
+{
+	using System.Data.Linq;
+	using System.Data.Linq.Mapping;
+	using System.ComponentModel;
+	using System;
+	
 	
 	[Table(Name="dbo.Users")]
 	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged

@@ -34,7 +34,8 @@ namespace Alumni
                     {
                         TopColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID),
 
-                        Article = article
+                        Article = article,
+                        RelatedArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetArticlesByColumnID(context, article.Column.ColumnID))
                     }));
 
                 Response.Write(html);

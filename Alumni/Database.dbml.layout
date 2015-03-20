@@ -38,7 +38,7 @@
         <elementListCompartment Id="07c02136-b6be-4be3-9cde-26ab1ba2389b" absoluteBounds="6.5150000005960464, 5.71000000089407, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.75 : 5.84699625651042); (6.5 : 5.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 5.84699625651042); (6.5 : 5.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBDataContext/Templates/Templates_Configs" />
       <nodes>
         <classShapeMoniker Id="d0eb4e80-48ec-424b-9dae-8421d937d76a" />
@@ -51,14 +51,14 @@
         <elementListCompartment Id="b876600a-9da6-4c39-82b7-3d0b54b17ca8" absoluteBounds="3.5149999999999997, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 7.023297525992); (3.59375 : 7.023297525992); (3.59375 : 3.73240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 7.023297525992); (3.59375 : 7.023297525992); (3.59375 : 3.73240397135417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBDataContext/Columns/Columns_Articles" />
       <nodes>
         <classShapeMoniker Id="66f807dc-26b8-4a30-9e99-077ec83043fc" />
         <classShapeMoniker Id="4076acb5-a99f-43ff-8559-095cf85e56b0" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.28929768880208); (3.5 : 2.28929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 2.28929768880208); (3.5 : 2.28929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBDataContext/Users/Users_Articles" />
       <nodes>
         <classShapeMoniker Id="e823aaec-c127-4463-8c7e-20eb39aa5fad" />
