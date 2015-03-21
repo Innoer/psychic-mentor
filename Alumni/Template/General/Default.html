@@ -4,7 +4,7 @@
 工大回忆：{% assign memory = Column['工大回忆'] %}
 <ul>
     <li><h3>{{ memory.TopArticle.Title }}</h3> {{ memory.TopArticle.PictureURL }}</li>
-    {% for item in memory.ArticleGetter.Result %} 
+    {% for item in memory.ArticleGetter.Take[5].Result %} 
         {% if item.ArticleID != memory.TopArticle.ArticleID %}
         <li>{{ item.Title }}{% if item.PictureURL %} - {{ item.PictureURL }}{% endif %}</li>
         {% endif %} 

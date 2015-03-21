@@ -18,6 +18,7 @@ namespace Alumni
         public static readonly int HomepageSubTemplateID = 1;
         public static readonly int ColumnDefaultSubTemplateID = 2;
         public static readonly int ArticleDefaultSubTemplateID = 3;
+        public static readonly char[] KeywordSeparator = new char[] { '|' };
 
         public static String SubTemplateCacheKey
         {

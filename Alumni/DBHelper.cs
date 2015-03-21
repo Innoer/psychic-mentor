@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Caching;
 using System.Text;
@@ -78,7 +79,7 @@ namespace Alumni
             public bool IsExternalLink { get; set; }
             public String ExternalLinkURL { get; set; }
 
-            public List<ColumnItem> SubColumns 
+            public IQueryable<ColumnItem> SubColumns 
             {
                 get
                 {
@@ -90,22 +91,6 @@ namespace Alumni
 
         public static class ColumnHelper
         {
-            public static List<ColumnItem> GetSubColumnsByID(DBDataContext context, int columnID)
-            {
-                var childs = from item in context.Columns
-                             where item.ParentColumnID == columnID
-                             select new ColumnItem
-                             {
-                                 ColumnID = item.ColumnID,
-                                 TemplateID = item.SubTemplateID,
-                                 ColumnName = item.ColumnName,
-                                 IsExternalLink = item.IsExternalLink,
-                                 ExternalLinkURL = item.ExternalLinkURL,
-                             };
-
-                return childs.ToList();
-            }
-
             public static ColumnItem GetColumnByRawColumn(Database.Columns col)
             {
                 return new ColumnItem
@@ -118,6 +103,22 @@ namespace Alumni
                 };
             }
 
+            public static IQueryable<ColumnItem> GetSubColumnsByID(DBDataContext context, int columnID)
+            {
+                var childs = from item in context.Columns
+                             where item.ParentColumnID == columnID
+                             select new ColumnItem
+                             {
+                                 ColumnID = item.ColumnID,
+                                 TemplateID = item.SubTemplateID,
+                                 ColumnName = item.ColumnName,
+                                 IsExternalLink = item.IsExternalLink,
+                                 ExternalLinkURL = item.ExternalLinkURL
+                             };
+
+                return childs;
+            }
+
             public static ColumnItem GetColumnByID(DBDataContext context, int columnID)
             {
                 var col = from item in context.Columns
@@ -128,17 +129,10 @@ namespace Alumni
                               TemplateID = item.SubTemplateID,
                               ColumnName = item.ColumnName,
                               IsExternalLink = item.IsExternalLink,
-                              ExternalLinkURL = item.ExternalLinkURL,
+                              ExternalLinkURL = item.ExternalLinkURL
                           };
-
-                try
-                {
-                    return col.Single();
-                }
-                catch (ArgumentNullException)
-                {
-                    return null;
-                }
+                
+                return col.SingleOrDefault();
             }
         }
 
@@ -152,23 +146,28 @@ namespace Alumni
             public int VisitCount { get; set; }
             public String Title { get; set; }
             public String PictureURL { get; set; }
+            public String[] Keywords { get; set; }
             public String Content { get; set; }
         }
 
         public static class ArticleHelper
         {
-            public static ArticleType ErrorArticle = new ArticleType
+            public static ArticleType GetArticleByRawArticle(Database.Articles article)
             {
-                ArticleID = 0,
-                Column = null,
-                TemplateID = 0,
-                PublishUserName = String.Empty,
-                PublishDate = DateTime.MinValue,
-                VisitCount = 0,
-                Title = String.Empty,
-                PictureURL = String.Empty,
-                Content = String.Empty
-            };
+                return new ArticleType
+                {
+                    ArticleID = article.ArticleID,
+                    Column = ColumnHelper.GetColumnByRawColumn(article.Columns),
+                    TemplateID = article.SubTemplateID,
+                    PublishUserName = article.Users.UserName,
+                    PublishDate = article.PublishDate,
+                    VisitCount = article.VisitCount,
+                    Title = article.Title,
+                    PictureURL = article.PictureURL,
+                    Keywords = article.Keywords.Split(SharedConfig.KeywordSeparator),
+                    Content = article.Content
+                };
+            }
 
             public static ArticleType GetArticleByID(DBDataContext context, int articleID)
             {
@@ -184,17 +183,37 @@ namespace Alumni
                                 VisitCount = item.VisitCount,
                                 Title = item.Title,
                                 PictureURL = item.PictureURL,
+                                Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
                                 Content = item.Content
                             };
 
-                try
-                {
-                    return query.Single();
-                }
-                catch (ArgumentNullException)
-                {
-                    return ErrorArticle;
-                }
+                return query.SingleOrDefault();
+            }
+
+            public static IQueryable<ArticleType> GetRelatedArticles(DBDataContext context, ArticleType article)
+            {
+                var predicate = PredicateBuilder.False<Database.Articles>();
+                article.Keywords.ToList().ForEach(keyword => 
+                    predicate = predicate.Or(item => item.Keywords.Contains(keyword)));
+
+                var articles = from item in context.Articles.Where(predicate)
+                               where item.ArticleID != article.ArticleID
+                               orderby item.IsStickTop descending, item.PublishDate descending
+                               select new ArticleType
+                               {
+                                   ArticleID = item.ArticleID,
+                                   Column = ColumnHelper.GetColumnByRawColumn(item.Columns),
+                                   TemplateID = item.SubTemplateID,
+                                   PublishUserName = item.Users.UserName,
+                                   PublishDate = item.PublishDate,
+                                   VisitCount = item.VisitCount,
+                                   Title = item.Title,
+                                   PictureURL = item.PictureURL,
+                                   Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
+                                   Content = item.Content
+                               };
+
+                return articles;
             }
 
             public static IQueryable<ArticleType> GetArticlesByColumnIDs(DBDataContext context, int[] colIDs)
@@ -212,32 +231,11 @@ namespace Alumni
                                    VisitCount = item.VisitCount,
                                    Title = item.Title,
                                    PictureURL = item.PictureURL,
+                                   Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
                                    Content = item.Content
                                };
 
                 return articles;
-            }
-
-            public static IQueryable<ArticleType> GetArticlesByColumnID(DBDataContext context, int columnID)
-            {
-                return GetArticlesByColumnIDs(context, new int[] { columnID });
-                /*var articles = from item in context.Articles
-                               where item.ColumnID == columnID
-                               orderby item.IsStickTop descending, item.PublishDate descending
-                               select new ArticleType
-                               {
-                                   ArticleID = item.ArticleID,
-                                   ColumnName = item.Columns.ColumnName,
-                                   TemplateID = item.SubTemplateID,
-                                   PublishUserName = item.Users.UserName,
-                                   PublishDate = item.PublishDate,
-                                   VisitCount = item.VisitCount,
-                                   Title = item.Title,
-                                   PictureURL = item.PictureURL,
-                                   Content = item.Content
-                               };
-
-                return articles;*/
             }
         }
 
@@ -255,10 +253,9 @@ namespace Alumni
             public TableSkipper<T> Skip { get; set; }
             public TableTaker<T> Take { get; set; }
 
-            public List<T> Result
+            public IQueryable<T> Result
             {
-                get { return collections.ToList(); }
-                set { }
+                get { return collections; }
             }
         }
 
@@ -273,11 +270,12 @@ namespace Alumni
 
             public bool ContainsKey(object key)
             {
-                int id = Convert.ToInt32(key);
+                return true; // must always true, fuck dotLiquid
+                /*int id = Convert.ToInt32(key);
                 if (id < 0 || id > collections.Count() - 1)
                     return false;
                 else
-                    return true;
+                    return true;*/
             }
 
             public object ToLiquid()

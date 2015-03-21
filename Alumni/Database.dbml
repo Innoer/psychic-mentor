@@ -63,6 +63,7 @@
       <Column Name="IsStickTop" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="PictureURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Keywords" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Columns_Articles" Member="Columns" ThisKey="ColumnID" OtherKey="ColumnID" Type="Columns" IsForeignKey="true" />
       <Association Name="Users_Articles" Member="Users" ThisKey="PublishUserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />

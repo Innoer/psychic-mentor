@@ -2,6 +2,17 @@
 {% block title %}{{ Article.Title }}{% endblock %} 
 {% block container %} 
     <p>相关文章：</p>
+    {% assign relate = RelatedArticleGetter.Take[5] %}
+    {% if relate.Result.size == 0 %}
+        未找到相关文章
+    {% else %}
+        <ul>
+        {% for item in relate.Result %}
+        <li>{{ item.Title }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
     <h3>{{ Article.Title }}</h3>
     {{ Article.Content }}
 {% endblock %}

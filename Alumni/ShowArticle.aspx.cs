@@ -14,14 +14,15 @@ namespace Alumni
         protected void Page_Load(object sender, EventArgs e)
         {
             DBDataContext context = new DBDataContext();
+            context.Log = Console.Out;
 
             int articleID;
-            ArticleType article = ArticleHelper.ErrorArticle;
+            ArticleType article = null;
 
             if (int.TryParse(Request["ArticleID"], out articleID))
                 article = ArticleHelper.GetArticleByID(context, articleID);
 
-            if (article.Equals(ArticleHelper.ErrorArticle))
+            if (article == null)
             {
                 Response.Write("Article not found.");
                 Response.End();
@@ -35,7 +36,7 @@ namespace Alumni
                         TopColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID),
 
                         Article = article,
-                        RelatedArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetArticlesByColumnID(context, article.Column.ColumnID))
+                        RelatedArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetRelatedArticles(context, article))
                     }));
 
                 Response.Write(html);
