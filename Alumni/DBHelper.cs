@@ -147,6 +147,7 @@ namespace Alumni
             public String Title { get; set; }
             public String PictureURL { get; set; }
             public String[] Keywords { get; set; }
+            public String Source { get; set; }
             public String Content { get; set; }
         }
 
@@ -165,6 +166,7 @@ namespace Alumni
                     Title = article.Title,
                     PictureURL = article.PictureURL,
                     Keywords = article.Keywords.Split(SharedConfig.KeywordSeparator),
+                    Source = item.Source,
                     Content = article.Content
                 };
             }
@@ -184,6 +186,7 @@ namespace Alumni
                                 Title = item.Title,
                                 PictureURL = item.PictureURL,
                                 Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
+                                Source = item.Source,
                                 Content = item.Content
                             };
 
@@ -210,6 +213,7 @@ namespace Alumni
                                    Title = item.Title,
                                    PictureURL = item.PictureURL,
                                    Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
+                                   Source = item.Source,
                                    Content = item.Content
                                };
 
@@ -232,6 +236,7 @@ namespace Alumni
                                    Title = item.Title,
                                    PictureURL = item.PictureURL,
                                    Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
+                                   Source = item.Source,
                                    Content = item.Content
                                };
 
@@ -271,11 +276,6 @@ namespace Alumni
             public bool ContainsKey(object key)
             {
                 return true; // must always true, fuck dotLiquid
-                /*int id = Convert.ToInt32(key);
-                if (id < 0 || id > collections.Count() - 1)
-                    return false;
-                else
-                    return true;*/
             }
 
             public object ToLiquid()

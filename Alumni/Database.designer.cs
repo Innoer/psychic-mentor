@@ -914,6 +914,8 @@ namespace Database
 		
 		private string _Keywords;
 		
+		private string _Source;
+		
 		private string _Content;
 		
 		private EntityRef<Columns> _Columns;
@@ -944,6 +946,8 @@ namespace Database
     partial void OnPictureURLChanged();
     partial void OnKeywordsChanging(string value);
     partial void OnKeywordsChanged();
+    partial void OnSourceChanging(string value);
+    partial void OnSourceChanged();
     partial void OnContentChanging(string value);
     partial void OnContentChanged();
     #endregion
@@ -1159,6 +1163,26 @@ namespace Database
 					this._Keywords = value;
 					this.SendPropertyChanged("Keywords");
 					this.OnKeywordsChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Source", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Source
+		{
+			get
+			{
+				return this._Source;
+			}
+			set
+			{
+				if ((this._Source != value))
+				{
+					this.OnSourceChanging(value);
+					this.SendPropertyChanging();
+					this._Source = value;
+					this.SendPropertyChanged("Source");
+					this.OnSourceChanged();
 				}
 			}
 		}

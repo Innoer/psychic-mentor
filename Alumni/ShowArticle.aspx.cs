@@ -14,7 +14,6 @@ namespace Alumni
         protected void Page_Load(object sender, EventArgs e)
         {
             DBDataContext context = new DBDataContext();
-            context.Log = Console.Out;
 
             int articleID;
             ArticleType article = null;
@@ -38,7 +37,7 @@ namespace Alumni
                         Article = article,
                         RelatedArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetRelatedArticles(context, article))
                     }));
-
+                
                 Response.Write(html);
                 Response.End();
             }
