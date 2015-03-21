@@ -56,10 +56,10 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database.mdf">
+    <Content Include="App_Data\Alumni.mdf">
     </Content>
-    <Content Include="App_Data\Database_log.ldf">
-      <DependentUpon>Database.mdf</DependentUpon>
+    <Content Include="App_Data\Alumni_log.ldf">
+      <DependentUpon>Alumni.mdf</DependentUpon>
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -72,12 +72,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.designer.cs">
+    <Compile Include="AlumniDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.dbml</DependentUpon>
+      <DependentUpon>AlumniDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="DBHelper.cs" />
+    <Compile Include="DebugWriter.cs" />
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -110,15 +111,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Database.dbml">
+    <None Include="AlumniDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Database.designer.cs</LastGenOutput>
+      <LastGenOutput>AlumniDB.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Database.dbml.layout">
-      <DependentUpon>Database.dbml</DependentUpon>
+    <None Include="AlumniDB.dbml.layout">
+      <DependentUpon>AlumniDB.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

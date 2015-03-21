@@ -13,7 +13,7 @@ namespace Alumni
     {
         public class ConfigHelper
         {
-            private Database.Configs _Config;
+            private AlumniDB.Configs _Config;
 
             public ConfigHelper(DBDataContext context)
             {
@@ -91,7 +91,7 @@ namespace Alumni
 
         public static class ColumnHelper
         {
-            public static ColumnItem GetColumnByRawColumn(Database.Columns col)
+            public static ColumnItem GetColumnByRawColumn(AlumniDB.Columns col)
             {
                 return new ColumnItem
                 {
@@ -153,7 +153,7 @@ namespace Alumni
 
         public static class ArticleHelper
         {
-            public static ArticleType GetArticleByRawArticle(Database.Articles article)
+            public static ArticleType GetArticleByRawArticle(AlumniDB.Articles article)
             {
                 return new ArticleType
                 {
@@ -166,7 +166,7 @@ namespace Alumni
                     Title = article.Title,
                     PictureURL = article.PictureURL,
                     Keywords = article.Keywords.Split(SharedConfig.KeywordSeparator),
-                    Source = item.Source,
+                    Source = article.Source,
                     Content = article.Content
                 };
             }
@@ -195,7 +195,7 @@ namespace Alumni
 
             public static IQueryable<ArticleType> GetRelatedArticles(DBDataContext context, ArticleType article)
             {
-                var predicate = PredicateBuilder.False<Database.Articles>();
+                var predicate = PredicateBuilder.False<AlumniDB.Articles>();
                 article.Keywords.ToList().ForEach(keyword => 
                     predicate = predicate.Or(item => item.Keywords.Contains(keyword)));
 
