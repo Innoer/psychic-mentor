@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="AlumniSNS" EntityNamespace="AlumniSNSDB" Class="AlumniSNSDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\AlumniSNS.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AlumniSNSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.EnrollProgram" Member="EnrollProgram">
+    <Type Name="EnrollProgram">
+      <Column Name="ProgramID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProgramName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="EnrollSchool_EnrollProgram" Member="EnrollSchool" ThisKey="SchoolID" OtherKey="SchoolID" Type="EnrollSchool" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorkplaceNature" Member="WorkplaceNature">
+    <Type Name="WorkplaceNature">
+      <Column Name="NatureID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NatureCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NatureName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="WorkplaceNature_User" Member="User" ThisKey="NatureID" OtherKey="WorkplaceNatureID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EnrollSchool" Member="EnrollSchool">
+    <Type Name="EnrollSchool">
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SchoolName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="EnrollSchool_EnrollProgram" Member="EnrollProgram" ThisKey="SchoolID" OtherKey="SchoolID" Type="EnrollProgram" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PassWord" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Sex" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="LiveCountry" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="LiveProvince" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="LiveCity" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkplaceNatureID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WorkplaceName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WorkTitle" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MailingAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FixedPhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="EMail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="QQNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="WeChatID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ClassNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="StudentNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="EnrollDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EnrollSchoolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EnrollProgramID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GraduateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="WorkplaceNature_User" Member="WorkplaceNature" ThisKey="WorkplaceNatureID" OtherKey="NatureID" Type="WorkplaceNature" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
