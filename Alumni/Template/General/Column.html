@@ -10,9 +10,11 @@
     
     <p>图片新闻：{{ PictureArticle.Title }} - {{ PictureArticle.PictureURL }}</p>
     
+    {{ SubColumn["校园旧闻"] }}
+    
     {{ Column.ColumnName }} 
     <ul>
-    {% for item in ArticleGetter.Result %}
+    {% for item in UnionArticleGetter.Result %}
         <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}">{{ item.Title }}</a> {{ item.PublishDate | Date: "MM-dd" }}</li>
     {% endfor %}
     

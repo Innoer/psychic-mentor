@@ -66,7 +66,12 @@ namespace Alumni
  
                         Column = column,
                         PictureArticle = picArticle,
-                        ArticleGetter = new TableGetter<ArticleType>(query.Skip((pageID - 1) * articlesPerPage).Take(articlesPerPage)),
+                        SubColumn = ColumnHelper.GetSubColumnsByID(context, column.ColumnID).ToDictionary(
+                                    k => k.ColumnName, v => new
+                                    {
+                                        ArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetArticlesByColumnIDs(context, new int[] { v.ColumnID }))
+                                    }),
+                        UnionArticleGetter = new TableGetter<ArticleType>(query.Skip((pageID - 1) * articlesPerPage).Take(articlesPerPage)),
 
                         Pager = new PagerType
                         {
