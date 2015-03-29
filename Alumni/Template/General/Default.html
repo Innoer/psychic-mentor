@@ -1,23 +1,320 @@
 ﻿{% extends /Template/General/Layout.html %} 
-{% block title %}哈尔滨工业大学（威海）校友会{% endblock %} 
-{% block container %} 
-工大回忆：{% assign memory = Column['工大回忆'] %}
-<ul>
-    <li><h3>{{ memory.TopArticle.Title }}</h3> {{ memory.TopArticle.PictureURL }}</li>
-    {% for item in memory.ArticleGetter.Take[5].Result %} 
-        {% if item.ArticleID != memory.TopArticle.ArticleID %}
-        <li>{{ item.Title }}{% if item.PictureURL %} - {{ item.PictureURL }}{% endif %}</li>
-        {% endif %} 
-    {% endfor %}
-    </ul>
-    <ul>
-        {% for item in LinkGetter.Take[10].Result %}
-        <li><a href="{{ item.LinkURL }}">{{ item.LinkName }}</a></li>
-        {% endfor %}
-    </ul>
-    <ul>
-        {% for item in DonationGetter.Take[10].Result %}
-        <li>{{ item.Name }} - {{ item.Amount }}</li>
-        {% endfor %}
-    </ul>
+{% block otherCSS %}
+<link href="/Template/Common/CSS/Default.css" rel="Stylesheet" />
+{% endblock %}
+
+{% block beforeHeader %}
+<div id="slider">
+{% endblock %}
+
+{% block afterHeader %}
+    <div class="control">
+        <span>
+            <img id="prev" class="common" alt="上一张" src="/Template/Common/Image/prev.png" /></span>
+        <span>
+            <img id="next" class="common" alt="下一张" src="/Template/Common/Image/next.png" /></span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="section1">
+    <div class="content">
+        <div class="box1" style="margin-top: 20px;">
+            <div class="container">
+                <div class="buttons">
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友新闻" control-div="news_mate"
+                        clicked="clicked" src="/Template/Common/Image/Button/校友新闻h.png" normal-state="/Template/Common/Image/Button/校友新闻.png"
+                        click-state="/Template/Common/Image/Button/校友新闻h.png" />
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="校区新闻" control-div="news_school"
+                        src="/Template/Common/Image/Button/校区新闻.png" normal-state="/Template/Common/Image/Button/校区新闻.png"
+                        click-state="/Template/Common/Image/Button/校区新闻h.png" />
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="通知公告" control-div="news_noti"
+                        src="/Template/Common/Image/Button/通知公告.png" normal-state="/Template/Common/Image/Button/通知公告.png"
+                        click-state="/Template/Common/Image/Button/通知公告h.png" />
+                </div>
+                <div id="news_mate">{% assign column = Column['校友新闻'] %}
+                    <div class="center">
+                        <div class="inner">
+                            <div class="picArticle">
+                                <img src="{{ column.TopArticle.PictureURL }}" />
+                                <div class="article">
+                                    <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
+                                    <div class="desc">
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="listArticle">
+                                {% for item in column.ArticleGetter.Take[4].Result %}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
+                                    <em style="color: #fff799;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif %} 
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+                </div>
+                <div id="news_school" style="display: none;">{% assign column = Column['校区新闻'] %}
+                    <div class="center">
+                        <div class="inner">
+                            <div class="picArticle">
+                                <img src="{{ column.TopArticle.PictureURL }}" />
+                                <div class="article">
+                                    <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
+                                    <div class="desc">
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="listArticle">
+                                {% for item in column.ArticleGetter.Take[4].Result %}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
+                                    <em style="color: #fff799;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif %} 
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+                </div>
+                <div id="news_noti" style="display: none;">{% assign column = Column['通知公告'] %}
+                    <div class="center">
+                        <div class="inner">
+                            <div class="picArticle">
+                                <img src="{{ column.TopArticle.PictureURL }}" />
+                                <div class="article">
+                                    <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
+                                    <div class="desc">
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="listArticle">
+                                {% for item in column.ArticleGetter.Take[4].Result %}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
+                                    <em style="color: #fff799;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif %} 
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="box2" style="margin-top: 20px;">{% assign column = Column['校庆专题'] %}
+            <img alt="30周年校庆专区" class="icon" src="/Template/Common/Image/30year.png" />
+            <div class="container">
+                <div class="inner">
+                    <div class="picArticle">
+                        <img src="{{ column.TopArticle.PictureURL }}" />
+                        <div class="article">
+                            <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 15, '…' }}</a>
+                            <div class="desc">
+                                <p>
+                                    {{ column.TopArticle.Content | StripHtml | Truncate: 43, '...' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="listArticle">
+                    {% for item in column.ArticleGetter.Take[4].Result %}
+                        {% if item.ArticleID != column.TopArticle.ArticleID %}
+                            <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #fff799;">{{ item.Title }}</a></li>
+                        {% endif %} 
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="section2">
+    <div class="content">
+        <div class="box1" style="margin-top: 10px;">
+            <div class="container">
+                <div class="buttons">
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="工大回忆" control-div="hit_memory"
+                        clicked="clicked" src="/Template/Common/Image/Button/工大回忆h.png" normal-state="/Template/Common/Image/Button/工大回忆.png"
+                        click-state="/Template/Common/Image/Button/工大回忆h.png" />
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友人物" control-div="mate_celebrity"
+                        src="/Template/Common/Image/Button/校友人物.png" normal-state="/Template/Common/Image/Button/校友人物.png"
+                        click-state="/Template/Common/Image/Button/校友人物h.png" />
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友组织" control-div="hit_alumni"
+                        src="/Template/Common/Image/Button/校友组织.png" normal-state="/Template/Common/Image/Button/校友组织.png"
+                        click-state="/Template/Common/Image/Button/校友组织h.png" />
+                </div>
+                <div id="hit_memory">{% assign column = Column['工大回忆'] %}
+                    <div class="center">
+                        <div class="inner">
+                            <div class="picArticle">
+                                <img src="{{ column.TopArticle.PictureURL }}" />
+                                <div class="article">
+                                    <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #0d184e;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
+                                    <div class="desc">
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="listArticle">
+                                {% for item in column.ArticleGetter.Take[4].Result %}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
+                                    <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif %} 
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+                </div>
+                <div id="mate_celebrity" style="display: none;">{% assign column = Column['校友人物'] %}
+                    <div class="center">
+                        <div class="inner">
+                            <div class="picArticle">
+                                <img src="{{ column.TopArticle.PictureURL }}" />
+                                <div class="article">
+                                    <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #0d184e;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
+                                    <div class="desc">
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="listArticle">
+                                {% for item in column.ArticleGetter.Take[4].Result %}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
+                                    <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif %} 
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+                </div>
+                <div id="hit_alumni" style="display: none;">
+                    <div class="center">
+                        <div class="inner">
+                            <ul class="listAlumni">
+                                <li><a href="#">北京校友会</a></li>
+                                <li><a href="#">上海校友会</a></li>
+                            </ul>
+                            <ul class="listAlumni">
+                                <li><a href="#">天津校友会</a></li>
+                                <li><a href="#">重庆校友会</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--<a href="#"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>-->
+                </div>
+            </div>
+        </div>
+        <div class="box2" style="margin-top: 10px;">
+            <img alt="捐赠鸣谢" class="icon" src="/Template/Common/Image/donations.png" />
+            <div class="container">
+                <div class="inner">
+                    <ul class="donations">
+                        {% for item in DonationGetter.Take[10].Result %}
+                        <li><b>{{ item.Name }}</b><em>{{ item.Amount }}</em></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <!--<a href="#"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>-->
+        </div>
+    </div>
+</div>
+<div class="section3">
+    <div class="content">
+        <div class="icon"></div>
+        <form target="_blank" method="post" action="/SNS/Search.aspx">
+        <div class="center">
+            <p>欢迎使用【找校友】功能！在这里，你可以找到多年前一起上过课的老朋友！</p>
+            <p>你也可以通过<a href="#">注册校友网</a>，让他/她也能在这里找到你！</p>
+            <div class="condition">
+                <p>入学年份</p>
+                <select name="enroll_year">
+                {% for i in (1988...LatestEnrollYear) reversed %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="condition">
+                <p>就读专业</p>
+                <select name="enroll_project">
+                {% for item in EnrollPrograms %}
+                    <option value="{{ item.ID }}">{{ item.Name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="condition">
+                <p>从事行业</p>
+                <select name="employ_category">
+                {% for item in EmployCategory %}
+                    <option value="{{ item.ID }}">{{ item.Name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="condition">
+                <p>所在地区</p>
+                <select name="live_province">
+                {% for item in LiveProvince %}
+                    <option value="{{ item.ID }}">{{ item.Name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div id="find_wrapper"><input type="submit" class="find" value="" /></div>
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <div class="content">
+        <div class="links">
+            {% for item in LinkGetter.Take[15].Result %}
+                <a href="{{ item.LinkURL }}">{{ item.LinkName }}</a>&ensp;
+            {% endfor %}
+        </div>
+        <div class="separator"></div>
+        <div class="copyright">版权所有© 哈尔滨工业大学(威海) 2014-2015 地址：山东省威海市文化西路2号 | 邮编：264209 | 鲁：ICP备06020633号 | <a href="#">管理入口</a></div>
+    </div>
+</div>
+{% endblock %}
+{% block otherJS %}
+    <script language="javascript" type="text/javascript">
+        function changeColumn(obj) {
+            var col = $(obj);
+
+            // not click
+            if (col.attr('clicked') == undefined) {
+                // remove current clicked
+                var divToHide = null;
+                col.parent().children("[name='btnChangeCol']").each(function () {
+                    var e = $(this);
+                    if (e.attr('clicked') != undefined) {
+                        // remove clicked state
+                        e.attr('src', e.attr('normal-state'));
+                        e.removeAttr('clicked');
+
+                        divToHide = '#' + e.attr('control-div');
+                        return false; // break
+                    }
+                });
+
+                // clicked this
+                col.attr('src', col.attr('click-state'));
+                col.attr('clicked', 'clicked');
+                var divToShow = '#' + col.attr('control-div');
+
+                $(divToHide).fadeOut('fast', function () {
+                    $(divToShow).fadeIn('fast');
+                });
+            }
+        }
+    </script>
 {% endblock %}

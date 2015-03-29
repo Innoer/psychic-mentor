@@ -43,13 +43,22 @@ namespace Alumni
             }
             else
             {
+                if (!column.Visible) // not visible, just jump
+                {
+                    Response.Redirect("/Default.aspx", true);
+                    return;
+                }
+
                 int.TryParse(Request["PageID"], out pageID);
 
                 var colIDs = new int[] { column.ColumnID }.Concat(column.SubColumns.Select(col => col.ColumnID)).ToArray();
                 var query = ArticleHelper.GetArticlesByColumnIDs(context, colIDs);
 
+                var subColumns = ColumnHelper.GetSubColumnsByID(context, column.ColumnID);
+                if (subColumns.Count() == 0) // no sub col, so we fetch same level col
+                    subColumns = ColumnHelper.GetSubColumnsByID(context, column.ParentColumnID);
+
                 var picArticle = query.FirstOrDefault(item => item.PictureURL != String.Empty);
-                if (picArticle == null) picArticle = query.FirstOrDefault();
 
                 int articlesPerPage = new ConfigHelper(context).ArticlesPerPage;
                 int totalPageCount = (int) Math.Ceiling(query.Count() / (double) articlesPerPage);
@@ -57,20 +66,22 @@ namespace Alumni
 
                 if (pageID < 1) pageID = 1;
                 else if (pageID > totalPageCount) pageID = totalPageCount;
-                
+
                 Template template = TemplateHelper.GetSubTemplate(context, column.TemplateID);
-                String html = template.Render(Hash.FromAnonymousObject(
+                var dataToRender = Hash.FromAnonymousObject(
                     new
                     {
                         TopColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID),
  
-                        Column = column,
+                        ThisColumn = column,
                         PictureArticle = picArticle,
                         SubColumn = ColumnHelper.GetSubColumnsByID(context, column.ColumnID).ToDictionary(
                                     k => k.ColumnName, v => new
                                     {
+                                        ColumnID = v.ColumnID,
                                         ArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetArticlesByColumnIDs(context, new int[] { v.ColumnID }))
                                     }),
+                        SubColumnList = subColumns.ToList(),
                         UnionArticleGetter = new TableGetter<ArticleType>(query.Skip((pageID - 1) * articlesPerPage).Take(articlesPerPage)),
 
                         Pager = new PagerType
@@ -80,9 +91,9 @@ namespace Alumni
                             CurrentPageID = pageID, TotalPageCount = totalPageCount,
                             TotalArticleCount = query.Count(), ArticlesPerPage = articlesPerPage
                         }
-                    }));
+                    });
 
-                Response.Write(html);
+                template.Render(Response.Output, new RenderParameters { LocalVariables = dataToRender });
                 Response.End();
             }
         }

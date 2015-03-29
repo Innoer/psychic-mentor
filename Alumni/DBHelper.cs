@@ -74,8 +74,10 @@ namespace Alumni
         public class ColumnItem : DotLiquid.Drop
         {
             public int ColumnID { get; set; }
+            public int ParentColumnID { get; set; }
             public int TemplateID { get; set; }
             public String ColumnName { get; set; }
+            public bool Visible { get; set; }
             public bool IsExternalLink { get; set; }
             public String ExternalLinkURL { get; set; }
 
@@ -96,11 +98,30 @@ namespace Alumni
                 return new ColumnItem
                 {
                     ColumnID = col.ColumnID,
+                    ParentColumnID = col.ParentColumnID,
                     TemplateID = col.SubTemplateID,
                     ColumnName = col.ColumnName,
+                    Visible = col.Visible,
                     IsExternalLink = col.IsExternalLink,
                     ExternalLinkURL = col.ExternalLinkURL
                 };
+            }
+
+            public static IQueryable<ColumnItem> GetAllColumns(DBDataContext context)
+            {
+                var childs = from item in context.Columns
+                             select new ColumnItem
+                             {
+                                 ColumnID = item.ColumnID,
+                                 TemplateID = item.SubTemplateID,
+                                 ParentColumnID = item.ParentColumnID,
+                                 ColumnName = item.ColumnName,
+                                 Visible = item.Visible,
+                                 IsExternalLink = item.IsExternalLink,
+                                 ExternalLinkURL = item.ExternalLinkURL
+                             };
+
+                return childs;
             }
 
             public static IQueryable<ColumnItem> GetSubColumnsByID(DBDataContext context, int columnID)
@@ -111,7 +132,9 @@ namespace Alumni
                              {
                                  ColumnID = item.ColumnID,
                                  TemplateID = item.SubTemplateID,
+                                 ParentColumnID = item.ParentColumnID,
                                  ColumnName = item.ColumnName,
+                                 Visible = item.Visible,
                                  IsExternalLink = item.IsExternalLink,
                                  ExternalLinkURL = item.ExternalLinkURL
                              };
@@ -126,8 +149,10 @@ namespace Alumni
                           select new ColumnItem
                           {
                               ColumnID = item.ColumnID,
+                              ParentColumnID = item.ParentColumnID,
                               TemplateID = item.SubTemplateID,
                               ColumnName = item.ColumnName,
+                              Visible = item.Visible,
                               IsExternalLink = item.IsExternalLink,
                               ExternalLinkURL = item.ExternalLinkURL
                           };
@@ -261,6 +286,11 @@ namespace Alumni
             public IQueryable<T> Result
             {
                 get { return collections; }
+            }
+
+            public List<T> ResultList
+            {
+                get { return collections.ToList(); }
             }
         }
 

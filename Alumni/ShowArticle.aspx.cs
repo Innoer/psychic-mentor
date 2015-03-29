@@ -28,17 +28,21 @@ namespace Alumni
             }
             else
             {
+                // execute sql command manually, to ensure it's atomic.
+                context.ExecuteCommand("UPDATE Articles SET VisitCount = VisitCount + 1 WHERE ArticleID = {0}", article.ArticleID);
+                article = ArticleHelper.GetArticleByID(context, articleID);
+
                 Template template = TemplateHelper.GetSubTemplate(context, article.TemplateID);
-                String html = template.Render(Hash.FromAnonymousObject(
+                var dataToRender = Hash.FromAnonymousObject(
                     new
                     {
                         TopColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID),
 
                         Article = article,
                         RelatedArticleGetter = new TableGetter<ArticleType>(ArticleHelper.GetRelatedArticles(context, article))
-                    }));
-                
-                Response.Write(html);
+                    });
+
+                template.Render(Response.Output, new RenderParameters { LocalVariables = dataToRender });
                 Response.End();
             }
         }

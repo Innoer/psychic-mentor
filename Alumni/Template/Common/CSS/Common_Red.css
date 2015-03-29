@@ -1,0 +1,24 @@
+﻿body { background: #efdede; }
+
+.header { background: url(/Template/Common/Image/header_bk_red.png) repeat-x; }
+
+.header .content .top { height: 100%; }
+
+.header .logo
+{
+    width: 425px; height: 58px;
+    float: left;
+    margin-top: 45px;
+}
+
+.header .content .top .left .title
+{
+    margin: 65px 0 0 25px;
+    float: left;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.header .content .top .left .title a { color: #ffffcc; }
+.header .content .top .left .title a:hover { text-decoration: underline; }

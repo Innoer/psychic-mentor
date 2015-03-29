@@ -1,0 +1,70 @@
+﻿body
+{
+    background: #C6E2EE url(/Template/Common/Image/gradient.png) repeat-x; /* fallback */
+    background: #C6E2EE -webkit-gradient(linear, 0 0, 0 bottom, from(#1B6699), to(#C6E2EE)) no-repeat;
+    background: #C6E2EE -webkit-linear-gradient(#1B6699, #C6E2EE) no-repeat;
+    background: #C6E2EE -moz-linear-gradient(#1B6699, #C6E2EE) no-repeat;
+    background: #C6E2EE -ms-linear-gradient(#1B6699, #C6E2EE) no-repeat;
+    background: #C6E2EE -o-linear-gradient(#1B6699, #C6E2EE) no-repeat;
+    background: #C6E2EE linear-gradient(#1B6699, #C6E2EE) no-repeat;
+}
+
+#container 
+{
+    position: relative;
+    z-index: 1;
+    width: 1000px;
+    background-color: white;
+    margin: -10px auto;
+    border: 1px solid #f8fbfd;
+    overflow: hidden;
+}
+
+#container .content
+{
+    width: 980px; /* height is given in html */
+    margin: 10px auto;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+#container .content .left
+{
+    width: 300px; height: 100%;
+    background-color: #f0f0f0;
+    float: left;
+    overflow: hidden;
+}
+
+#container .content .left .separator
+{
+    background: url(/Template/Common/Image/left_separator_blue.png) repeat-y;
+    width: 100%; height: 2px;
+    overflow: hidden;
+}
+
+#container .content .right
+{
+    width: 680px; height: 100%;
+    float: right;
+    overflow: hidden;
+}
+
+#container .footer
+{
+    width: 1000px; height: 65px;
+    background-color: white;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#container .footer .content
+{
+    width: 980px; height: 100%;
+    background-color: #033f74;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    line-height: 65px;
+}

@@ -1,0 +1,509 @@
+﻿.talks
+{
+    margin: -10px auto;
+    margin-bottom: 8px;
+}
+
+.talks .content
+{
+    position: relative;
+    z-index: 1;
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #a95353;
+    overflow: hidden;
+    color: white;
+    
+    -webkit-box-shadow: #666 2px 2px 3px;
+    -moz-box-shadow: #666 2px 2px 3px;
+    box-shadow: #666 2px 2px 3px;
+    
+    behavior: url(/Template/Common/JS/PIE.htc);
+}
+
+.talks .content p
+{
+    margin: 10px 0 10px 15px;
+    display: block;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.slider_wrapper
+{
+    width: 1120px;
+    margin: 10px auto;
+    overflow: hidden;
+}
+
+.slider_wrapper .slider
+{
+    position: relative;
+    width: 1000px; height: 375px;
+    background-color: #a95353;
+    margin: 0 auto;
+    float: left;
+    
+    color: white;
+}
+
+.slider_wrapper .slider .video
+{
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: url(/Template/Common/Image/slider_img.jpg) no-repeat;
+}
+
+.slider_wrapper .slider .title
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%; height: 70px;
+    background: url(/Template/Common/Image/slider_title_bk.png) repeat-x;
+    font-weight: 500;
+}
+
+.slider_wrapper .slider .title p
+{
+    margin: 20px 0 20px 15px;
+    display: block;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.slider_wrapper span:hover { cursor: pointer; }
+.slider_wrapper .left 
+{
+    margin-top: 130px;
+    width: 60px;
+    float: left;
+}
+.slider_wrapper .right
+{
+    margin-top: 130px;
+    float: right;
+}
+
+.news 
+{
+    width: 1000px; height: 340px;
+    background-color: #a95353; 
+    margin: 10px auto;
+    overflow: hidden;
+    color: white;
+    font-weight: 300;
+}
+
+.more 
+{
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 102px; height: 16px;
+}
+
+.box1
+{
+    position: relative;
+    width: 336px; height: 240px;
+    margin: 85px 0 0 75px;
+    _margin-left: 38px; /* fix for ie6 */
+    background: url(/Template/Common/Image/box_bk_red.png) repeat;
+    float: left;
+}
+
+.box1 .icon
+{
+    width: 85px; height: 85px;
+    margin: -55px 0 0 -50px; 
+    float: left;
+}
+
+.box1 .container 
+{
+    width: 100%; height: 180px;
+    overflow: hidden;
+}
+
+.box1 .container .inner 
+{
+    height: 164px;
+    margin: 0 25px 0 25px;
+}
+
+.box1 .inner a:hover { text-decoration: underline; }
+
+.box1 .listArticle
+{
+    width: 100%; height: 100%;
+    list-style: none;
+}
+
+.box1 .listArticle li  
+{
+    height: 30px !important;
+    width: 100%; height: 28px; 
+    border-bottom: 1px solid white;
+    line-height: 28px;
+    font-size: 15px;
+}
+
+.box1 .listArticle li a  
+{
+    width: 100%; height: 100%;
+    display: block;
+    overflow: hidden;
+    float: left;
+    padding-left: 5px;
+    color: white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.box2
+{
+    position: relative;
+    width: 420px; height: 240px;
+    margin: 85px 75px 0 0;
+    _margin-right: 38px; /* fix for ie6 */
+    background: url(/Template/Common/Image/box_bk_red.png) repeat;
+    float: right;
+}
+
+.box2 .icon
+{
+    width: 85px; height: 85px;
+    margin: -55px 0 0 -50px; 
+    float: left;
+}
+
+.box2 .container 
+{
+    width: 100%; height: 180px;
+    overflow: hidden;
+}
+
+.box2 .container .inner 
+{
+    height: 100%;
+    margin: 0 20px 0 20px;
+}
+
+.box2 .article
+{
+    width: 173px; height: 100%;
+    float: left;
+}
+
+.box2 .article .title
+{
+    width: 100%; height: 45px;
+    overflow: hidden;
+    display: block;
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.box2 .article a { color: #fff799; }
+.box2 .article a:hover { text-decoration: underline; }
+
+.box2 .article .desc
+{
+    overflow: hidden;
+    margin-top: 10px;
+    text-indent: 24px;
+}
+
+.box2 .inner .separator
+{
+    width: 1px; height: 100%;
+    background-color: white;
+    margin: 0 auto;
+    float: left;
+}
+
+.box2 .inner a:hover { text-decoration: underline; }
+
+.timeline
+{
+    position: relative;
+    width: 1000px;
+    background-color: #a95353;
+    margin: 0 auto;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.timeline .space_before
+{
+    position: relative;
+    width: 100%; height: 150px;
+    /* fix for ie6, 7 */
+    _height: 70px; *height: 70px;
+    overflow: hidden;
+}
+
+.timeline .icon30
+{
+    position: relative;
+    margin: -80px auto;
+    width: 160px; height: 160px;
+    background-color: #efdede;
+    text-align: center;
+    color: #330000;
+    overflow: hidden;
+    z-index: 2;
+        
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
+
+    behavior: url(/Template/Common/JS/PIE.htc);
+}
+
+.timeline .icon30 p
+{
+    margin: 48px auto;
+    font-size: 72px;
+    line-height: 60px;
+    font-weight: 600;
+}
+
+.timeline .container
+{
+    position: relative;
+    width: 1000px;
+    background-color: #f1f2f7;
+    z-index: 1;
+}
+
+.timeline .container .clear { padding-top: 80px; }
+
+.timeline-block 
+{
+    position: relative; 
+    width: 100%; 
+    overflow: hidden;
+}
+
+.timeline-block .point
+{
+    position: absolute;
+    overflow: hidden;
+    top: 15px;
+    width: 10px; height: 10px;
+    background-color: #9f9d9d;
+    border: 10px solid #d3d3d3;
+    z-index: 2;
+    
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+
+    behavior: url(/Template/Common/JS/PIE.htc);
+}
+
+.timeline-block .left-time
+{
+    position: absolute;
+    top: 0; left: 500px;
+    z-index: 2;
+}
+
+.timeline-block .left-time p
+{
+    margin: 9px 0 0 40px;
+    font-size: 28px;
+    line-height: normal;
+    font-weight: 600;
+    color: #253446;
+}
+
+.timeline-block .content
+{
+    overflow: hidden;
+    background-color: white;
+    
+    padding-bottom: 12px;
+    
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    
+    -webkit-box-shadow: #efdede 2px 3px 2px;
+    -moz-box-shadow: #efdede 2px 3px 2px;
+    box-shadow: #efdede 2px 3px 2px;
+
+    behavior: url(/Template/Common/JS/PIE.htc);
+}
+
+.timeline-block .placeholder { height: 25px; }
+
+.timeline-block .left
+{
+    position: relative;
+    width: 495px;
+    display: inline;
+    float: right; margin-right: 498px;
+    border-right: 4px solid #d3d3d3;
+    z-index: 1;
+}
+
+.timeline-block .left .point { right: -17px; }
+
+.timeline-block .left .content { margin: 10px 35px 10px 50px; }
+
+.timeline-block .right-time
+{
+    position: absolute;
+    top: 0; right: 500px;
+    z-index: 2;
+}
+
+.timeline-block .right-time p
+{
+    margin: 9px 40px 0 0;
+    font-size: 28px;
+    line-height: normal;
+    font-weight: 600;
+    color: #253446;
+}
+
+.timeline-block .right
+{
+    position: relative;
+    width: 495px;
+    display: inline;
+    float: left; margin-left: 498px;
+    border-left: 4px solid #d3d3d3;
+    z-index: 1;
+}
+
+.timeline-block .right .point { left: -17px; }
+
+.timeline-block .right .content { margin: 10px 50px 10px 35px; }
+
+.timeline-block .content h2
+{
+    margin: 15px 20px 0 20px;
+    /* fix for ie6, 7 */
+    width: 370px; _margin-top: 20px; *margin-top: 20px;
+    font-size: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #1a3252;
+    font-weight: 600;
+    line-height: 26px;
+}
+
+.timeline-block .content p
+{
+    margin: 10px 0 0 20px;
+    width: 370px;
+    /* fix for ie6, 7 */
+    _padding-bottom: 10px; *padding-bottom: 10px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #23333f;
+}
+
+.timeline-block .content a
+{
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    /* fix for ie6, 7 */
+    _margin-top: 0; *margin-top: 0;
+    background-color: #b16363;
+    display: block;
+    width: 100px; height: 32px;
+    
+    color: white;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    
+    -webkit-border-radius: 0.25em;
+    -moz-border-radius: 0.25em;
+    border-radius: 0.25em;
+
+    behavior: url(/Template/Common/JS/PIE.htc);
+}
+
+.timeline-block .left .content a 
+{ 
+    float: left; 
+    margin-left: 20px;
+    _margin-left: 10px; /* fix for ie6 */
+}
+.timeline-block .right .content a 
+{
+     float: right; 
+     margin-right: 20px; 
+     _margin-right: 10px; /* fix for ie6 */
+}
+
+.timeline-block .content a:hover { text-decoration: underline; }
+
+.timeline .space_after
+{
+    position: relative;
+    width: 1000px; height: 50px;
+    z-index: 1;
+}
+
+.icon_today_wrapper 
+{ 
+    width: 100%; 
+    padding-bottom: 60px;
+    background-color: #f1f2f7;
+}
+
+.icon_today
+{
+    position: relative;
+    margin: 0 auto;
+    width: 100px; height: 100px;
+    background-color: #2980b8;
+    text-align: center;
+    overflow: hidden;
+    z-index: 2;
+        
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+
+    behavior: url(/Template/Common/JS/PIE.htc);
+}
+
+.icon_today p
+{
+    margin: 18px auto;
+    color: white;
+    font-size: 30px;
+    line-height: 60px;
+    font-weight: 300;
+}
+
+.footer 
+{
+    position: relative;
+    width: 100%; height: 60px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.footer .content 
+{
+    position: relative;
+    width: 1000px; height: 100%;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    overflow: hidden;
+    color: #7e7e7e;
+    text-align: center;
+    line-height: 55px;
+}

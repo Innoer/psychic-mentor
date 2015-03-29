@@ -1,35 +1,93 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
+﻿<!DOCTYPE html>
+<html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="renderer" content="webkit" />
+
     <title>{% block title %}哈尔滨工业大学（威海）校友网{% endblock %}</title>
+
+    <!--[if lt IE 9]><script>document.execCommand("BackgroundImageCache", false, true);</script><![endif]-->
+
+    <link href="/Template/Common/CSS/Common.css" rel="Stylesheet" />
+    <link href="/Template/Common/CSS/bgStretcher.css" rel="Stylesheet" />
+
+    {% block otherCSS %}{% endblock %}
+
+    <script type="text/javascript" src="/Template/Common/JS/jquery-1.11.2.min.js"></script>
+    <!--[if IE 6]><script type="text/javascript" src="/Template/Common/JS/DD_belatedPNG.js"></script><![endif]-->
+    <script type="text/javascript" src="/Template/Common/JS/bgStretcher.js"></script>
+
+    <script type="text/javascript" src="/Template/Common/JS/Common.js"></script>
 </head>
 <body>
-    <ul>
-        {% for top in TopColumns %}
-        <li>
-            {% if top.IsExternalLink %} 
-                <a href="{{ top.ExternalLinkURL }}">{{ top.ColumnName }}</a> 
-            {% else %} 
-                <a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}">{{ top.ColumnName }}</a>
-            {% endif %}
-            
-            {% if top.SubColumns.size > 0 %}
-                <ul>
-                {% for child in top.SubColumns %}
-                    {% if child.IsExternalLink %}
-                        <li><a href="{{ child.ExternalLinkURL }}">{{ child.ColumnName }}</a></li>
-                    {% else %}
-                        <li><a href="/ShowColumn.aspx?ColumnID={{ child.ColumnID }}">{{ child.ColumnName }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-    
-    {% block container %}{% endblock %}
-    
-    <p>版权所有 哈尔滨工业大学(威海) 2014-2015</p>
+    <div class="wrapper">
+        {% block beforeHeader %}{% endblock %}
+        <div class="header">
+            <div class="content">
+                <div class="top">
+                    <div class="left">
+                        <a href="/Default.aspx" title="哈尔滨工业大学（威海）校友网">
+                            <img class="logo" alt="哈尔滨工业大学（威海）校友网" src="/Template/Common/Image/logo.png" />
+                        </a>
+                    </div>
+                    <div class="right">
+                        <div id="time">
+                        </div>
+                        <div class="search_border">
+                            <form target="_blank" method="get" action="/Search.aspx">
+                            <input type="text" id="search_input" name="q" />
+                            <div id="search_button_wrapper">
+                                <input type="submit" id="search_button" value="" /></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav_wrapper">
+                    <div class="content">
+                        <div class="nav">
+                            <ul>
+                                <li><a href="/Default.aspx" class="dropdown">首页</a></li>
+                            </ul>
+                            {% for top in TopColumns %}
+			                <ul>
+                            {% if top.Visible %}
+				                {% if top.IsExternalLink %} 
+                                    <li><a href="{{ top.ExternalLinkURL }}" target="_blank" class="dropdown">{{ top.ColumnName }}</a></li>
+                                {% else %}
+                                    {% if top.ColumnName == "校庆专题" %}
+                                    <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" target="_blank" class="dropdown" style="color: #f7930a;">{{ top.ColumnName }}</a></li>
+                                    {% else %} 
+                                    <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" class="dropdown">{{ top.ColumnName }}</a></li>
+                                    {% endif %}
+                                {% endif %}
+                    
+                                {% if top.SubColumns.size > 0 %}
+                                    <li class="sublinks">
+                                    {% for child in top.SubColumns %}
+                                        {% if child.IsExternalLink %}
+                                            <a href="{{ child.ExternalLinkURL }}">{{ child.ColumnName }}</a>
+                                        {% else %}
+                                            <a href="/ShowColumn.aspx?ColumnID={{ child.ColumnID }}">{{ child.ColumnName }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+			                </ul>
+                            {% endfor %}
+                        </div>
+                        <div class="sign">
+                            <a href="#">注册</a> <a href="#" style="background-color: #485b8f">登录校友网</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block afterHeader %}{% endblock %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block otherJS %}{% endblock %}
 </body>
 </html>

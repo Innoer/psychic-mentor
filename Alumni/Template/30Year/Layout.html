@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="renderer" content="webkit" />
+
+    <title>{% block title %}哈尔滨工业大学（威海）校友网{% endblock %}</title>
+
+    <!--[if lt IE 9]><script>document.execCommand("BackgroundImageCache", false, true);</script><![endif]-->
+
+    <link href="/Template/Common/CSS/Common.css" rel="Stylesheet" />
+    <link href="/Template/Common/CSS/Common_Red.css" rel="Stylesheet" />
+    <link href="/Template/Common/CSS/bgStretcher.css" rel="Stylesheet" />
+
+    {% block otherCSS %}{% endblock %}
+
+    <script type="text/javascript" src="/Template/Common/JS/jquery-1.11.2.min.js"></script>
+    <!--[if IE 6]><script type="text/javascript" src="/Template/Common/JS/DD_belatedPNG.js"></script><![endif]-->
+    <script type="text/javascript" src="/Template/Common/JS/bgStretcher.js"></script>
+
+    <script type="text/javascript" src="/Template/Common/JS/Common.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        {% block beforeHeader %}{% endblock %}
+        <div class="header">
+            <div class="content">
+                <div class="top">
+                    <div class="left">
+                        <a href="/Default.aspx" title="哈尔滨工业大学（威海）校友网">
+                            <img class="logo" alt="哈尔滨工业大学（威海）校友网" src="/Template/Common/Image/logo_small.png" />
+                        </a>
+                        <div class="title"><a href="/ShowColumn.aspx?ColumnID=22">30周年校庆专题</a></div>
+                    </div>
+                    <div class="right">
+                        <div id="time">
+                        </div>
+                        <div class="search_border">
+                            <form target="_blank" method="get" action="/Search.aspx">
+                            <input type="text" id="search_input" name="q" />
+                            <div id="search_button_wrapper">
+                                <input type="submit" id="search_button" value="" /></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block afterHeader %}{% endblock %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block otherJS %}{% endblock %}
+</body>
+</html>

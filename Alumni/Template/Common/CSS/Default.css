@@ -1,0 +1,444 @@
+﻿#slider 
+{
+    width: 100%; height: 386px;
+    background: url(/Template/Common/Image/Slider/4.jpg) no-repeat;
+    overflow:hidden;
+}
+
+#slider .control { width: 100%; }
+
+#slider .control .common 
+{
+    margin: 100px 0;
+    width: 20px; height: 50px;
+}
+
+#slider .control span:hover { cursor: pointer; }
+
+#slider #prev { float: left; }
+#slider #next { float: right; }
+
+.section1 
+{
+    width: 100%; height: 380px;
+    background: url(/Template/Common/Image/sec1_bk.jpg) repeat-x;
+    overflow: hidden;
+}
+
+.section1 .content 
+{
+    width: 1000px; height: 320px;
+    color: white;
+    margin: 0 auto;
+}
+
+.section2 
+{
+    width: 100%; height: 350px;
+    background: url(/Template/Common/Image/sec2_bk.png) repeat-x;
+    overflow: hidden;
+}
+
+.section2 .content 
+{
+    width: 1000px; height: 100%;
+    margin: 0 auto;
+    color: #384272;
+}
+
+.section3 
+{
+    width: 100%; height: 200px;
+    overflow: hidden;
+}
+
+.section3 .content 
+{
+    width: 1100px; height: 100%;
+    margin: 0px auto;
+    color: white;
+    overflow: hidden;
+}
+
+.section3 .content a { color: #fff45c; }
+.section3 .content a:hover { text-decoration: underline; }
+
+.section3 .content .icon 
+{
+    background: url(/Template/Common/Image/find_mate.png) no-repeat;
+    width: 85px; height: 85px;
+    margin: 60px 0 0 60px;
+    _margin-left: 25px; /* fix for ie6 */
+    float: left;
+    overflow: hidden;
+}
+
+.section3 .content .center 
+{
+    float: left;
+    margin: 60px 0 0 50px;
+}
+
+.section3 .content .center p  
+{
+    line-height: 20px; 
+    font-size: 15px;
+}
+
+.section3 .content .center .condition 
+{
+    float: left;
+    margin: 10px 15px 0 0;
+}
+
+.section3 .content .center .condition p
+{
+    color: #b6c2db; 
+    font-weight: 300;
+    padding-bottom: 2px;
+}
+
+.section3 .content .center .condition select 
+{
+    width: 150px; height: 22px;
+    border: 1px solid white;
+    background-color: #b6c2db;
+    color: #2b386b;
+}
+
+#find_wrapper input:hover { cursor: pointer; }
+
+.section3 .content .find  
+{
+    width: 190px; height: 180px;
+    background: url(/Template/Common/Image/find.png) no-repeat;
+    margin: 25px 0 0 10px;
+    overflow: hidden;
+    border: 0;
+}
+
+.footer 
+{
+    width: 100%; height: 60px;
+    background-color: #0d184e;
+    overflow: hidden;
+}
+
+.footer .content 
+{
+    width: 1000px; height: 100%;
+    margin: 0 auto;
+    color: white;
+    overflow: hidden;
+}
+
+.footer a { color: white; }
+.footer a:hover { text-decoration: underline; }
+
+.footer .links 
+{
+    overflow: hidden;
+    width: 100%; height: 28px;
+    margin: 0 auto;
+    padding-top: 2px;
+    line-height: 26px;
+    font-size: 13px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.footer .separator 
+{
+    width: 100%; height: 1px;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.footer .copyright 
+{
+    text-align: center;
+    width: 100%; height: 28px;
+    margin: 0 auto;
+    line-height: 26px;
+    font-weight: 400;
+}
+
+.more 
+{
+    position: absolute;
+    width: 102px; height: 16px;
+    bottom: 0; right: 0;
+}
+
+.box1 
+{
+    position: relative;
+    width: 530px; height: 290px;
+    border: 1px solid white;
+    background: url(/Template/Common/Image/box_bk.png) repeat;
+    float: left;
+}
+
+.box1 .container 
+{
+    width: 100%; height: 100%;
+}
+
+.box1 .buttons 
+{
+    width: 100%; height: 40px;
+}
+
+.box1 .buttons img 
+{
+    margin: 10px 0 0 10px;
+    float: left;
+    width: 100px; height: 30px;
+    border: 1px solid white;
+    background-color: #002060;
+}
+
+.box1 .buttons img:hover { cursor: pointer; }
+
+.box1 .center 
+{
+    width: 100%; height: 234px;
+    overflow: hidden;
+}
+
+.box1 .center .inner 
+{
+    height: 200px;
+    margin: 25px 25px 0 25px;
+}
+
+.box1 .center a:hover { text-decoration: underline; }
+
+.box1 .picArticle
+{
+    margin: 0 auto;
+    width: 100%; height: 100px;
+}
+
+.box1 .picArticle img 
+{
+    width: 150px; height: 100%; 
+    display: inline-block;
+    float: left;
+}
+
+.box1 .picArticle .article
+{
+    width: 315px; height: 100%;
+    margin-left: 15px;
+    float: left;
+}
+
+.box1 .picArticle .article .title
+{
+    width: 100%; height: 38px;
+    margin-top: 2px;
+    overflow: hidden;
+    display: block;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.box1 .picArticle .article .desc 
+{
+    height: 60px;
+    overflow: hidden;
+    text-indent: 24px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.box1 .listArticle
+{
+    width: 100%; height: 90px;
+    margin-top: 10px;
+    list-style: none;
+}
+
+.box1 .listArticle li  
+{
+    width: 100%; height: 28px; 
+    border-top: 1px solid white;
+    line-height: 28px;
+}
+
+.box1 .listArticle li a  
+{
+    width: 425px; height: 100%;
+    display: block;
+    overflow: hidden;
+    float: left;
+    padding-left: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.box1 .listArticle li em
+{
+    height: 100%;
+    float: right;
+    font-style: normal;
+}
+
+.box2 
+{
+    position: relative;
+    width: 325px; height: 290px;
+    border: 1px solid white;
+    background: url(/Template/Common/Image/box_bk.png) repeat;
+    float: right;
+}
+
+.box2 .icon
+{
+    width: 85px; height: 85px;
+    margin: -10px 0 0 -43px; 
+    float: left;
+}
+
+.box2 .container 
+{
+    width: 280px; height: 274px;
+    overflow: hidden;
+}
+
+.box2 .container .inner 
+{
+    height: 220px;
+    margin: 50px 10px 0 0;
+}
+
+.box2 .inner a:hover { text-decoration: underline; }
+
+.box2 .picArticle
+{
+    margin: 0 auto;
+    width: 100%; height: 100px;
+}
+
+.box2 .picArticle img 
+{
+    width: 125px; height: 100px; 
+    display: inline-block;
+    float: left;
+}
+
+.box2 .picArticle .article
+{
+    width: 130px; height: 100%;
+    margin-left: 15px;
+    float: left;
+    overflow: hidden;
+}
+
+.box2 .picArticle .article .title
+{
+    width: 100%; height: 38px;
+    overflow: hidden;
+    display: block;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.box2 .picArticle .article .desc 
+{
+    margin-top: 5px;
+    height: 58px;
+    overflow: hidden;
+    text-indent: 24px;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.box2 .listArticle
+{
+    width: 250px; height: 90px;
+    margin-top: 27px;
+    list-style: none;
+}
+
+.box2 .listArticle li  
+{
+    width: 100%; height: 28px; 
+    border-top: 1px solid white;
+    line-height: 28px;
+}
+
+.box2 .listArticle li a  
+{
+    width: 100%; height: 100%;
+    display: block;
+    overflow: hidden;
+    float: left;
+    padding-left: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.listAlumni 
+{
+    width: 50%; height: 100%;
+    float: left; 
+    list-style: none; 
+}
+
+.listAlumni li
+{
+    width: 100%; height: 22px;
+    _height: 18px; /* fix for ie 6 */
+    
+}
+
+.listAlumni li a 
+{ 
+    width: 100%; height: 100%;
+    display: block;
+    overflow: hidden;
+    color: #0d184e;
+    line-height: 18px;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+}
+
+.donations
+{
+    width: 100%; height: 100%;
+    list-style: none;
+}
+
+.donations li
+{
+    width: 100%; height: 22px;
+    _height: 18px; /* fix for ie 6 */
+    overflow: hidden;
+    color: #0d184e;
+    line-height: 18px;
+}
+
+.donations li b 
+{
+    width: 190px; height: 100%;
+    display: block;
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 400;
+}
+
+.donations li em
+{
+    width: 75px; height: 100%;
+    float: right;
+    overflow: hidden;
+    display: block;
+    font-style: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

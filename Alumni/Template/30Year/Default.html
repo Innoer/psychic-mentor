@@ -1,0 +1,193 @@
+﻿{% extends /Template/30Year/Layout.html %} 
+{% block otherCSS %}
+<link href="/Template/Common/CSS/Default_Red.css" rel="Stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="talks">
+    <div class="content"><p>校友寄语：祝母校越办越好！——李大为</p></div>
+</div>
+
+<div class="slider_wrapper">
+    <div class="left control"><span><img id="prev" alt="上一张" src="/Template/Common/Image/left_arrow.png" /></span></div>
+    <div class="slider">
+        <div class="video"></div>
+        <div class="title"><p>校区全面部署30周年校庆工作</p></div>
+    </div>
+    <div class="right control"><span><img id="next" alt="下一张" src="/Template/Common/Image/right_arrow.png" /></span></div>
+</div>
+
+<div class="news">
+        <div class="box1">
+            <img alt="活动公告" class="icon" src="/Template/Common/Image/30activity.png" />
+            <div class="container">
+                <div class="inner">
+                    <ul class="listArticle">
+                        {% for item in SubColumn['校庆活动公告'].ArticleGetter.Take[5].Result %}
+                        <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}">{{ item.Title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['校庆活动公告'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+            </div>
+        </div>
+
+        <div class="box2">{% assign articles = SubColumn['校庆新闻动态'].ArticleGetter.Take[2].ResultList %}
+            <img alt="新闻动态" class="icon" src="/Template/Common/Image/30news.png" />
+            <div class="container">
+                <div class="inner">
+                    <div class="article" style="margin-right: 15px;">
+                        <div class="title"><a href="/ShowArticle.aspx?ArticleID={{ articles[0].ArticleID }}">{{ articles[0].Title }}</a></div>
+                         <div class="desc">
+                            <p>{{ articles[0].Content | StripHtml | Truncate: 82, '…' }}</p>
+                         </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="article" style="margin-left: 15px;">
+                        <div class="title"><a href="/ShowArticle.aspx?ArticleID={{ articles[1].ArticleID }}">{{ articles[1].Title }}</a></div>
+                         <div class="desc">
+                            <p>{{ articles[1].Content | StripHtml | Truncate: 82, '…' }}</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['校庆新闻动态'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+        </div>
+</div>
+
+<div class="timeline">
+    <div class="space_before"></div>
+    <div class="icon30"><p>30</p></div>
+    <div class="container">
+        <div class="clear"></div>
+        <div class="timeline-block"><div class="left" style="height: 20px; border-right-style: dotted;"></div></div>
+        <div class="timeline-block">
+            <div class="left-time"><p>1920</p></div>
+            <div class="left" style="border-right-style: dotted;">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>起源</h2>
+                    <p>1920年哈尔滨中俄工业学校（哈尔滨工业大学的前身）建立</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder" style="height: 2px;"></div>
+            </div>
+        </div>
+        <div class="timeline-block"><div class="left" style="height: 100px; border-right-style: dotted;"></div></div>
+        <div class="timeline-block">
+            <div class="right-time"><p>1985</p></div>
+            <div class="right">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>筹备</h2>
+                    <p>1985年哈工大与威海市政府签定合作建设威海分校的协议</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="left-time"><p>1987</p></div>
+            <div class="left">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>筹建</h2>
+                    <p>1987年经原中国航天工业部批准并开始筹建</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="right-time"><p>1988</p></div>
+            <div class="right">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>招生</h2>
+                    <p>1988年开始招生</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="left-time"><p>1996</p></div>
+            <div class="left">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>合并</h2>
+                    <p>1996年经原国家教委批准哈工大汽车工程学院迁址威海与威海分校合并</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="right-time"><p>1997</p></div>
+            <div class="right">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>扩建</h2>
+                    <p>1997年哈工大汽车工程学院正式迁址威海，在威海分校改扩建</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="left-time"><p>2001</p></div>
+            <div class="left">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>共建</h2>
+                    <p>2001年威海市人民政府与哈工大签定共建哈工大威海分校协议</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="right-time"><p>2002</p></div>
+            <div class="right">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>更名</h2>
+                    <p>2002年正式更名为哈尔滨工业大学（威海）</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="left-time"><p>2010</p></div>
+            <div class="left">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>共建</h2>
+                    <p>2010年2月，工业和信息化部、山东省人民政府、威海市人民政府三方签订共建哈工大（威海）协议</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="right-time"><p>2014</p></div>
+            <div class="right">
+                <div class="point"></div>
+                <div class="content">
+                    <h2>共建</h2>
+                    <p>2014年3月，在哈工大第五届四次教职工代表大会上，王树国校长在工作报告中指出，国家海洋局和工业和信息化部已初步达成共识，将共建哈工大（威海）</p>
+                    <a href="#">了解更多</a>
+                </div>
+                <div class="placeholder"></div>
+            </div>
+        </div>
+    </div>
+    <div class="icon_today_wrapper"><div class="icon_today"><p>今天</p></div></div>
+    <div class="space_after"></div>
+</div>
+
+<div class="footer">
+    <div class="content">版权所有© 哈尔滨工业大学(威海) 2014-2015 地址：山东省威海市文化西路2号 | 邮编：264209 | 鲁：ICP备06020633号</div>
+</div>
+{% endblock %}

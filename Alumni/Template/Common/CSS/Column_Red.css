@@ -1,0 +1,7 @@
+﻿body { background: #efdede; }
+
+.picArticle .border { border-color: #efdede; }
+
+#container .content .left .separator { background: url(/Template/Common/Image/left_separator_red.png) repeat-y; }
+
+#container .footer .content { background-color: #993333; }
