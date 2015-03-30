@@ -1240,7 +1240,7 @@ namespace SNSDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> BirthDate
 		{
 			get
@@ -1552,7 +1552,7 @@ namespace SNSDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollDate", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollDate", DbType="DateTime NOT NULL")]
 		public System.DateTime EnrollDate
 		{
 			get
@@ -1620,7 +1620,7 @@ namespace SNSDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GraduateDate", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GraduateDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> GraduateDate
 		{
 			get

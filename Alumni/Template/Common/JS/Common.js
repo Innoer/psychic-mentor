@@ -74,12 +74,13 @@ $(document).ready(function () {
             imageWidth: 1920,
             imageHeight: 386,
             slideShowSpeed: 1000,
+            nextSlideDelay: 10000,
             transitionEffect: 'fade',
             sequenceMode: 'normal',
             buttonPrev: '#prev',
             buttonNext: '#next',
-            anchoring: 'left center',
-            anchoringImg: 'left center'
+            anchoring: 'center center',
+            anchoringImg: 'center center'
         });
 
     $('.dropdown').mouseenter(showSubMenu);

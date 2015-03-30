@@ -55,7 +55,7 @@
       <Column Name="PassWord" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Sex" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="BirthDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="LiveProvinceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LiveCityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EmployCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -70,10 +70,10 @@
       <Column Name="WeChatID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ClassNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="StudentNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="EnrollDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EnrollDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EnrollSchoolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EnrollProgramID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="GraduateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="GraduateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="EmployCategory_User" Member="EmployCategory" ThisKey="EmployCategoryID" OtherKey="CategoryID" Type="EmployCategory" IsForeignKey="true" />
       <Association Name="EnrollProgram_User" Member="EnrollProgram" ThisKey="EnrollProgramID" OtherKey="ProgramID" Type="EnrollProgram" IsForeignKey="true" />
       <Association Name="EnrollSchool_User" Member="EnrollSchool" ThisKey="EnrollSchoolID" OtherKey="SchoolID" Type="EnrollSchool" IsForeignKey="true" />

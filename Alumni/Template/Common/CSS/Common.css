@@ -103,6 +103,10 @@ body
     
     font: 14px "Microsoft YaHei";
     color: white;
+    
+    /* remove blur */
+    outline:0px !important;
+    -webkit-appearance:none;
 }
 
 #search_button 
@@ -150,7 +154,7 @@ body
     width: 110px; height: 34px;
     color: white;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 34px;
     text-align: center;
 }

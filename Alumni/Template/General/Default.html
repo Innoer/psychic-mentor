@@ -41,7 +41,7 @@
                                 <div class="article">
                                     <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
                                     <div class="desc">
-                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 65, '…' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                 <div class="article">
                                     <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
                                     <div class="desc">
-                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 65, '…' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                 <div class="article">
                                     <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
                                     <div class="desc">
-                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 65, '…' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -117,14 +117,14 @@
                             <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #fff799;">{{ column.TopArticle.Title | Truncate: 15, '…' }}</a>
                             <div class="desc">
                                 <p>
-                                    {{ column.TopArticle.Content | StripHtml | Truncate: 43, '...' }}</p>
+                                    {{ column.TopArticle.Content | StripHtml | Truncate: 28, '...' }}</p>
                             </div>
                         </div>
                     </div>
                     <ul class="listArticle">
                     {% for item in column.ArticleGetter.Take[4].Result %}
                         {% if item.ArticleID != column.TopArticle.ArticleID %}
-                            <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #fff799;">{{ item.Title }}</a></li>
+                            <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a></li>
                         {% endif %} 
                     {% endfor %}
                     </ul>
@@ -157,7 +157,7 @@
                                 <div class="article">
                                     <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #0d184e;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
                                     <div class="desc">
-                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 65, '…' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                 <div class="article">
                                     <a href="/ShowArticle.aspx?ArticleID={{ column.TopArticle.ArticleID }}" class="title" title="{{ column.TopArticle.Title }}" style="color: #0d184e;">{{ column.TopArticle.Title | Truncate: 38, '…' }}</a>
                                     <div class="desc">
-                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 75, '…' }}</p>
+                                        <p>{{ column.TopArticle.Content | StripHtml | Truncate: 65, '…' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -217,12 +217,14 @@
         <div class="box2" style="margin-top: 10px;">
             <img alt="捐赠鸣谢" class="icon" src="/Template/Common/Image/donations.png" />
             <div class="container">
-                <div class="inner">
+                <div class="inner" style="height: 230px;">
+                    <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="up" scrollAmount="1" scrollDelay="20" style="height: 100%;">
                     <ul class="donations">
-                        {% for item in DonationGetter.Take[10].Result %}
+                        {% for item in DonationGetter.Result %}
                         <li><b>{{ item.Name }}</b><em>{{ item.Amount }}</em></li>
                         {% endfor %}
                     </ul>
+                    </marquee>
                 </div>
             </div>
             <!--<a href="#"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>-->
