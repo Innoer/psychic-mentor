@@ -1,4 +1,6 @@
-﻿function doSearch() {
+﻿/* Code by Shindo. March, 2015. */
+
+function doSearch() {
     var text = $('#search_input').val();
     alert(text);
 

@@ -1,4 +1,6 @@
-﻿body
+﻿/* Code by Shindo. March, 2015. */
+
+body
 {
     background: #C6E2EE url(/Template/Common/Image/gradient.png) repeat-x; /* fallback */
     background: #C6E2EE -webkit-gradient(linear, 0 0, 0 bottom, from(#1B6699), to(#C6E2EE)) no-repeat;

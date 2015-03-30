@@ -1,4 +1,6 @@
-﻿#container .content .left .curpos
+﻿/* Code by Shindo. March, 2015. */
+
+#container .content .left .curpos
 {
     width: 100%; height: 110px;
     position: relative;
