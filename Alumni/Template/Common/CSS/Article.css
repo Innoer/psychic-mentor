@@ -58,7 +58,7 @@
 #container .content .right
 {
     background-color: white;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
 }
 
 #container .content .right a { color: #003f72; }
@@ -102,9 +102,9 @@
 {
     width: 640px;
     margin: 0 auto;
-    text-indent: 24px;
     font-size: 16px;
-    line-height: normal;
+    line-height: 20px;
 }
 
+#container .content .article .news { width: 100%; }
 #container .content .article img { margin: 0 auto; }

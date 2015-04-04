@@ -29,23 +29,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PublishDatabaseSettings>
       <Objects>
-        <ObjectGroup Name="ConnectionString-Deployment" Order="1">
-          <Destination Path="" />
-          <Object Type="dbFullSql">
-            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|\Alumni.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" />
-            <Source Path="obj\Debug\AutoScripts\ConnectionString-Deployment_SchemaAndData.sql" Transacted="True" />
-          </Object>
-        </ObjectGroup>
-        <ObjectGroup Name="AlumniSNSConnectionString-Deployment" Order="2">
-          <Destination Path="" />
-          <Object Type="dbFullSql">
-            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|\AlumniSNS.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" />
-            <Source Path="obj\Debug\AutoScripts\AlumniSNSConnectionString-Deployment_SchemaOnly.sql" Transacted="True" />
-          </Object>
-        </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
     <PackageAsSingleFile>true</PackageAsSingleFile>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,20 +44,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PublishDatabaseSettings>
       <Objects>
-        <ObjectGroup Name="ConnectionString-Deployment" Order="1">
-          <Destination Path="" />
-          <Object Type="dbFullSql">
-            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|\AlumniSNS.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" />
-            <Source Path="obj\Release\AutoScripts\ConnectionString-Deployment_SchemaOnly.sql" Transacted="True" />
-          </Object>
-        </ObjectGroup>
-        <ObjectGroup Name="AlumniSNSConnectionString-Deployment" Order="2">
-          <Destination Path="" />
-          <Object Type="dbFullSql">
-            <PreSource Path="Data Source=.\SQLEXPRESS%3bAttachDbFilename=|DataDirectory|\AlumniSNS.mdf%3bIntegrated Security=True%3bUser Instance=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" />
-            <Source Path="obj\Release\AutoScripts\AlumniSNSConnectionString-Deployment_SchemaOnly.sql" Transacted="True" />
-          </Object>
-        </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
     <DeployIisAppPath>Default Web Site/Alumni</DeployIisAppPath>
@@ -88,9 +61,6 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -98,9 +68,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Alumni.mdf">
@@ -114,12 +81,255 @@
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Manage\Article.aspx" />
     <Content Include="Search.aspx" />
     <Content Include="ShowArticle.aspx" />
     <Content Include="ShowColumn.aspx" />
+    <Content Include="ShowDonation.aspx" />
+    <Content Include="SNS\FindMate.aspx" />
+    <Content Include="SNS\SignIn.aspx" />
     <Content Include="Template\30Year\Column.html" />
     <Content Include="Template\30Year\Default.html" />
     <Content Include="Template\30Year\Layout.html" />
+    <Content Include="Template\Common\ckeditor\adapters\jquery.js" />
+    <Content Include="Template\Common\ckeditor\build-config.js" />
+    <Content Include="Template\Common\ckeditor\ckeditor.js" />
+    <Content Include="Template\Common\ckeditor\config.js" />
+    <Content Include="Template\Common\ckeditor\contents.css" />
+    <Content Include="Template\Common\ckeditor\lang\en.js" />
+    <Content Include="Template\Common\ckeditor\lang\zh-cn.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Template\Common\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Template\Common\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Template\Common\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Template\Common\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Template\Common\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Template\Common\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Template\Common\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Template\Common\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Template\Common\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\icons.png" />
+    <Content Include="Template\Common\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Template\Common\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Template\Common\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Template\Common\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Template\Common\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Template\Common\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Template\Common\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Template\Common\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Template\Common\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Template\Common\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Template\Common\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Template\Common\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Template\Common\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Template\Common\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Template\Common\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Template\Common\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Template\Common\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Template\Common\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Template\Common\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Template\Common\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Template\Common\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Template\Common\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Template\Common\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Template\Common\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Template\Common\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Template\Common\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Template\Common\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Template\Common\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Template\Common\ckeditor\skins\moono\dialog.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\editor.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="Template\Common\ckeditor\skins\moono\icons.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\close.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="Template\Common\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="Template\Common\ckeditor\styles.js" />
     <Content Include="Template\Common\CSS\Article.css" />
     <Content Include="Template\Common\CSS\Child.css" />
     <Content Include="Template\Common\CSS\Column.css" />
@@ -128,15 +338,68 @@
     <Content Include="Template\Common\CSS\Common_Red.css" />
     <Content Include="Template\Common\CSS\Default.css" />
     <Content Include="Template\Common\CSS\Default_Red.css" />
+    <Content Include="Template\Common\CSS\SNS\FindMate.css" />
+    <Content Include="Template\Common\CSS\SNS\SignIn.css" />
+    <Content Include="Template\Common\Image\30activity.png" />
+    <Content Include="Template\Common\Image\30news.png" />
+    <Content Include="Template\Common\Image\30year.png" />
+    <Content Include="Template\Common\Image\box_bk.png" />
+    <Content Include="Template\Common\Image\box_bk_red.png" />
+    <Content Include="Template\Common\Image\build.gif" />
+    <Content Include="Template\Common\Image\Button\工大回忆.png" />
+    <Content Include="Template\Common\Image\Button\工大回忆h.png" />
+    <Content Include="Template\Common\Image\Button\校区新闻.png" />
+    <Content Include="Template\Common\Image\Button\校区新闻h.png" />
+    <Content Include="Template\Common\Image\Button\校友人物.png" />
+    <Content Include="Template\Common\Image\Button\校友人物h.png" />
+    <Content Include="Template\Common\Image\Button\校友新闻.png" />
+    <Content Include="Template\Common\Image\Button\校友新闻h.png" />
+    <Content Include="Template\Common\Image\Button\校友组织.png" />
+    <Content Include="Template\Common\Image\Button\校友组织h.png" />
+    <Content Include="Template\Common\Image\Button\通知公告.png" />
+    <Content Include="Template\Common\Image\Button\通知公告h.png" />
+    <Content Include="Template\Common\Image\donations.png" />
+    <Content Include="Template\Common\Image\find.png" />
+    <Content Include="Template\Common\Image\find_mate.png" />
+    <Content Include="Template\Common\Image\gradient.png" />
+    <Content Include="Template\Common\Image\header_bk.png" />
+    <Content Include="Template\Common\Image\header_bk_red.png" />
+    <Content Include="Template\Common\Image\left_arrow.png" />
+    <Content Include="Template\Common\Image\left_separator_blue.png" />
+    <Content Include="Template\Common\Image\left_separator_red.png" />
+    <Content Include="Template\Common\Image\logo.png" />
+    <Content Include="Template\Common\Image\logo_small.png" />
+    <Content Include="Template\Common\Image\menu_item.png" />
+    <Content Include="Template\Common\Image\menu_item_hover.png" />
+    <Content Include="Template\Common\Image\more.png" />
+    <Content Include="Template\Common\Image\next.png" />
+    <Content Include="Template\Common\Image\no_image.jpg" />
+    <Content Include="Template\Common\Image\point.jpg" />
+    <Content Include="Template\Common\Image\prev.png" />
+    <Content Include="Template\Common\Image\right_arrow.png" />
+    <Content Include="Template\Common\Image\search.png" />
+    <Content Include="Template\Common\Image\sec1_bk.jpg" />
+    <Content Include="Template\Common\Image\sec2_bk.png" />
+    <Content Include="Template\Common\Image\Slider\1.jpg" />
+    <Content Include="Template\Common\Image\Slider\2.jpg" />
+    <Content Include="Template\Common\Image\Slider\3.jpg" />
+    <Content Include="Template\Common\Image\Slider\4.jpg" />
+    <Content Include="Template\Common\Image\Slider\5.jpg" />
+    <Content Include="Template\Common\Image\slider_img.jpg" />
+    <Content Include="Template\Common\Image\slider_title_bk.png" />
     <Content Include="Template\Common\JS\Common.js" />
     <Content Include="Template\Common\JS\DD_belatedPNG.js" />
     <Content Include="Template\Common\JS\html5shiv.min.js" />
     <Content Include="Template\Common\JS\jquery-1.11.2.min.js" />
     <Content Include="Template\Common\JS\PIE.htc" />
+    <Content Include="Template\Common\JS\Sign.js" />
     <Content Include="Template\General\Article.html" />
     <Content Include="Template\General\Column.html" />
     <Content Include="Template\General\Default.html" />
+    <Content Include="Template\General\Donation.html" />
     <Content Include="Template\General\Layout.html" />
+    <Content Include="Template\SNS\FindMate.html" />
+    <Content Include="Template\SNS\SignIn.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -165,6 +428,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Manage\Article.aspx.cs">
+      <DependentUpon>Article.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\Article.aspx.designer.cs">
+      <DependentUpon>Article.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.aspx.cs">
@@ -188,6 +458,27 @@
     <Compile Include="ShowColumn.aspx.designer.cs">
       <DependentUpon>ShowColumn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ShowDonation.aspx.cs">
+      <DependentUpon>ShowDonation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowDonation.aspx.designer.cs">
+      <DependentUpon>ShowDonation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\FindMate.aspx.cs">
+      <DependentUpon>FindMate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\FindMate.aspx.designer.cs">
+      <DependentUpon>FindMate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\SignIn.aspx.cs">
+      <DependentUpon>SignIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\SignIn.aspx.designer.cs">
+      <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -203,6 +494,21 @@
       <LastGenOutput>AlumniSNS.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Template\Common\ckeditor\.DS_Store" />
+    <None Include="Template\Common\ckeditor\CHANGES.md" />
+    <None Include="Template\Common\ckeditor\LICENSE.md" />
+    <None Include="Template\Common\ckeditor\plugins\scayt\LICENSE.md" />
+    <None Include="Template\Common\ckeditor\plugins\scayt\README.md" />
+    <None Include="Template\Common\ckeditor\plugins\wsc\LICENSE.md" />
+    <None Include="Template\Common\ckeditor\plugins\wsc\README.md" />
+    <None Include="Template\Common\ckeditor\README.md" />
+    <None Include="Template\Common\ckeditor\skins\moono\readme.md" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="AlumniDB.dbml.layout">
@@ -220,6 +526,7 @@
       <DependentUpon>AlumniSNS.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

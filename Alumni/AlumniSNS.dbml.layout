@@ -1,96 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.625" name="AlumniSNS">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.75" name="AlumniSNS">
   <DataContextMoniker Name="/SNSDataContext" />
   <nestedChildShapes>
-    <classShape Id="12fd5fb9-6237-4803-bde6-4e1c749e868a" absoluteBounds="3.5, 1.125, 2, 1.1939925130208335">
+    <classShape Id="108c2f0d-7ca3-4fab-8c19-951e329b6286" absoluteBounds="3.5, 1.125, 2, 1.1939925130208335">
       <DataClassMoniker Name="/SNSDataContext/EmployCategory" />
       <nestedChildShapes>
-        <elementListCompartment Id="5a604d6b-debf-4734-a1fb-729ac25466fb" absoluteBounds="3.515, 1.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="82fb2c09-a043-48f8-8ec0-2e67579cadd8" absoluteBounds="3.515, 1.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7972bd86-62aa-44ad-9871-f127e8e51b20" absoluteBounds="3.5, 8, 2, 1.3862939453124987">
-      <DataClassMoniker Name="/SNSDataContext/WorkplaceNature" />
-      <nestedChildShapes>
-        <elementListCompartment Id="619020d7-9d4f-4834-aa72-da4153ceb5a3" absoluteBounds="3.515, 8.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="87aa835a-b73c-461d-b6b3-9b407985cba3" absoluteBounds="3.5, 3.125, 2, 1.3862939453125005">
+    <classShape Id="e72b2d6d-94c5-4648-ba47-31d28381764f" absoluteBounds="3.5, 3.125, 2, 1.3862939453125005">
       <DataClassMoniker Name="/SNSDataContext/EnrollProgram" />
       <nestedChildShapes>
-        <elementListCompartment Id="e02a8d85-9730-49b2-9f31-cab024a55334" absoluteBounds="3.515, 3.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="633111ea-eaba-4104-8fdd-41824c5ee0fc" absoluteBounds="3.515, 3.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2ec0fe51-e8dd-4398-be93-ea10617ba3bf" absoluteBounds="0.75, 3.25, 2, 1.1939925130208335">
+    <classShape Id="33364608-2163-4b73-8fec-4172864db497" absoluteBounds="0.75, 3.25, 2, 1.1939925130208344">
       <DataClassMoniker Name="/SNSDataContext/EnrollSchool" />
       <nestedChildShapes>
-        <elementListCompartment Id="0c55d60e-0782-4a8b-abf1-419b7b4a39fe" absoluteBounds="0.765, 3.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f7633eed-6c73-4b10-a4f5-b6f23b05f2d7" absoluteBounds="0.765, 3.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="01bdf411-9a69-4d1c-bc9d-eb8858a01574" absoluteBounds="6.25, 8, 2, 1.3862939453124987">
+    <classShape Id="4bceb6ba-f8ac-435b-9a92-f311b5f733d3" absoluteBounds="3.5, 6, 2, 1.3862939453125005">
       <DataClassMoniker Name="/SNSDataContext/LiveCity" />
       <nestedChildShapes>
-        <elementListCompartment Id="49273cf0-8e30-48da-afeb-548855f574e7" absoluteBounds="6.265, 8.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c9c8d679-43a2-41fa-aa89-c761f7e5e342" absoluteBounds="3.515, 6.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9fb9dda8-39a5-4e8e-8e23-4ddb3dccf346" absoluteBounds="3.5, 6.125, 2, 1.1939925130208344">
+    <classShape Id="4276a905-507c-4bed-a556-660b69c45e81" absoluteBounds="0.75, 6.125, 2, 1.1939925130208344">
       <DataClassMoniker Name="/SNSDataContext/LiveProvince" />
       <nestedChildShapes>
-        <elementListCompartment Id="bd38c546-50ba-4345-9636-e362073e0068" absoluteBounds="3.515, 6.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="559b9532-bbd3-448b-89dd-beab0d22ef0f" absoluteBounds="0.765, 6.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ff4d1d2b-b725-4da1-92f7-9969abadb83d" absoluteBounds="6.25, 1.125, 2, 5.4246240234375005">
-      <DataClassMoniker Name="/SNSDataContext/User" />
+    <classShape Id="28d2f2f7-3c29-4f54-9920-818ac0803183" absoluteBounds="3.5, 8.125, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/SNSDataContext/WorkplaceNature" />
       <nestedChildShapes>
-        <elementListCompartment Id="01e67511-d4ea-4a53-b0d9-7387d243e252" absoluteBounds="6.265, 1.585, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8be54e8e-90ae-4fb8-bf26-597a25319546" absoluteBounds="3.515, 8.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 3.84699625651042); (3.5 : 3.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 3.84699625651042); (3.04166666666667 : 3.84699625651042 : JumpStart); (3.20833333333333 : 3.84699625651042 : JumpEnd); (3.5 : 3.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SNSDataContext/EnrollSchool/EnrollSchool_EnrollProgram" />
       <nodes>
-        <classShapeMoniker Id="2ec0fe51-e8dd-4398-be93-ea10617ba3bf" />
-        <classShapeMoniker Id="87aa835a-b73c-461d-b6b3-9b407985cba3" />
+        <classShapeMoniker Id="33364608-2163-4b73-8fec-4172864db497" />
+        <classShapeMoniker Id="e72b2d6d-94c5-4648-ba47-31d28381764f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 7.31899251302083); (5.875 : 7.69399251302083); (5.875 : 7.625); (6.25 : 8)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.72199625651042); (3.5 : 6.72199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SNSDataContext/LiveProvince/LiveProvince_LiveCity" />
       <nodes>
-        <classShapeMoniker Id="9fb9dda8-39a5-4e8e-8e23-4ddb3dccf346" />
-        <classShapeMoniker Id="01bdf411-9a69-4d1c-bc9d-eb8858a01574" />
+        <classShapeMoniker Id="4276a905-507c-4bed-a556-660b69c45e81" />
+        <classShapeMoniker Id="4bceb6ba-f8ac-435b-9a92-f311b5f733d3" />
       </nodes>
     </associationConnector>
+    <classShape Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" absoluteBounds="6.25, 1.125, 2, 5.4246240234374987">
+      <DataClassMoniker Name="/SNSDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5e9b2117-d65d-4188-9471-76a27147c959" absoluteBounds="6.265, 1.585, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
     <associationConnector edgePoints="[(5.5 : 1.72199625651042); (6.25 : 1.72199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SNSDataContext/EmployCategory/EmployCategory_User" />
       <nodes>
-        <classShapeMoniker Id="12fd5fb9-6237-4803-bde6-4e1c749e868a" />
-        <classShapeMoniker Id="ff4d1d2b-b725-4da1-92f7-9969abadb83d" />
+        <classShapeMoniker Id="108c2f0d-7ca3-4fab-8c19-951e329b6286" />
+        <classShapeMoniker Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 3.81814697265625); (5.97916666666667 : 3.81814697265625 : JumpStart); (6.14583333333333 : 3.81814697265625 : JumpEnd); (6.25 : 3.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 3.81814697265625); (6.25 : 3.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SNSDataContext/EnrollProgram/EnrollProgram_User" />
       <nodes>
-        <classShapeMoniker Id="87aa835a-b73c-461d-b6b3-9b407985cba3" />
-        <classShapeMoniker Id="ff4d1d2b-b725-4da1-92f7-9969abadb83d" />
+        <classShapeMoniker Id="e72b2d6d-94c5-4648-ba47-31d28381764f" />
+        <classShapeMoniker Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 4.44399251302083); (1.75 : 5.31814697265625); (5.97916666666667 : 5.31814697265625 : JumpStart); (6.14583333333333 : 5.31814697265625 : JumpEnd); (6.25 : 5.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 3.25); (1.75 : 2.72199625651042); (3.04166666666667 : 2.72199625651042 : JumpStart); (3.20833333333333 : 2.72199625651042 : JumpEnd); (6.25 : 2.72199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SNSDataContext/EnrollSchool/EnrollSchool_User" />
       <nodes>
-        <classShapeMoniker Id="2ec0fe51-e8dd-4398-be93-ea10617ba3bf" />
-        <classShapeMoniker Id="ff4d1d2b-b725-4da1-92f7-9969abadb83d" />
+        <classShapeMoniker Id="33364608-2163-4b73-8fec-4172864db497" />
+        <classShapeMoniker Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.33731201171875); (5.97916666666667 : 6.33731201171875 : JumpStart); (6.14583333333333 : 6.33731201171875 : JumpEnd); (6.25 : 6.33731201171875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 6.27481201171875); (6.25 : 6.27481201171875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SNSDataContext/LiveCity/LiveCity_User" />
+      <nodes>
+        <classShapeMoniker Id="4bceb6ba-f8ac-435b-9a92-f311b5f733d3" />
+        <classShapeMoniker Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.12591745577925); (3.125 : 5.75091745577925); (3.125 : 0.75); (5.875 : 0.75); (6.25 : 1.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/SNSDataContext/LiveProvince/LiveProvince_User" />
       <nodes>
-        <classShapeMoniker Id="9fb9dda8-39a5-4e8e-8e23-4ddb3dccf346" />
-        <classShapeMoniker Id="ff4d1d2b-b725-4da1-92f7-9969abadb83d" />
+        <classShapeMoniker Id="4276a905-507c-4bed-a556-660b69c45e81" />
+        <classShapeMoniker Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 8.0618490375601); (6.0625 : 7.4993490375601); (6.0625 : 2.77007161458333); (6.25 : 2.77007161458333)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 8.81814697265625); (7.25 : 8.81814697265625); (7.25 : 6.5496240234375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SNSDataContext/WorkplaceNature/WorkplaceNature_User" />
       <nodes>
-        <classShapeMoniker Id="7972bd86-62aa-44ad-9871-f127e8e51b20" />
-        <classShapeMoniker Id="ff4d1d2b-b725-4da1-92f7-9969abadb83d" />
+        <classShapeMoniker Id="28d2f2f7-3c29-4f54-9920-818ac0803183" />
+        <classShapeMoniker Id="7a965ea7-bddd-43cb-81b8-04b1a51e53c8" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

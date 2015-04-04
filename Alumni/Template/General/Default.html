@@ -1,13 +1,16 @@
-﻿{% extends /Template/General/Layout.html %} 
-{% block otherCSS %}
+﻿{% extends /Template/General/Layout.html -%} 
+{% block otherCSS -%}
 <link href="/Template/Common/CSS/Default.css" rel="Stylesheet" />
-{% endblock %}
+<link href="/Template/Common/CSS/bgStretcher.css" rel="Stylesheet" />
 
-{% block beforeHeader %}
+<script type="text/javascript" src="/Template/Common/JS/bgStretcher.js"></script>
+{% endblock -%}
+
+{% block beforeHeader -%}
 <div id="slider">
-{% endblock %}
+{% endblock -%}
 
-{% block afterHeader %}
+{% block afterHeader -%}
     <div class="control">
         <span>
             <img id="prev" class="common" alt="上一张" src="/Template/Common/Image/prev.png" /></span>
@@ -15,9 +18,9 @@
             <img id="next" class="common" alt="下一张" src="/Template/Common/Image/next.png" /></span>
     </div>
 </div>
-{% endblock %}
+{% endblock -%}
 
-{% block content %}
+{% block content -%}
 <div class="section1">
     <div class="content">
         <div class="box1" style="margin-top: 20px;">
@@ -33,7 +36,7 @@
                         src="/Template/Common/Image/Button/通知公告.png" normal-state="/Template/Common/Image/Button/通知公告.png"
                         click-state="/Template/Common/Image/Button/通知公告h.png" />
                 </div>
-                <div id="news_mate">{% assign column = Column['校友新闻'] %}
+                <div id="news_mate">{% assign column = Column['校友新闻'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -46,18 +49,18 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result %}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                {% for item in column.ArticleGetter.Take[4].Result -%}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
                                     <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
-                                    <em style="color: #fff799;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif %} 
-                                {% endfor %}
+                                    <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif -%} 
+                                {% endfor -%}
                             </ul>
                         </div>
                     </div>
                     <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
                 </div>
-                <div id="news_school" style="display: none;">{% assign column = Column['校区新闻'] %}
+                <div id="news_school" style="display: none;">{% assign column = Column['校区新闻'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -70,18 +73,18 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result %}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                {% for item in column.ArticleGetter.Take[4].Result -%}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
                                     <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
-                                    <em style="color: #fff799;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif %} 
-                                {% endfor %}
+                                    <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif -%} 
+                                {% endfor -%}
                             </ul>
                         </div>
                     </div>
                     <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
                 </div>
-                <div id="news_noti" style="display: none;">{% assign column = Column['通知公告'] %}
+                <div id="news_noti" style="display: none;">{% assign column = Column['通知公告'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -94,12 +97,12 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result %}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                {% for item in column.ArticleGetter.Take[4].Result -%}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
                                     <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
-                                    <em style="color: #fff799;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif %} 
-                                {% endfor %}
+                                    <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
+                                    {% endif -%} 
+                                {% endfor -%}
                             </ul>
                         </div>
                     </div>
@@ -107,7 +110,7 @@
                 </div>
             </div>
         </div>
-        <div class="box2" style="margin-top: 20px;">{% assign column = Column['校庆专题'] %}
+        <div class="box2" style="margin-top: 20px;">{% assign column = Column['校庆专题'] -%}
             <img alt="30周年校庆专区" class="icon" src="/Template/Common/Image/30year.png" />
             <div class="container">
                 <div class="inner">
@@ -122,11 +125,11 @@
                         </div>
                     </div>
                     <ul class="listArticle">
-                    {% for item in column.ArticleGetter.Take[4].Result %}
-                        {% if item.ArticleID != column.TopArticle.ArticleID %}
+                    {% for item in column.ArticleGetter.Take[4].Result -%}
+                        {% if item.ArticleID != column.TopArticle.ArticleID -%}
                             <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a></li>
-                        {% endif %} 
-                    {% endfor %}
+                        {% endif -%} 
+                    {% endfor -%}
                     </ul>
                 </div>
             </div>
@@ -149,7 +152,7 @@
                         src="/Template/Common/Image/Button/校友组织.png" normal-state="/Template/Common/Image/Button/校友组织.png"
                         click-state="/Template/Common/Image/Button/校友组织h.png" />
                 </div>
-                <div id="hit_memory">{% assign column = Column['工大回忆'] %}
+                <div id="hit_memory">{% assign column = Column['工大回忆'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -162,18 +165,18 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result %}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                {% for item in column.ArticleGetter.Take[4].Result -%}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
                                     <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
                                     <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif %} 
-                                {% endfor %}
+                                    {% endif -%} 
+                                {% endfor -%}
                             </ul>
                         </div>
                     </div>
                     <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
                 </div>
-                <div id="mate_celebrity" style="display: none;">{% assign column = Column['校友人物'] %}
+                <div id="mate_celebrity" style="display: none;">{% assign column = Column['校友人物'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -186,12 +189,12 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result %}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID %}
+                                {% for item in column.ArticleGetter.Take[4].Result -%}
+                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
                                     <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
                                     <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif %} 
-                                {% endfor %}
+                                    {% endif -%} 
+                                {% endfor -%}
                             </ul>
                         </div>
                     </div>
@@ -217,57 +220,57 @@
         <div class="box2" style="margin-top: 10px;">
             <img alt="捐赠鸣谢" class="icon" src="/Template/Common/Image/donations.png" />
             <div class="container">
-                <div class="inner" style="height: 230px;">
+                <div class="inner">
                     <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="up" scrollAmount="1" scrollDelay="20" style="height: 100%;">
                     <ul class="donations">
-                        {% for item in DonationGetter.Result %}
+                        {% for item in DonationGetter.Take[100].Result -%}
                         <li><b>{{ item.Name }}</b><em>{{ item.Amount }}</em></li>
-                        {% endfor %}
+                        {% endfor -%}
                     </ul>
                     </marquee>
                 </div>
             </div>
-            <!--<a href="#"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>-->
+            <a href="/ShowDonation.aspx"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
         </div>
     </div>
 </div>
 <div class="section3">
     <div class="content">
         <div class="icon"></div>
-        <form target="_blank" method="post" action="/SNS/Search.aspx">
+        <form target="_blank" method="post" action="/SNS/FindMate.aspx">
         <div class="center">
             <p>欢迎使用【找校友】功能！在这里，你可以找到多年前一起上过课的老朋友！</p>
             <p>你也可以通过<a href="#">注册校友网</a>，让他/她也能在这里找到你！</p>
             <div class="condition">
                 <p>入学年份</p>
                 <select name="enroll_year">
-                {% for i in (1988...LatestEnrollYear) reversed %}
+                {% for i in (1988...LatestEnrollYear) reversed -%}
                     <option value="{{ i }}">{{ i }}</option>
-                {% endfor %}
+                {% endfor -%}
                 </select>
             </div>
             <div class="condition">
                 <p>就读专业</p>
-                <select name="enroll_project">
-                {% for item in EnrollPrograms %}
+                <select name="enroll_program">
+                {% for item in EnrollPrograms -%}
                     <option value="{{ item.ID }}">{{ item.Name }}</option>
-                {% endfor %}
+                {% endfor -%}
                 </select>
             </div>
             <div class="condition">
                 <p>从事行业</p>
                 <select name="employ_category">
-                {% for item in EmployCategory %}
+                {% for item in EmployCategory -%}
                     <option value="{{ item.ID }}">{{ item.Name }}</option>
-                {% endfor %}
+                {% endfor -%}
                 </select>
             </div>
             <div class="condition">
                 <p>所在地区</p>
                 <select name="live_province">
-                {% for item in LiveProvince %}
+                {% for item in LiveProvince -%}
                     <option value="{{ item.ID }}">{{ item.Name }}</option>
-                {% endfor %}
+                {% endfor -%}
                 </select>
             </div>
         </div>
@@ -278,22 +281,22 @@
 <div class="footer">
     <div class="content">
         <div class="links">
-            {% for item in LinkGetter.Take[15].Result %}
+            {% for item in LinkGetter.Take[15].Result -%}
                 <a href="{{ item.LinkURL }}">{{ item.LinkName }}</a>&ensp;
-            {% endfor %}
+            {% endfor -%}
         </div>
         <div class="separator"></div>
-        <div class="copyright">版权所有© 哈尔滨工业大学(威海) 2014-2015 地址：山东省威海市文化西路2号 | 邮编：264209 | 鲁：ICP备06020633号 | <a href="#">管理入口</a></div>
+        <div class="copyright">版权所有© 哈尔滨工业大学(威海) 2014-2015 地址：山东省威海市文化西路2号 | 邮编：264209 | 鲁：ICP备06020633号 | <a href="/Manage">管理入口</a></div>
     </div>
 </div>
-{% endblock %}
-{% block otherJS %}
+{% endblock -%}
+{% block otherJS -%}
     <script language="javascript" type="text/javascript">
         function changeColumn(obj) {
             var col = $(obj);
 
             // not click
-            if (col.attr('clicked') == undefined) {
+            if (col.prop('clicked') == undefined) {
                 // remove current clicked
                 var divToHide = null;
                 col.parent().children("[name='btnChangeCol']").each(function () {
@@ -319,4 +322,4 @@
             }
         }
     </script>
-{% endblock %}
+{% endblock -%}

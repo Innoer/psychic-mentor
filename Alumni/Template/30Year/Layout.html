@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <meta name="renderer" content="webkit" />
 
-    <title>{% block title %}哈尔滨工业大学（威海）校友网{% endblock %}</title>
+    <title>{% block title -%}哈尔滨工业大学（威海）校友网{% endblock -%}</title>
 
     <!--[if lt IE 9]><script>document.execCommand("BackgroundImageCache", false, true);</script><![endif]-->
 
@@ -12,7 +12,7 @@
     <link href="/Template/Common/CSS/Common_Red.css" rel="Stylesheet" />
     <link href="/Template/Common/CSS/bgStretcher.css" rel="Stylesheet" />
 
-    {% block otherCSS %}{% endblock %}
+    {% block otherCSS -%}{% endblock -%}
 
     <script type="text/javascript" src="/Template/Common/JS/jquery-1.11.2.min.js"></script>
     <!--[if IE 6]><script type="text/javascript" src="/Template/Common/JS/DD_belatedPNG.js"></script><![endif]-->
@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="wrapper">
-        {% block beforeHeader %}{% endblock %}
+        {% block beforeHeader -%}{% endblock -%}
         <div class="header">
             <div class="content">
                 <div class="top">
@@ -46,12 +46,12 @@
                 </div>
             </div>
         </div>
-        {% block afterHeader %}{% endblock %}
+        {% block afterHeader -%}{% endblock -%}
 
-        {% block content %}{% endblock %}
+        {% block content -%}{% endblock -%}
     </div>
 
-    {% block otherJS %}{% endblock %}
+    {% block otherJS -%}{% endblock -%}
 </body>
 </html>
 

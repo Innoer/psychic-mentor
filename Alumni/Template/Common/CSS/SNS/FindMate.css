@@ -1,0 +1,137 @@
+﻿/* Code by Shindo. March, 2015. */
+
+#container .content .left .curpos
+{
+    width: 100%; height: 110px;
+    position: relative;
+}
+
+#container .content .left .curpos span
+{
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#container .content .left .curpos em 
+{ 
+    color: #17588d;
+    font-style: normal;
+}
+
+#container .content .left b
+{
+    display: block;
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-bottom: 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #003366;
+}
+
+#container .content .left .condition
+{
+    width: 100%;
+    margin: 5px auto;
+}
+
+#container .content .left .condition h3
+{
+    display: inline;
+    margin-left: 15px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+#container .content .left .condition select 
+{
+    margin-left: 15px;
+    width: 180px; height: 22px;
+    border: 1px solid #79838b;
+}
+
+#container .content .left .condition select option[disabled] { display: none; }
+
+#container .content .left .condition input
+{
+    margin-left: 200px;
+    /* fix for ie6, 7 */
+    _margin-left: 163px; *margin-left: 163px;
+    width: 70px; height: 24px;
+    background: #bed5e6 url(/Template/Common/Image/search.png) no-repeat 3px center;
+    border: 1px solid #79838b;
+    text-align: left;
+    text-indent: 33px;
+}
+
+#container .content .left .condition input:hover { cursor: pointer; }
+
+#container .content .left a:hover { text-decoration: underline; }
+
+#container .content .right
+{
+    background-color: white;
+    padding-bottom: 15px;
+}
+
+#container .content .right .title
+{
+    width: 620px; height: 110px;
+    background: url(/Template/Common/Image/build.gif) no-repeat right bottom;
+    margin: 0 auto;
+    border-bottom: 2px solid #ececec;
+    position: relative;
+}
+
+#container .content .right .title span
+{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+#container .content .right .content
+{
+    background-color: white;
+    margin: 10px auto;
+    width: 620px;
+    min-height: 350px;
+    
+    /* ie6 fix */
+    height: auto !important;
+    height: 350px;
+}
+
+#container .content .right .content p { padding-bottom: 10px; }
+
+#find_result
+{
+    width: 100%;
+    empty-cells: show;
+    border-collapse: collapse;
+    border-top: 1px solid #cfdde9;
+    background-color: white;
+}
+
+#find_result td, th
+{
+    padding: 7px 4px;
+    border-bottom: 1px solid #cfdde9;
+}
+
+#find_result th
+{
+    text-align: left;
+    background-color: #f3f9ff;
+}
+
+.icon_sms
+{
+    width: 20px; height: 16px;
+}

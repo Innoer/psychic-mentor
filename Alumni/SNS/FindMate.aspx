@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FindMate.aspx.cs" Inherits="Alumni.SNS.FindMate" %>

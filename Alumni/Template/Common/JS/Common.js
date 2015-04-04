@@ -1,12 +1,5 @@
 ﻿/* Code by Shindo. March, 2015. */
 
-function doSearch() {
-    var text = $('#search_input').val();
-    alert(text);
-
-    return false; // prevent submit
-}
-
 function showSubMenu() {
     $('.sublinks').stop(false, true).hide();
 
@@ -59,7 +52,7 @@ function updateTime() {
 }
 
 $(document).ready(function () {
-    if (window.DD_belatedPNG) 
+    if (window.DD_belatedPNG)
         DD_belatedPNG.fix("*");
 
     updateTime();
@@ -87,4 +80,41 @@ $(document).ready(function () {
 
     $('.dropdown').mouseenter(showSubMenu);
     $('.dropdown').click(showSubMenu);
+
+    $('#cover_bg').click(hideCover);
 });
+
+$(window).resize(function () {
+    var windowWidth = $(window).width(), windowHeight = $(window).height();
+    $(".dialog").each(function () {
+        $(this).css({ left: (windowWidth - $(this).width()) / 2, top: (windowHeight - $(this).height()) / 2 });
+    });
+});
+
+function showCover(dialog) {
+    var wrapperWidth = $(".wrapper").width(), wrapperHeight = $(".wrapper").height();
+    var windowWidth = $(window).width(), windowHeight = $(window).height();
+    var dialogWidth = $(dialog).width(), dialogHeight = $(dialog).height();
+
+    $("#cover_bg").css({ height: wrapperHeight, display: "block" });
+    $(dialog).css({ left: (windowWidth - dialogWidth) / 2, top: (windowHeight - dialogHeight) / 2 });
+
+    $("#cover_bg").show("fast", function () { $(dialog).fadeIn(); });
+}
+
+function hideCover() {
+    $(".dialog").each(function() {
+        $(this).fadeOut("fast", function () { $("#cover_bg").hide(); });
+    });
+}
+
+function showLogin() {
+    $("#dialog_signin p").show();
+    $("#dialog_signin iframe").hide();
+    showCover('#dialog_signin');
+
+    $("#signin_iframe").attr('src', '/SNS/SignIn.aspx?t=' + Math.random());
+    $("#signin_iframe").ready(function () {
+        $("#dialog_signin p").fadeOut("fast", function() { $("#dialog_signin iframe").fadeIn(); });
+    });
+}

@@ -1,11 +1,11 @@
-﻿{% extends /Template/30Year/Layout.html %} 
-{% block otherCSS %}
+﻿{% extends /Template/30Year/Layout.html -%} 
+{% block otherCSS -%}
 <link href="/Template/Common/CSS/Child.css" rel="Stylesheet" />
 <link href="/Template/Common/CSS/Column.css" rel="Stylesheet" />
 <link href="/Template/Common/CSS/Column_Red.css" rel="Stylesheet" />
-{% endblock %}
+{% endblock -%}
 
-{% block content %}
+{% block content -%}
         <div id="container">
             <div class="content" style="height: 700px;">
                 <div class="left">
@@ -13,27 +13,31 @@
                         <div class="title">栏目子类</div>
                         <div class="separator"></div>
                         <ul>
-                            {% for item in SubColumnList %}
-                            <li><a href="/ShowColumn.aspx?ColumnID={{ item.ColumnID }}">{{ item.ColumnName }}</a></li>
-                            {% endfor %}
+                            {% for item in SubColumnList -%}
+                                {% if item.IsSpecialCommand and item.SpecialCommandName == "url" -%}
+                                <li><a href="{{ item.SpecialCommandArgument }}">{{ item.ColumnName }}</a></li>
+                                {% else -%}
+                                <li><a href="/ShowColumn.aspx?ColumnID={{ item.ColumnID }}">{{ item.ColumnName }}</a></li>
+                                {% endif -%}
+                            {% endfor -%}
                         </ul>
                     </div>
                     <div class="bottom">
                         <p>图片新闻</p>
                         <div class="picArticle">
-                            {% if PictureArticle %}
+                            {% if PictureArticle -%}
                                 <div class="border"><a href="/ShowArticle.aspx?ArticleID={{ PictureArticle.ArticleID }}" title="{{ PictureArticle.Title }}">
-                                {% if PictureArticle.PictureURL %}
+                                {% if PictureArticle.PictureURL -%}
                                     <img src="{{ PictureArticle.PictureURL }}" />
-                                {% else %}
+                                {% else -%}
                                     <img src="/Template/Common/Image/no_image.jpg" />
-                                {% endif %}
+                                {% endif -%}
                                 </div></a>
                                 <span><a href="/ShowArticle.aspx?ArticleID={{ PictureArticle.ArticleID }}">{{ PictureArticle.Title | Truncate: 18, '…' }}</a></span>
-                            {% else %}
+                            {% else -%}
                                 <div class="border"><a href="#" title="暂无图片新闻"><img src="/Template/Common/Image/no_image.jpg" /></div></a>
                                 <span><a href="#">暂无图片新闻</a></span>
-                            {% endif %}
+                            {% endif -%}
                         </div>
                     </div>
                 </div>
@@ -41,23 +45,23 @@
                 <div class="right">
                     <div class="title"><span>{{ ThisColumn.ColumnName }}&nbsp;<font color="red">&gt;&gt;</font></span></div>
                     <ul>
-                        {% for item in UnionArticleGetter.Take[Pager.ArticlesPerPage].Result %}
+                        {% for item in UnionArticleGetter.Take[Pager.ArticlesPerPage].Result -%}
                             <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}">{{ item.Title | Truncate: 28, '…' }}</a>&ensp;
-                            {% if item.PictureURL %}<font color="red">[图文]</font>&ensp;{% endif %}
+                            {% if item.PictureURL -%}<font color="red">[图文]</font>&ensp;{% endif -%}
                             {{ item.PublishDate | Date: "MM-dd" }}</li>
-                        {% endfor %}
+                        {% endfor -%}
                      </ul>
                      <div class="pager">
-                        {% if Pager.First %}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID=1">首页</a>{% else %}首页{% endif %}&ensp;
-                        {% if Pager.Previous %}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID={{ Pager.CurrentPageID | Minus:1 }}">上一页</a>{% else %}上一页{% endif %}&ensp;
-                        {% if Pager.Next %}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID={{ Pager.CurrentPageID | Plus:1 }}">下一页</a>{% else %}下一页{% endif %}&ensp;
-                        {% if Pager.Last %}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID={{ Pager.TotalPageCount }}">尾页</a>{% else %}尾页{% endif %}&ensp;
+                        {% if Pager.First -%}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID=1">首页</a>{% else -%}首页{% endif -%}&ensp;
+                        {% if Pager.Previous -%}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID={{ Pager.CurrentPageID | Minus:1 }}">上一页</a>{% else -%}上一页{% endif -%}&ensp;
+                        {% if Pager.Next -%}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID={{ Pager.CurrentPageID | Plus:1 }}">下一页</a>{% else -%}下一页{% endif -%}&ensp;
+                        {% if Pager.Last -%}<a href="/ShowColumn.aspx?ColumnID={{ Column.ColumnID }}&PageID={{ Pager.TotalPageCount }}">尾页</a>{% else -%}尾页{% endif -%}&ensp;
                         页次：<font color="red">{{ Pager.CurrentPageID }}</font>/{{ Pager.TotalPageCount}}页&ensp;共{{ Pager.TotalArticleCount }}条&ensp;{{ Pager.ArticlesPerPage }}条/页
                      </div>
                 </div>
             </div>
             <div class="footer">
-                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.<div>
+                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.</div>
             </div>
         </div>
-{% endblock %}
+{% endblock -%}

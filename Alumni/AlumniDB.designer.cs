@@ -28,21 +28,21 @@ namespace Alumni
 		
     #region 可扩展性方法定义
     partial void OnCreated();
+    partial void InsertArticles(AlumniDB.Articles instance);
+    partial void UpdateArticles(AlumniDB.Articles instance);
+    partial void DeleteArticles(AlumniDB.Articles instance);
     partial void InsertUsers(AlumniDB.Users instance);
     partial void UpdateUsers(AlumniDB.Users instance);
     partial void DeleteUsers(AlumniDB.Users instance);
+    partial void InsertColumns(AlumniDB.Columns instance);
+    partial void UpdateColumns(AlumniDB.Columns instance);
+    partial void DeleteColumns(AlumniDB.Columns instance);
     partial void InsertLinks(AlumniDB.Links instance);
     partial void UpdateLinks(AlumniDB.Links instance);
     partial void DeleteLinks(AlumniDB.Links instance);
     partial void InsertTemplates(AlumniDB.Templates instance);
     partial void UpdateTemplates(AlumniDB.Templates instance);
     partial void DeleteTemplates(AlumniDB.Templates instance);
-    partial void InsertArticles(AlumniDB.Articles instance);
-    partial void UpdateArticles(AlumniDB.Articles instance);
-    partial void DeleteArticles(AlumniDB.Articles instance);
-    partial void InsertColumns(AlumniDB.Columns instance);
-    partial void UpdateColumns(AlumniDB.Columns instance);
-    partial void DeleteColumns(AlumniDB.Columns instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -75,11 +75,27 @@ namespace Alumni
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<AlumniDB.Articles> Articles
+		{
+			get
+			{
+				return this.GetTable<AlumniDB.Articles>();
+			}
+		}
+		
 		public System.Data.Linq.Table<AlumniDB.Users> Users
 		{
 			get
 			{
 				return this.GetTable<AlumniDB.Users>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AlumniDB.Columns> Columns
+		{
+			get
+			{
+				return this.GetTable<AlumniDB.Columns>();
 			}
 		}
 		
@@ -114,22 +130,6 @@ namespace Alumni
 				return this.GetTable<AlumniDB.Templates>();
 			}
 		}
-		
-		public System.Data.Linq.Table<AlumniDB.Articles> Articles
-		{
-			get
-			{
-				return this.GetTable<AlumniDB.Articles>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AlumniDB.Columns> Columns
-		{
-			get
-			{
-				return this.GetTable<AlumniDB.Columns>();
-			}
-		}
 	}
 }
 namespace AlumniDB
@@ -139,544 +139,6 @@ namespace AlumniDB
 	using System.ComponentModel;
 	using System;
 	
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UserID;
-		
-		private string _UserName;
-		
-		private string _PassWord;
-		
-		private int _Level;
-		
-		private EntitySet<Articles> _Articles;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIDChanging(int value);
-    partial void OnUserIDChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPassWordChanging(string value);
-    partial void OnPassWordChanged();
-    partial void OnLevelChanging(int value);
-    partial void OnLevelChanged();
-    #endregion
-		
-		public Users()
-		{
-			this._Articles = new EntitySet<Articles>(new Action<Articles>(this.attach_Articles), new Action<Articles>(this.detach_Articles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassWord", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string PassWord
-		{
-			get
-			{
-				return this._PassWord;
-			}
-			set
-			{
-				if ((this._PassWord != value))
-				{
-					this.OnPassWordChanging(value);
-					this.SendPropertyChanging();
-					this._PassWord = value;
-					this.SendPropertyChanged("PassWord");
-					this.OnPassWordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Level]", Storage="_Level", DbType="Int NOT NULL")]
-		public int Level
-		{
-			get
-			{
-				return this._Level;
-			}
-			set
-			{
-				if ((this._Level != value))
-				{
-					this.OnLevelChanging(value);
-					this.SendPropertyChanging();
-					this._Level = value;
-					this.SendPropertyChanged("Level");
-					this.OnLevelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Articles", Storage="_Articles", ThisKey="UserID", OtherKey="PublishUserID")]
-		public EntitySet<Articles> Articles
-		{
-			get
-			{
-				return this._Articles;
-			}
-			set
-			{
-				this._Articles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Articles(Articles entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_Articles(Articles entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Configs")]
-	public partial class Configs
-	{
-		
-		private int _GlobalTemplateID;
-		
-		private int _ArticlesPerPage;
-		
-		public Configs()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GlobalTemplateID", DbType="Int NOT NULL")]
-		public int GlobalTemplateID
-		{
-			get
-			{
-				return this._GlobalTemplateID;
-			}
-			set
-			{
-				if ((this._GlobalTemplateID != value))
-				{
-					this._GlobalTemplateID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArticlesPerPage", DbType="Int NOT NULL")]
-		public int ArticlesPerPage
-		{
-			get
-			{
-				return this._ArticlesPerPage;
-			}
-			set
-			{
-				if ((this._ArticlesPerPage != value))
-				{
-					this._ArticlesPerPage = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donations")]
-	public partial class Donations
-	{
-		
-		private int _DonationId;
-		
-		private string _Name;
-		
-		private string _Amount;
-		
-		public Donations()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonationId", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int DonationId
-		{
-			get
-			{
-				return this._DonationId;
-			}
-			set
-			{
-				if ((this._DonationId != value))
-				{
-					this._DonationId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this._Amount = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Links")]
-	public partial class Links : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _LinkID;
-		
-		private string _LinkName;
-		
-		private string _LinkURL;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnLinkIDChanging(int value);
-    partial void OnLinkIDChanged();
-    partial void OnLinkNameChanging(string value);
-    partial void OnLinkNameChanged();
-    partial void OnLinkURLChanging(string value);
-    partial void OnLinkURLChanged();
-    #endregion
-		
-		public Links()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int LinkID
-		{
-			get
-			{
-				return this._LinkID;
-			}
-			set
-			{
-				if ((this._LinkID != value))
-				{
-					this.OnLinkIDChanging(value);
-					this.SendPropertyChanging();
-					this._LinkID = value;
-					this.SendPropertyChanged("LinkID");
-					this.OnLinkIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string LinkName
-		{
-			get
-			{
-				return this._LinkName;
-			}
-			set
-			{
-				if ((this._LinkName != value))
-				{
-					this.OnLinkNameChanging(value);
-					this.SendPropertyChanging();
-					this._LinkName = value;
-					this.SendPropertyChanged("LinkName");
-					this.OnLinkNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkURL", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string LinkURL
-		{
-			get
-			{
-				return this._LinkURL;
-			}
-			set
-			{
-				if ((this._LinkURL != value))
-				{
-					this.OnLinkURLChanging(value);
-					this.SendPropertyChanging();
-					this._LinkURL = value;
-					this.SendPropertyChanged("LinkURL");
-					this.OnLinkURLChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Templates")]
-	public partial class Templates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TemplateID;
-		
-		private int _ParentTemplateID;
-		
-		private int _SubTemplateID;
-		
-		private string _TemplateName;
-		
-		private string _TemplatePath;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTemplateIDChanging(int value);
-    partial void OnTemplateIDChanged();
-    partial void OnParentTemplateIDChanging(int value);
-    partial void OnParentTemplateIDChanged();
-    partial void OnSubTemplateIDChanging(int value);
-    partial void OnSubTemplateIDChanged();
-    partial void OnTemplateNameChanging(string value);
-    partial void OnTemplateNameChanged();
-    partial void OnTemplatePathChanging(string value);
-    partial void OnTemplatePathChanged();
-    #endregion
-		
-		public Templates()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TemplateID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TemplateID
-		{
-			get
-			{
-				return this._TemplateID;
-			}
-			set
-			{
-				if ((this._TemplateID != value))
-				{
-					this.OnTemplateIDChanging(value);
-					this.SendPropertyChanging();
-					this._TemplateID = value;
-					this.SendPropertyChanged("TemplateID");
-					this.OnTemplateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentTemplateID", DbType="Int NOT NULL")]
-		public int ParentTemplateID
-		{
-			get
-			{
-				return this._ParentTemplateID;
-			}
-			set
-			{
-				if ((this._ParentTemplateID != value))
-				{
-					this.OnParentTemplateIDChanging(value);
-					this.SendPropertyChanging();
-					this._ParentTemplateID = value;
-					this.SendPropertyChanged("ParentTemplateID");
-					this.OnParentTemplateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubTemplateID", DbType="Int NOT NULL")]
-		public int SubTemplateID
-		{
-			get
-			{
-				return this._SubTemplateID;
-			}
-			set
-			{
-				if ((this._SubTemplateID != value))
-				{
-					this.OnSubTemplateIDChanging(value);
-					this.SendPropertyChanging();
-					this._SubTemplateID = value;
-					this.SendPropertyChanged("SubTemplateID");
-					this.OnSubTemplateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TemplateName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string TemplateName
-		{
-			get
-			{
-				return this._TemplateName;
-			}
-			set
-			{
-				if ((this._TemplateName != value))
-				{
-					this.OnTemplateNameChanging(value);
-					this.SendPropertyChanging();
-					this._TemplateName = value;
-					this.SendPropertyChanged("TemplateName");
-					this.OnTemplateNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TemplatePath", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string TemplatePath
-		{
-			get
-			{
-				return this._TemplatePath;
-			}
-			set
-			{
-				if ((this._TemplatePath != value))
-				{
-					this.OnTemplatePathChanging(value);
-					this.SendPropertyChanging();
-					this._TemplatePath = value;
-					this.SendPropertyChanged("TemplatePath");
-					this.OnTemplatePathChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Articles")]
 	public partial class Articles : INotifyPropertyChanging, INotifyPropertyChanged
@@ -1086,6 +548,168 @@ namespace AlumniDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _UserID;
+		
+		private string _UserName;
+		
+		private string _PassWord;
+		
+		private int _Level;
+		
+		private EntitySet<Articles> _Articles;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPassWordChanging(string value);
+    partial void OnPassWordChanged();
+    partial void OnLevelChanging(int value);
+    partial void OnLevelChanged();
+    #endregion
+		
+		public Users()
+		{
+			this._Articles = new EntitySet<Articles>(new Action<Articles>(this.attach_Articles), new Action<Articles>(this.detach_Articles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassWord", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PassWord
+		{
+			get
+			{
+				return this._PassWord;
+			}
+			set
+			{
+				if ((this._PassWord != value))
+				{
+					this.OnPassWordChanging(value);
+					this.SendPropertyChanging();
+					this._PassWord = value;
+					this.SendPropertyChanged("PassWord");
+					this.OnPassWordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Level]", Storage="_Level", DbType="Int NOT NULL")]
+		public int Level
+		{
+			get
+			{
+				return this._Level;
+			}
+			set
+			{
+				if ((this._Level != value))
+				{
+					this.OnLevelChanging(value);
+					this.SendPropertyChanging();
+					this._Level = value;
+					this.SendPropertyChanged("Level");
+					this.OnLevelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Articles", Storage="_Articles", ThisKey="UserID", OtherKey="PublishUserID")]
+		public EntitySet<Articles> Articles
+		{
+			get
+			{
+				return this._Articles;
+			}
+			set
+			{
+				this._Articles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Articles(Articles entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_Articles(Articles entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Columns")]
 	public partial class Columns : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1102,9 +726,13 @@ namespace AlumniDB
 		
 		private bool _Visible;
 		
-		private bool _IsExternalLink;
+		private bool _Deletable;
 		
-		private string _ExternalLinkURL;
+		private bool _IsSpecialCommand;
+		
+		private string _SpecialCommandName;
+		
+		private string _SpecialCommandArgument;
 		
 		private EntitySet<Articles> _Articles;
 		
@@ -1122,10 +750,14 @@ namespace AlumniDB
     partial void OnColumnNameChanged();
     partial void OnVisibleChanging(bool value);
     partial void OnVisibleChanged();
-    partial void OnIsExternalLinkChanging(bool value);
-    partial void OnIsExternalLinkChanged();
-    partial void OnExternalLinkURLChanging(string value);
-    partial void OnExternalLinkURLChanged();
+    partial void OnDeletableChanging(bool value);
+    partial void OnDeletableChanged();
+    partial void OnIsSpecialCommandChanging(bool value);
+    partial void OnIsSpecialCommandChanged();
+    partial void OnSpecialCommandNameChanging(string value);
+    partial void OnSpecialCommandNameChanged();
+    partial void OnSpecialCommandArgumentChanging(string value);
+    partial void OnSpecialCommandArgumentChanged();
     #endregion
 		
 		public Columns()
@@ -1234,42 +866,82 @@ namespace AlumniDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsExternalLink", DbType="Bit NOT NULL")]
-		public bool IsExternalLink
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deletable", DbType="Bit NOT NULL")]
+		public bool Deletable
 		{
 			get
 			{
-				return this._IsExternalLink;
+				return this._Deletable;
 			}
 			set
 			{
-				if ((this._IsExternalLink != value))
+				if ((this._Deletable != value))
 				{
-					this.OnIsExternalLinkChanging(value);
+					this.OnDeletableChanging(value);
 					this.SendPropertyChanging();
-					this._IsExternalLink = value;
-					this.SendPropertyChanged("IsExternalLink");
-					this.OnIsExternalLinkChanged();
+					this._Deletable = value;
+					this.SendPropertyChanged("Deletable");
+					this.OnDeletableChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExternalLinkURL", DbType="NVarChar(MAX)")]
-		public string ExternalLinkURL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSpecialCommand", DbType="Bit NOT NULL")]
+		public bool IsSpecialCommand
 		{
 			get
 			{
-				return this._ExternalLinkURL;
+				return this._IsSpecialCommand;
 			}
 			set
 			{
-				if ((this._ExternalLinkURL != value))
+				if ((this._IsSpecialCommand != value))
 				{
-					this.OnExternalLinkURLChanging(value);
+					this.OnIsSpecialCommandChanging(value);
 					this.SendPropertyChanging();
-					this._ExternalLinkURL = value;
-					this.SendPropertyChanged("ExternalLinkURL");
-					this.OnExternalLinkURLChanged();
+					this._IsSpecialCommand = value;
+					this.SendPropertyChanged("IsSpecialCommand");
+					this.OnIsSpecialCommandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SpecialCommandName", DbType="NVarChar(MAX)")]
+		public string SpecialCommandName
+		{
+			get
+			{
+				return this._SpecialCommandName;
+			}
+			set
+			{
+				if ((this._SpecialCommandName != value))
+				{
+					this.OnSpecialCommandNameChanging(value);
+					this.SendPropertyChanging();
+					this._SpecialCommandName = value;
+					this.SendPropertyChanged("SpecialCommandName");
+					this.OnSpecialCommandNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SpecialCommandArgument", DbType="NVarChar(MAX)")]
+		public string SpecialCommandArgument
+		{
+			get
+			{
+				return this._SpecialCommandArgument;
+			}
+			set
+			{
+				if ((this._SpecialCommandArgument != value))
+				{
+					this.OnSpecialCommandArgumentChanging(value);
+					this.SendPropertyChanging();
+					this._SpecialCommandArgument = value;
+					this.SendPropertyChanged("SpecialCommandArgument");
+					this.OnSpecialCommandArgumentChanged();
 				}
 			}
 		}
@@ -1317,6 +989,382 @@ namespace AlumniDB
 		{
 			this.SendPropertyChanging();
 			entity.Columns = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Configs")]
+	public partial class Configs
+	{
+		
+		private int _GlobalTemplateID;
+		
+		private int _ArticlesPerPage;
+		
+		public Configs()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GlobalTemplateID", DbType="Int NOT NULL")]
+		public int GlobalTemplateID
+		{
+			get
+			{
+				return this._GlobalTemplateID;
+			}
+			set
+			{
+				if ((this._GlobalTemplateID != value))
+				{
+					this._GlobalTemplateID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArticlesPerPage", DbType="Int NOT NULL")]
+		public int ArticlesPerPage
+		{
+			get
+			{
+				return this._ArticlesPerPage;
+			}
+			set
+			{
+				if ((this._ArticlesPerPage != value))
+				{
+					this._ArticlesPerPage = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donations")]
+	public partial class Donations
+	{
+		
+		private int _DonationId;
+		
+		private string _Name;
+		
+		private string _Amount;
+		
+		public Donations()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonationId", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int DonationId
+		{
+			get
+			{
+				return this._DonationId;
+			}
+			set
+			{
+				if ((this._DonationId != value))
+				{
+					this._DonationId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Links")]
+	public partial class Links : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _LinkID;
+		
+		private string _LinkName;
+		
+		private string _LinkURL;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLinkIDChanging(int value);
+    partial void OnLinkIDChanged();
+    partial void OnLinkNameChanging(string value);
+    partial void OnLinkNameChanged();
+    partial void OnLinkURLChanging(string value);
+    partial void OnLinkURLChanged();
+    #endregion
+		
+		public Links()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int LinkID
+		{
+			get
+			{
+				return this._LinkID;
+			}
+			set
+			{
+				if ((this._LinkID != value))
+				{
+					this.OnLinkIDChanging(value);
+					this.SendPropertyChanging();
+					this._LinkID = value;
+					this.SendPropertyChanged("LinkID");
+					this.OnLinkIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string LinkName
+		{
+			get
+			{
+				return this._LinkName;
+			}
+			set
+			{
+				if ((this._LinkName != value))
+				{
+					this.OnLinkNameChanging(value);
+					this.SendPropertyChanging();
+					this._LinkName = value;
+					this.SendPropertyChanged("LinkName");
+					this.OnLinkNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LinkURL", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string LinkURL
+		{
+			get
+			{
+				return this._LinkURL;
+			}
+			set
+			{
+				if ((this._LinkURL != value))
+				{
+					this.OnLinkURLChanging(value);
+					this.SendPropertyChanging();
+					this._LinkURL = value;
+					this.SendPropertyChanged("LinkURL");
+					this.OnLinkURLChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Templates")]
+	public partial class Templates : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TemplateID;
+		
+		private int _ParentTemplateID;
+		
+		private int _SubTemplateID;
+		
+		private string _TemplateName;
+		
+		private string _TemplatePath;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTemplateIDChanging(int value);
+    partial void OnTemplateIDChanged();
+    partial void OnParentTemplateIDChanging(int value);
+    partial void OnParentTemplateIDChanged();
+    partial void OnSubTemplateIDChanging(int value);
+    partial void OnSubTemplateIDChanged();
+    partial void OnTemplateNameChanging(string value);
+    partial void OnTemplateNameChanged();
+    partial void OnTemplatePathChanging(string value);
+    partial void OnTemplatePathChanged();
+    #endregion
+		
+		public Templates()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TemplateID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TemplateID
+		{
+			get
+			{
+				return this._TemplateID;
+			}
+			set
+			{
+				if ((this._TemplateID != value))
+				{
+					this.OnTemplateIDChanging(value);
+					this.SendPropertyChanging();
+					this._TemplateID = value;
+					this.SendPropertyChanged("TemplateID");
+					this.OnTemplateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentTemplateID", DbType="Int NOT NULL")]
+		public int ParentTemplateID
+		{
+			get
+			{
+				return this._ParentTemplateID;
+			}
+			set
+			{
+				if ((this._ParentTemplateID != value))
+				{
+					this.OnParentTemplateIDChanging(value);
+					this.SendPropertyChanging();
+					this._ParentTemplateID = value;
+					this.SendPropertyChanged("ParentTemplateID");
+					this.OnParentTemplateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubTemplateID", DbType="Int NOT NULL")]
+		public int SubTemplateID
+		{
+			get
+			{
+				return this._SubTemplateID;
+			}
+			set
+			{
+				if ((this._SubTemplateID != value))
+				{
+					this.OnSubTemplateIDChanging(value);
+					this.SendPropertyChanging();
+					this._SubTemplateID = value;
+					this.SendPropertyChanged("SubTemplateID");
+					this.OnSubTemplateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TemplateName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string TemplateName
+		{
+			get
+			{
+				return this._TemplateName;
+			}
+			set
+			{
+				if ((this._TemplateName != value))
+				{
+					this.OnTemplateNameChanging(value);
+					this.SendPropertyChanging();
+					this._TemplateName = value;
+					this.SendPropertyChanged("TemplateName");
+					this.OnTemplateNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TemplatePath", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string TemplatePath
+		{
+			get
+			{
+				return this._TemplatePath;
+			}
+			set
+			{
+				if ((this._TemplatePath != value))
+				{
+					this.OnTemplatePathChanging(value);
+					this.SendPropertyChanging();
+					this._TemplatePath = value;
+					this.SendPropertyChanged("TemplatePath");
+					this.OnTemplatePathChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

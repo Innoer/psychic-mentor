@@ -1,25 +1,25 @@
-﻿{% extends /Template/General/Layout.html %}
-{% block otherCSS %}
+﻿{% extends /Template/General/Layout.html -%}
+{% block otherCSS -%}
 <link href="/Template/Common/CSS/Child.css" rel="Stylesheet" />
 <link href="/Template/Common/CSS/Article.css" rel="Stylesheet" />
-{% endblock %}
+{% endblock -%}
 
-{% block content %}
+{% block content -%}
         <div id="container">
             <div class="content" style="background-color: #f0f0f0;">
                 <div class="left">
                     <div class="curpos"><span>当前位置&nbsp;>>&nbsp;<a href="/ShowColumn.aspx?ColumnID={{ Article.Column.ColumnID }}">{{ Article.Column.ColumnName }}</a></span></div>
                     <div class="separator"></div>
                     <p>相关新闻：</p>
-                    {% assign relate = RelatedArticleGetter.Take[5] %}
+                    {% assign relate = RelatedArticleGetter.Take[5] -%}
                     <ul>
-                        {% if relate.Result.size == 0 %}
+                        {% if relate.Result.size == 0 -%}
                         <li>未找到相关文章</li>
-                        {% else %}
-                            {% for item in relate.Result %}
+                        {% else -%}
+                            {% for item in relate.Result -%}
                         <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}">{{ item.Title }}</a></li>
-                            {% endfor %}
-                        {% endif %}
+                            {% endfor -%}
+                        {% endif -%}
                     </ul>
                 </div>
 
@@ -27,11 +27,11 @@
                     <div class="title"><span>{{ Article.Title }}</span></div>
                     <div class="separator"></div>
                     <div class="info">[&nbsp;作者： {{ Article.PublishUserName }}&nbsp;来源：{{ Article.Source }}&nbsp;浏览：{{ Article.VisitCount }}&nbsp;录入时间：{{ Article.PublishDate | Date:"yyyy年MM月dd日" }}&nbsp;]</div>
-                    <div class="article">{{ Article.Content }}</div>
+                    <div class="article"><div class="news">{{ Article.Content }}</div></div>
                 </div>
             </div>
             <div class="footer">
-                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.<div>
+                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.</div>
             </div>
         </div>
-{% endblock %}
+{% endblock -%}

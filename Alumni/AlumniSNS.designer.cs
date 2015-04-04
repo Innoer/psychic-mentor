@@ -28,27 +28,27 @@ namespace Alumni
 		
     #region 可扩展性方法定义
     partial void OnCreated();
-    partial void InsertEmployCategory(SNSDatabase.EmployCategory instance);
-    partial void UpdateEmployCategory(SNSDatabase.EmployCategory instance);
-    partial void DeleteEmployCategory(SNSDatabase.EmployCategory instance);
-    partial void InsertWorkplaceNature(SNSDatabase.WorkplaceNature instance);
-    partial void UpdateWorkplaceNature(SNSDatabase.WorkplaceNature instance);
-    partial void DeleteWorkplaceNature(SNSDatabase.WorkplaceNature instance);
-    partial void InsertEnrollProgram(SNSDatabase.EnrollProgram instance);
-    partial void UpdateEnrollProgram(SNSDatabase.EnrollProgram instance);
-    partial void DeleteEnrollProgram(SNSDatabase.EnrollProgram instance);
-    partial void InsertEnrollSchool(SNSDatabase.EnrollSchool instance);
-    partial void UpdateEnrollSchool(SNSDatabase.EnrollSchool instance);
-    partial void DeleteEnrollSchool(SNSDatabase.EnrollSchool instance);
-    partial void InsertLiveCity(SNSDatabase.LiveCity instance);
-    partial void UpdateLiveCity(SNSDatabase.LiveCity instance);
-    partial void DeleteLiveCity(SNSDatabase.LiveCity instance);
-    partial void InsertLiveProvince(SNSDatabase.LiveProvince instance);
-    partial void UpdateLiveProvince(SNSDatabase.LiveProvince instance);
-    partial void DeleteLiveProvince(SNSDatabase.LiveProvince instance);
-    partial void InsertUser(SNSDatabase.User instance);
-    partial void UpdateUser(SNSDatabase.User instance);
-    partial void DeleteUser(SNSDatabase.User instance);
+    partial void InsertEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void UpdateEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void DeleteEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void InsertEnrollProgram(AlumniSNSDB.EnrollProgram instance);
+    partial void UpdateEnrollProgram(AlumniSNSDB.EnrollProgram instance);
+    partial void DeleteEnrollProgram(AlumniSNSDB.EnrollProgram instance);
+    partial void InsertEnrollSchool(AlumniSNSDB.EnrollSchool instance);
+    partial void UpdateEnrollSchool(AlumniSNSDB.EnrollSchool instance);
+    partial void DeleteEnrollSchool(AlumniSNSDB.EnrollSchool instance);
+    partial void InsertLiveCity(AlumniSNSDB.LiveCity instance);
+    partial void UpdateLiveCity(AlumniSNSDB.LiveCity instance);
+    partial void DeleteLiveCity(AlumniSNSDB.LiveCity instance);
+    partial void InsertLiveProvince(AlumniSNSDB.LiveProvince instance);
+    partial void UpdateLiveProvince(AlumniSNSDB.LiveProvince instance);
+    partial void DeleteLiveProvince(AlumniSNSDB.LiveProvince instance);
+    partial void InsertWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
+    partial void UpdateWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
+    partial void DeleteWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
+    partial void InsertUser(AlumniSNSDB.User instance);
+    partial void UpdateUser(AlumniSNSDB.User instance);
+    partial void DeleteUser(AlumniSNSDB.User instance);
     #endregion
 		
 		public SNSDataContext() : 
@@ -81,64 +81,64 @@ namespace Alumni
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.EmployCategory> EmployCategory
+		public System.Data.Linq.Table<AlumniSNSDB.EmployCategory> EmployCategory
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.EmployCategory>();
+				return this.GetTable<AlumniSNSDB.EmployCategory>();
 			}
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.WorkplaceNature> WorkplaceNature
+		public System.Data.Linq.Table<AlumniSNSDB.EnrollProgram> EnrollProgram
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.WorkplaceNature>();
+				return this.GetTable<AlumniSNSDB.EnrollProgram>();
 			}
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.EnrollProgram> EnrollProgram
+		public System.Data.Linq.Table<AlumniSNSDB.EnrollSchool> EnrollSchool
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.EnrollProgram>();
+				return this.GetTable<AlumniSNSDB.EnrollSchool>();
 			}
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.EnrollSchool> EnrollSchool
+		public System.Data.Linq.Table<AlumniSNSDB.LiveCity> LiveCity
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.EnrollSchool>();
+				return this.GetTable<AlumniSNSDB.LiveCity>();
 			}
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.LiveCity> LiveCity
+		public System.Data.Linq.Table<AlumniSNSDB.LiveProvince> LiveProvince
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.LiveCity>();
+				return this.GetTable<AlumniSNSDB.LiveProvince>();
 			}
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.LiveProvince> LiveProvince
+		public System.Data.Linq.Table<AlumniSNSDB.WorkplaceNature> WorkplaceNature
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.LiveProvince>();
+				return this.GetTable<AlumniSNSDB.WorkplaceNature>();
 			}
 		}
 		
-		public System.Data.Linq.Table<SNSDatabase.User> User
+		public System.Data.Linq.Table<AlumniSNSDB.User> User
 		{
 			get
 			{
-				return this.GetTable<SNSDatabase.User>();
+				return this.GetTable<AlumniSNSDB.User>();
 			}
 		}
 	}
 }
-namespace SNSDatabase
+namespace AlumniSNSDB
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -257,144 +257,6 @@ namespace SNSDatabase
 		{
 			this.SendPropertyChanging();
 			entity.EmployCategory = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkplaceNature")]
-	public partial class WorkplaceNature : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _NatureID;
-		
-		private int _NatureCode;
-		
-		private string _NatureName;
-		
-		private EntitySet<User> _User;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnNatureIDChanging(int value);
-    partial void OnNatureIDChanged();
-    partial void OnNatureCodeChanging(int value);
-    partial void OnNatureCodeChanged();
-    partial void OnNatureNameChanging(string value);
-    partial void OnNatureNameChanged();
-    #endregion
-		
-		public WorkplaceNature()
-		{
-			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int NatureID
-		{
-			get
-			{
-				return this._NatureID;
-			}
-			set
-			{
-				if ((this._NatureID != value))
-				{
-					this.OnNatureIDChanging(value);
-					this.SendPropertyChanging();
-					this._NatureID = value;
-					this.SendPropertyChanged("NatureID");
-					this.OnNatureIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureCode", DbType="Int NOT NULL")]
-		public int NatureCode
-		{
-			get
-			{
-				return this._NatureCode;
-			}
-			set
-			{
-				if ((this._NatureCode != value))
-				{
-					this.OnNatureCodeChanging(value);
-					this.SendPropertyChanging();
-					this._NatureCode = value;
-					this.SendPropertyChanged("NatureCode");
-					this.OnNatureCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string NatureName
-		{
-			get
-			{
-				return this._NatureName;
-			}
-			set
-			{
-				if ((this._NatureName != value))
-				{
-					this.OnNatureNameChanging(value);
-					this.SendPropertyChanging();
-					this._NatureName = value;
-					this.SendPropertyChanged("NatureName");
-					this.OnNatureNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="WorkplaceNature_User", Storage="_User", ThisKey="NatureID", OtherKey="WorkplaceNatureID")]
-		public EntitySet<User> User
-		{
-			get
-			{
-				return this._User;
-			}
-			set
-			{
-				this._User.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.WorkplaceNature = this;
-		}
-		
-		private void detach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.WorkplaceNature = null;
 		}
 	}
 	
@@ -731,6 +593,8 @@ namespace SNSDatabase
 		
 		private string _CityName;
 		
+		private EntitySet<User> _User;
+		
 		private EntityRef<LiveProvince> _LiveProvince;
 		
     #region 可扩展性方法定义
@@ -747,6 +611,7 @@ namespace SNSDatabase
 		
 		public LiveCity()
 		{
+			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
 			this._LiveProvince = default(EntityRef<LiveProvince>);
 			OnCreated();
 		}
@@ -815,6 +680,19 @@ namespace SNSDatabase
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LiveCity_User", Storage="_User", ThisKey="CityID", OtherKey="LiveCityID")]
+		public EntitySet<User> User
+		{
+			get
+			{
+				return this._User;
+			}
+			set
+			{
+				this._User.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LiveProvince_LiveCity", Storage="_LiveProvince", ThisKey="ProvinceID", OtherKey="ProvinceID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public LiveProvince LiveProvince
 		{
@@ -867,6 +745,18 @@ namespace SNSDatabase
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.LiveCity = this;
+		}
+		
+		private void detach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.LiveCity = null;
 		}
 	}
 	
@@ -1012,6 +902,144 @@ namespace SNSDatabase
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkplaceNature")]
+	public partial class WorkplaceNature : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NatureID;
+		
+		private int _NatureCode;
+		
+		private string _NatureName;
+		
+		private EntitySet<User> _User;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNatureIDChanging(int value);
+    partial void OnNatureIDChanged();
+    partial void OnNatureCodeChanging(int value);
+    partial void OnNatureCodeChanged();
+    partial void OnNatureNameChanging(string value);
+    partial void OnNatureNameChanged();
+    #endregion
+		
+		public WorkplaceNature()
+		{
+			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NatureID
+		{
+			get
+			{
+				return this._NatureID;
+			}
+			set
+			{
+				if ((this._NatureID != value))
+				{
+					this.OnNatureIDChanging(value);
+					this.SendPropertyChanging();
+					this._NatureID = value;
+					this.SendPropertyChanged("NatureID");
+					this.OnNatureIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureCode", DbType="Int NOT NULL")]
+		public int NatureCode
+		{
+			get
+			{
+				return this._NatureCode;
+			}
+			set
+			{
+				if ((this._NatureCode != value))
+				{
+					this.OnNatureCodeChanging(value);
+					this.SendPropertyChanging();
+					this._NatureCode = value;
+					this.SendPropertyChanged("NatureCode");
+					this.OnNatureCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string NatureName
+		{
+			get
+			{
+				return this._NatureName;
+			}
+			set
+			{
+				if ((this._NatureName != value))
+				{
+					this.OnNatureNameChanging(value);
+					this.SendPropertyChanging();
+					this._NatureName = value;
+					this.SendPropertyChanged("NatureName");
+					this.OnNatureNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="WorkplaceNature_User", Storage="_User", ThisKey="NatureID", OtherKey="WorkplaceNatureID")]
+		public EntitySet<User> User
+		{
+			get
+			{
+				return this._User;
+			}
+			set
+			{
+				this._User.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.WorkplaceNature = this;
+		}
+		
+		private void detach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.WorkplaceNature = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1032,7 +1060,7 @@ namespace SNSDatabase
 		
 		private int _LiveProvinceID;
 		
-		private int _LiveCityID;
+		private System.Nullable<int> _LiveCityID;
 		
 		private int _EmployCategoryID;
 		
@@ -1058,19 +1086,21 @@ namespace SNSDatabase
 		
 		private string _StudentNo;
 		
-		private System.DateTime _EnrollDate;
+		private int _EnrollYear;
 		
 		private int _EnrollSchoolID;
 		
 		private int _EnrollProgramID;
 		
-		private System.Nullable<System.DateTime> _GraduateDate;
+		private System.Nullable<int> _GraduateYear;
 		
 		private EntityRef<EmployCategory> _EmployCategory;
 		
 		private EntityRef<EnrollProgram> _EnrollProgram;
 		
 		private EntityRef<EnrollSchool> _EnrollSchool;
+		
+		private EntityRef<LiveCity> _LiveCity;
 		
 		private EntityRef<LiveProvince> _LiveProvince;
 		
@@ -1094,7 +1124,7 @@ namespace SNSDatabase
     partial void OnBirthDateChanged();
     partial void OnLiveProvinceIDChanging(int value);
     partial void OnLiveProvinceIDChanged();
-    partial void OnLiveCityIDChanging(int value);
+    partial void OnLiveCityIDChanging(System.Nullable<int> value);
     partial void OnLiveCityIDChanged();
     partial void OnEmployCategoryIDChanging(int value);
     partial void OnEmployCategoryIDChanged();
@@ -1120,14 +1150,14 @@ namespace SNSDatabase
     partial void OnClassNoChanged();
     partial void OnStudentNoChanging(string value);
     partial void OnStudentNoChanged();
-    partial void OnEnrollDateChanging(System.DateTime value);
-    partial void OnEnrollDateChanged();
+    partial void OnEnrollYearChanging(int value);
+    partial void OnEnrollYearChanged();
     partial void OnEnrollSchoolIDChanging(int value);
     partial void OnEnrollSchoolIDChanged();
     partial void OnEnrollProgramIDChanging(int value);
     partial void OnEnrollProgramIDChanged();
-    partial void OnGraduateDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnGraduateDateChanged();
+    partial void OnGraduateYearChanging(System.Nullable<int> value);
+    partial void OnGraduateYearChanged();
     #endregion
 		
 		public User()
@@ -1135,6 +1165,7 @@ namespace SNSDatabase
 			this._EmployCategory = default(EntityRef<EmployCategory>);
 			this._EnrollProgram = default(EntityRef<EnrollProgram>);
 			this._EnrollSchool = default(EntityRef<EnrollSchool>);
+			this._LiveCity = default(EntityRef<LiveCity>);
 			this._LiveProvince = default(EntityRef<LiveProvince>);
 			this._WorkplaceNature = default(EntityRef<WorkplaceNature>);
 			OnCreated();
@@ -1284,8 +1315,8 @@ namespace SNSDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LiveCityID", DbType="Int NOT NULL")]
-		public int LiveCityID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LiveCityID", DbType="Int")]
+		public System.Nullable<int> LiveCityID
 		{
 			get
 			{
@@ -1295,6 +1326,10 @@ namespace SNSDatabase
 			{
 				if ((this._LiveCityID != value))
 				{
+					if (this._LiveCity.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnLiveCityIDChanging(value);
 					this.SendPropertyChanging();
 					this._LiveCityID = value;
@@ -1552,22 +1587,22 @@ namespace SNSDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollDate", DbType="DateTime NOT NULL")]
-		public System.DateTime EnrollDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollYear", DbType="Int NOT NULL")]
+		public int EnrollYear
 		{
 			get
 			{
-				return this._EnrollDate;
+				return this._EnrollYear;
 			}
 			set
 			{
-				if ((this._EnrollDate != value))
+				if ((this._EnrollYear != value))
 				{
-					this.OnEnrollDateChanging(value);
+					this.OnEnrollYearChanging(value);
 					this.SendPropertyChanging();
-					this._EnrollDate = value;
-					this.SendPropertyChanged("EnrollDate");
-					this.OnEnrollDateChanged();
+					this._EnrollYear = value;
+					this.SendPropertyChanged("EnrollYear");
+					this.OnEnrollYearChanged();
 				}
 			}
 		}
@@ -1620,22 +1655,22 @@ namespace SNSDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GraduateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> GraduateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GraduateYear", DbType="Int")]
+		public System.Nullable<int> GraduateYear
 		{
 			get
 			{
-				return this._GraduateDate;
+				return this._GraduateYear;
 			}
 			set
 			{
-				if ((this._GraduateDate != value))
+				if ((this._GraduateYear != value))
 				{
-					this.OnGraduateDateChanging(value);
+					this.OnGraduateYearChanging(value);
 					this.SendPropertyChanging();
-					this._GraduateDate = value;
-					this.SendPropertyChanged("GraduateDate");
-					this.OnGraduateDateChanged();
+					this._GraduateYear = value;
+					this.SendPropertyChanged("GraduateYear");
+					this.OnGraduateYearChanged();
 				}
 			}
 		}
@@ -1738,6 +1773,40 @@ namespace SNSDatabase
 						this._EnrollSchoolID = default(int);
 					}
 					this.SendPropertyChanged("EnrollSchool");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LiveCity_User", Storage="_LiveCity", ThisKey="LiveCityID", OtherKey="CityID", IsForeignKey=true)]
+		public LiveCity LiveCity
+		{
+			get
+			{
+				return this._LiveCity.Entity;
+			}
+			set
+			{
+				LiveCity previousValue = this._LiveCity.Entity;
+				if (((previousValue != value) 
+							|| (this._LiveCity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LiveCity.Entity = null;
+						previousValue.User.Remove(this);
+					}
+					this._LiveCity.Entity = value;
+					if ((value != null))
+					{
+						value.User.Add(this);
+						this._LiveCityID = value.CityID;
+					}
+					else
+					{
+						this._LiveCityID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("LiveCity");
 				}
 			}
 		}

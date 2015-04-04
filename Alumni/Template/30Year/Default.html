@@ -1,9 +1,9 @@
-﻿{% extends /Template/30Year/Layout.html %} 
-{% block otherCSS %}
+﻿{% extends /Template/30Year/Layout.html -%} 
+{% block otherCSS -%}
 <link href="/Template/Common/CSS/Default_Red.css" rel="Stylesheet" />
-{% endblock %}
+{% endblock -%}
 
-{% block content %}
+{% block content -%}
 <div class="talks">
     <div class="content"><p>校友寄语：祝母校越办越好！——李大为</p></div>
 </div>
@@ -23,16 +23,16 @@
             <div class="container">
                 <div class="inner">
                     <ul class="listArticle">
-                        {% for item in SubColumn['校庆活动公告'].ArticleGetter.Take[5].Result %}
+                        {% for item in SubColumn['校庆活动公告'].ArticleGetter.Take[5].Result -%}
                         <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}">{{ item.Title }}</a></li>
-                        {% endfor %}
+                        {% endfor -%}
                     </ul>
                 </div>
             <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['校庆活动公告'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
             </div>
         </div>
 
-        <div class="box2">{% assign articles = SubColumn['校庆新闻动态'].ArticleGetter.Take[2].ResultList %}
+        <div class="box2">{% assign articles = SubColumn['校庆新闻动态'].ArticleGetter.Take[2].ResultList -%}
             <img alt="新闻动态" class="icon" src="/Template/Common/Image/30news.png" />
             <div class="container">
                 <div class="inner">
@@ -190,4 +190,4 @@
 <div class="footer">
     <div class="content">版权所有© 哈尔滨工业大学(威海) 2014-2015 地址：山东省威海市文化西路2号 | 邮编：264209 | 鲁：ICP备06020633号</div>
 </div>
-{% endblock %}
+{% endblock -%}

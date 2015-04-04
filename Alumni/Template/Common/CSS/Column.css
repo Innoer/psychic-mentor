@@ -134,3 +134,14 @@
     font-weight: 500;
     font-size: 13px;
 }
+
+#container .content .article
+{
+    width: 600px;
+    margin: 15px auto;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+#container .content .article .news { width: 100%; }
+#container .content .article img { margin: 0 auto; }

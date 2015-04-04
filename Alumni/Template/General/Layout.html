@@ -4,24 +4,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <meta name="renderer" content="webkit" />
 
-    <title>{% block title %}哈尔滨工业大学（威海）校友网{% endblock %}</title>
+    <title>{% block title -%}哈尔滨工业大学（威海）校友网{% endblock -%}</title>
 
     <!--[if lt IE 9]><script>document.execCommand("BackgroundImageCache", false, true);</script><![endif]-->
 
-    <link href="/Template/Common/CSS/Common.css" rel="Stylesheet" />
-    <link href="/Template/Common/CSS/bgStretcher.css" rel="Stylesheet" />
-
-    {% block otherCSS %}{% endblock %}
-
     <script type="text/javascript" src="/Template/Common/JS/jquery-1.11.2.min.js"></script>
     <!--[if IE 6]><script type="text/javascript" src="/Template/Common/JS/DD_belatedPNG.js"></script><![endif]-->
-    <script type="text/javascript" src="/Template/Common/JS/bgStretcher.js"></script>
 
     <script type="text/javascript" src="/Template/Common/JS/Common.js"></script>
+
+    <link href="/Template/Common/CSS/Common.css" rel="Stylesheet" />
+    {% block otherCSS -%}{% endblock -%}
 </head>
 <body>
     <div class="wrapper">
-        {% block beforeHeader %}{% endblock %}
+        {% block beforeHeader -%}{% endblock -%}
         <div class="header">
             <div class="content">
                 <div class="top">
@@ -48,47 +45,53 @@
                             <ul>
                                 <li><a href="/Default.aspx" class="dropdown">首页</a></li>
                             </ul>
-                            {% for top in TopColumns %}
+                            {% for top in TopColumns -%}
 			                <ul>
-                            {% if top.Visible %}
-				                {% if top.IsExternalLink %} 
-                                    <li><a href="{{ top.ExternalLinkURL }}" target="_blank" class="dropdown">{{ top.ColumnName }}</a></li>
-                                {% else %}
-                                    {% if top.ColumnName == "校庆专题" %}
+                            {% if top.Visible -%}
+				                {% if top.IsSpecialCommand and top.SpecialCommandName == "url" -%} 
+                                    <li><a href="{{ top.SpecialCommandArgument }}" target="_blank" class="dropdown">{{ top.ColumnName }}</a></li>
+                                {% else -%}
+                                    {% if top.ColumnName == "校庆专题" -%}
                                     <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" target="_blank" class="dropdown" style="color: #f7930a;">{{ top.ColumnName }}</a></li>
-                                    {% else %} 
+                                    {% else -%} 
                                     <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" class="dropdown">{{ top.ColumnName }}</a></li>
-                                    {% endif %}
-                                {% endif %}
+                                    {% endif -%}
+                                {% endif -%}
                     
-                                {% if top.SubColumns.size > 0 %}
+                                {% if top.SubColumns.size > 0 -%}
                                     <li class="sublinks">
-                                    {% for child in top.SubColumns %}
-                                        {% if child.IsExternalLink %}
-                                            <a href="{{ child.ExternalLinkURL }}">{{ child.ColumnName }}</a>
-                                        {% else %}
+                                    {% for child in top.SubColumns -%}
+                                        {% if child.IsSpecialCommand and child.SpecialCommandName == "url" -%}
+                                            <a href="{{ child.SpecialCommandArgument }}">{{ child.ColumnName }}</a>
+                                        {% else -%}
                                             <a href="/ShowColumn.aspx?ColumnID={{ child.ColumnID }}">{{ child.ColumnName }}</a>
-                                        {% endif %}
-                                    {% endfor %}
+                                        {% endif -%}
+                                    {% endfor -%}
                                     </li>
-                                {% endif %}
-                            {% endif %}
+                                {% endif -%}
+                            {% endif -%}
 			                </ul>
-                            {% endfor %}
+                            {% endfor -%}
                         </div>
                         <div class="sign">
-                            <a href="#">注册</a> <a href="#" style="background-color: #485b8f">登录校友网</a>
+                            <a href="#">注册</a> <a href="#" style="background-color: #485b8f" onclick="showLogin();">登录校友网</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% block afterHeader %}{% endblock %}
+        {% block afterHeader -%}{% endblock -%}
 
-        {% block content %}{% endblock %}
+        {% block content -%}{% endblock -%}
     </div>
 
-    {% block otherJS %}{% endblock %}
+    <div id="cover_bg"></div>
+    <div class="dialog" id="dialog_signin">
+        <p class='loading'>加载中…</p>
+        <iframe id="signin_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+    </div>
+
+    {% block otherJS -%}{% endblock -%}
 </body>
 </html>
 

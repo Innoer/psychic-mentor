@@ -55,6 +55,13 @@ namespace Alumni
                 return sb.ToString();
             }
 
+            private static String getTemplateCacheKey(String path)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat(SharedConfig.SubTemplateCacheKey, path);
+                return sb.ToString();
+            }
+
             public static DotLiquid.Template GetSubTemplate(DBDataContext context, int subTemplateID)
             {
                 String cacheKey = getSubTemplateCacheKey(subTemplateID);
@@ -62,6 +69,21 @@ namespace Alumni
                 if (template == null)
                 {
                     String path = HttpContext.Current.Server.MapPath(GetSubTemplatePath(context, subTemplateID));
+                    template = DotLiquid.Template.Parse(File.ReadAllText(path, Encoding.UTF8));
+
+                    CacheDependency dependency = new CacheDependency(path);
+                    HttpRuntime.Cache.Add(cacheKey, template, dependency, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, CacheItemPriority.Default, null);
+                }
+                return template;
+            }
+
+            public static DotLiquid.Template GetTemplateByPath(String relativePath)
+            {
+                String cacheKey = getTemplateCacheKey(relativePath);
+                DotLiquid.Template template = HttpRuntime.Cache[cacheKey] as DotLiquid.Template;
+                if (template == null)
+                {
+                    String path = HttpContext.Current.Server.MapPath(relativePath);
                     template = DotLiquid.Template.Parse(File.ReadAllText(path, Encoding.UTF8));
 
                     CacheDependency dependency = new CacheDependency(path);
@@ -78,8 +100,9 @@ namespace Alumni
             public int TemplateID { get; set; }
             public String ColumnName { get; set; }
             public bool Visible { get; set; }
-            public bool IsExternalLink { get; set; }
-            public String ExternalLinkURL { get; set; }
+            public bool IsSpecialCommand { get; set; }
+            public String SpecialCommandName { get; set; }
+            public String SpecialCommandArgument { get; set; }
 
             public IQueryable<ColumnItem> SubColumns 
             {
@@ -102,8 +125,9 @@ namespace Alumni
                     TemplateID = col.SubTemplateID,
                     ColumnName = col.ColumnName,
                     Visible = col.Visible,
-                    IsExternalLink = col.IsExternalLink,
-                    ExternalLinkURL = col.ExternalLinkURL
+                    IsSpecialCommand = col.IsSpecialCommand,
+                    SpecialCommandName = col.SpecialCommandName,
+                    SpecialCommandArgument = col.SpecialCommandArgument,
                 };
             }
 
@@ -117,8 +141,9 @@ namespace Alumni
                                  ParentColumnID = item.ParentColumnID,
                                  ColumnName = item.ColumnName,
                                  Visible = item.Visible,
-                                 IsExternalLink = item.IsExternalLink,
-                                 ExternalLinkURL = item.ExternalLinkURL
+                                 IsSpecialCommand = item.IsSpecialCommand,
+                                 SpecialCommandName = item.SpecialCommandName,
+                                 SpecialCommandArgument = item.SpecialCommandArgument,
                              };
 
                 return childs;
@@ -135,8 +160,9 @@ namespace Alumni
                                  ParentColumnID = item.ParentColumnID,
                                  ColumnName = item.ColumnName,
                                  Visible = item.Visible,
-                                 IsExternalLink = item.IsExternalLink,
-                                 ExternalLinkURL = item.ExternalLinkURL
+                                 IsSpecialCommand = item.IsSpecialCommand,
+                                 SpecialCommandName = item.SpecialCommandName,
+                                 SpecialCommandArgument = item.SpecialCommandArgument,
                              };
 
                 return childs;
@@ -153,10 +179,30 @@ namespace Alumni
                               TemplateID = item.SubTemplateID,
                               ColumnName = item.ColumnName,
                               Visible = item.Visible,
-                              IsExternalLink = item.IsExternalLink,
-                              ExternalLinkURL = item.ExternalLinkURL
+                              IsSpecialCommand = item.IsSpecialCommand,
+                              SpecialCommandName = item.SpecialCommandName,
+                              SpecialCommandArgument = item.SpecialCommandArgument,
                           };
                 
+                return col.SingleOrDefault();
+            }
+
+            public static ColumnItem GetColumnByName(DBDataContext context, string name)
+            {
+                var col = from item in context.Columns
+                          where item.ColumnName == name
+                          select new ColumnItem
+                          {
+                              ColumnID = item.ColumnID,
+                              ParentColumnID = item.ParentColumnID,
+                              TemplateID = item.SubTemplateID,
+                              ColumnName = item.ColumnName,
+                              Visible = item.Visible,
+                              IsSpecialCommand = item.IsSpecialCommand,
+                              SpecialCommandName = item.SpecialCommandName,
+                              SpecialCommandArgument = item.SpecialCommandArgument,
+                          };
+
                 return col.SingleOrDefault();
             }
         }
@@ -189,7 +235,7 @@ namespace Alumni
                     PublishDate = article.PublishDate,
                     VisitCount = article.VisitCount,
                     Title = article.Title,
-                    PictureURL = article.PictureURL,
+                    PictureURL = article.PictureURL != String.Empty ? article.PictureURL : null,
                     Keywords = article.Keywords.Split(SharedConfig.KeywordSeparator),
                     Source = article.Source,
                     Content = article.Content
@@ -209,7 +255,7 @@ namespace Alumni
                                 PublishDate = item.PublishDate,
                                 VisitCount = item.VisitCount,
                                 Title = item.Title,
-                                PictureURL = item.PictureURL,
+                                PictureURL = item.PictureURL != String.Empty ? item.PictureURL : null,
                                 Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
                                 Source = item.Source,
                                 Content = item.Content
@@ -236,7 +282,7 @@ namespace Alumni
                                    PublishDate = item.PublishDate,
                                    VisitCount = item.VisitCount,
                                    Title = item.Title,
-                                   PictureURL = item.PictureURL,
+                                   PictureURL = item.PictureURL != String.Empty ? item.PictureURL : null,
                                    Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
                                    Source = item.Source,
                                    Content = item.Content
@@ -259,7 +305,7 @@ namespace Alumni
                                    PublishDate = item.PublishDate,
                                    VisitCount = item.VisitCount,
                                    Title = item.Title,
-                                   PictureURL = item.PictureURL,
+                                   PictureURL = item.PictureURL != String.Empty ? item.PictureURL : null,
                                    Keywords = item.Keywords.Split(SharedConfig.KeywordSeparator),
                                    Source = item.Source,
                                    Content = item.Content

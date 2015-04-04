@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Untitled Document</title>
+        <style type="text/css">
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    margin:0;
+}
+#main {
+    height:1800px;
+    padding-top:90px;
+    text-align:center;
+}
+#fullbg {
+    background-color:Gray;
+    left:0px;
+    opacity:0.5;
+    position:absolute;
+    top:0px;
+    z-index:3;
+    filter:alpha(opacity=50); /* IE6 */
+    -moz-opacity:0.5; /* Mozilla */
+    -khtml-opacity:0.5; /* Safari */
+}
+#dialog {
+    background-color:#FFF;
+    border:1px solid #888;
+    display:none;
+    height:200px;
+    left:50%;
+    margin:-100px 0 0 -100px;
+    padding:12px;
+    position:fixed !important; /* 浮动对话框 */
+    position:absolute;
+    top:50%;
+    width:200px;
+    z-index:5;
+}
+#dialog p {
+    margin:0 0 12px;
+}
+#dialog p.close {
+    text-align:right;
+}
+</style>
+
+<script type="text/javascript" src="/Template/Common/JS/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+//显示灰色 jQuery 遮罩层
+function showBg() {
+    var bh = $("body").height();
+    var bw = $("body").width();
+    $("#fullbg").css({
+        height:bh,
+        width:bw,
+        display:"block"
+    });
+    $("#dialog").show();
+}
+//关闭灰色 jQuery 遮罩
+function closeBg() {
+    $("#fullbg,#dialog").hide();
+}
+
+$(document).ready(function() {
+	$("#fullbg").click(closeBg);
+});
+</script>
+<!--[if lte IE 6]>
+<script type="text/javascript">
+// 浮动对话框
+$(document).ready(function() {
+    var domThis = $('#dialog')[0];
+    var wh = $(window).height() / 2;
+    domThis.style.setExpression('top', 'eval((document.documentElement).scrollTop + ' + wh + ') + "px"');
+});
+</script>
+<![endif]-->
+    </head>
+    
+    <body>
+    <div id="main"> <a href="#" onclick="showBg();">点击这里看 jQuery 遮罩层效果.</a> </div>
+<!-- jQuery 遮罩层 -->
+<div id="fullbg"></div>
+<!-- end jQuery 遮罩层 -->
+<!-- 对话框 -->
+<div id="dialog">
+  <p class="close"><a href="#" onclick="closeBg();">关闭</a></p>
+  <p>正在加载，请稍后...</p>
+</div>
+<!-- jQuery 遮罩层上方的对话框 -->
+    </body>
+</html>

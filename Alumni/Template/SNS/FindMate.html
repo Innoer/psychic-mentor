@@ -1,0 +1,158 @@
+﻿{% extends /Template/General/Layout.html -%}
+{% block otherCSS -%}
+<link href="/Template/Common/CSS/Child.css" rel="Stylesheet" />
+<link href="/Template/Common/CSS/SNS/FindMate.css" rel="Stylesheet" />
+{% endblock -%}
+
+{% block content -%}
+        <div id="container">
+            <div class="content" style="background-color: #f0f0f0;">
+                <div class="left">
+                    <div class="curpos"><span>当前位置&nbsp;>>&nbsp;<em>校友搜索</em></span></div>
+                    <div class="separator"></div>
+                    <form method="post" action="/SNS/FindMate.aspx">
+                    <b>搜索条件：</b>
+                    <div class="condition">
+                        <h3>入学年份</h3>
+                        <select name="enroll_year" id="enroll_year">
+                        {% for i in (1988...LatestEnrollYear) reversed -%}
+                            <option value="{{ i }}" {% if i == SelectedYear %}selected="selected"{% endif %}>{{ i }}</option>
+                        {% endfor -%}
+                        </select>
+                    </div>
+                    <div class="condition">
+                        <h3>就读学院</h3>
+                        <select name="enroll_school" id="enroll_school" onchange="enrollSchoolChange();">
+                        {% for item in EnrollSchool -%}
+                            <option value="{{ item.ID }}" {% if item.ID == SelectedSchool %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                        {% endfor -%}
+                        </select>
+                    </div>
+                    <div class="condition">
+                        <h3>就读专业</h3>
+                        <select name="enroll_program" id="enroll_program"></select>
+                    </div>
+                    <div class="condition">
+                        <h3>从事行业</h3>
+                        <select name="employ_category" id="employ_category">
+                        {% for item in EmployCategory -%}
+                            <option value="{{ item.ID }}" {% if item.ID == SelectedCategory %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                        {% endfor -%}
+                        </select>
+                    </div>
+                    <div class="condition">
+                        <h3>所在省份</h3>
+                        <select name="live_province" id="live_province" onchange="liveProvinceChange();">
+                        {% for item in LiveProvince -%}
+                            <option value="{{ item.ID }}" {% if item.ID == SelectedProvince %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                        {% endfor -%}
+                        </select>
+                    </div>
+                    <div class="condition">
+                        <h3>所在城市</h3>
+                        <select name="live_city" id="live_city"></select>
+                    </div>
+                    <div class="condition"><input type="submit" value="搜索" /></div>
+                    </form>
+                </div>
+
+                <div class="right">
+                    <div class="title"><span>校友搜索结果&nbsp;<font color="red">&gt;&gt;</font></span></div>
+                    <div class="content">
+                        {% if Query.Success == false -%}
+                        <p>{{ Query.Status }}</p>
+                        {% else -%}
+                        <p>找到相关结果 {{ Query.Count }} 个。</p>
+                            {% if Query.Count > 0 -%}
+                            <table id="find_result" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>姓名</th><th>从事行业</th><th>职务</th><th>所在地区</th><th style="text-align: center;">短消息</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in Query.Result -%}
+                                    <tr>
+                                        <td>{{ item.Name }}</td><td>{{ item.EmployCategory }}</td><td>{{ item.WorkTitle }}</td><td>{{ item.LivePlace }}</td>
+                                        <td style="text-align: center;"><a href="/SNS/SendSMS.aspx?User={{ item.UserID }}" title="发送短消息"><img class="icon_sms" src="/Template/Common/Image/SMS.png" /></a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif -%}
+                        {% endif -%}
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.</div>
+            </div>
+        </div>
+
+        <div style="display: none;">
+            <select id="programData">
+                {% for item in EnrollProgram -%}
+                <option value="{{ item.ID }}" schoolID="{{ item.SchoolID }}">{{ item.Name }}</option>
+                {% endfor -%}
+            </select>
+
+            <select id="cityData">
+                {% for item in LiveCity -%}
+                <option value="{{ item.ID }}" provinceID="{{ item.ProvinceID }}">{{ item.Name }}</option>
+                {% endfor -%}
+            </select>
+        </div>
+{% endblock -%}
+
+{% block otherJS %}
+<script language="javascript" type="text/javascript">
+    function enrollSchoolChange() { setProgramBySchool($("#enroll_school option:selected").val(), 1); }
+    function liveProvinceChange() { setCityByProvince($("#live_province option:selected").val(), 0); }
+
+    function setProgramBySchool(schoolID, selectedProgram)
+    {
+        var frag = $(document.createDocumentFragment());
+        $("#programData option").each(function () {
+            var prog = $(this);
+
+            if (prog.attr('schoolID') == schoolID)
+            {
+                if (prog.val() == selectedProgram)
+                    prog.attr('selected', 'selected');
+
+                frag.append(prog);
+            }
+        });
+        $("#enroll_program").html(frag);
+    }
+
+    function setCityByProvince(provinceID, selectedCity)
+    {
+        var frag = $(document.createDocumentFragment());
+        
+        var all = $('<option value="0" provinceID="0">（全部）</option>');
+        if (selectedCity == 0) all.attr('selected', 'selected');
+        frag.append(all);
+
+        $("#cityData option").each(function() {
+            var city = $(this);
+            
+            if (city.attr('provinceID') == "0" || city.attr('provinceID') == provinceID)
+            {
+                if (city.val() == selectedCity)
+                    city.attr('selected', 'selected');
+
+                frag.append(city);
+            }
+        });
+        $("#live_city").html(frag);
+    }
+
+    $(document).ready(function () {
+        setProgramBySchool({{ SelectedSchool }}, {{ SelectedProgram }});
+        setCityByProvince({{ SelectedProvince }}, {{ SelectedCity }});
+
+        $("#find_result tr:nth-child(even)").css("background-color", "#f3f9ff");
+    });
+</script>
+{% endblock %}
