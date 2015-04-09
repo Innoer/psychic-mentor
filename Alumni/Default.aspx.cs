@@ -77,7 +77,7 @@ namespace Alumni
                         {
                             ColumnID = v.ColumnID,
                             TopArticle = topArticle,
-                            ArticleGetter = new TableGetter<ArticleType>(articles)
+                            ArticleGetter = new TableGetter<ArticleType>(articles.Where(item => topArticle != null ? item.ArticleID != topArticle.ArticleID : true))
                         };
                     }), 
 

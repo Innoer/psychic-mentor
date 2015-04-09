@@ -7,6 +7,14 @@
       <Association Name="EmployCategory_User" Member="User" ThisKey="CategoryID" OtherKey="EmployCategoryID" Type="User" />
     </Type>
   </Table>
+  <Table Name="dbo.WorkplaceNature" Member="WorkplaceNature">
+    <Type Name="WorkplaceNature">
+      <Column Name="NatureID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NatureCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NatureName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="WorkplaceNature_User" Member="User" ThisKey="NatureID" OtherKey="WorkplaceNatureID" Type="User" />
+    </Type>
+  </Table>
   <Table Name="dbo.EnrollProgram" Member="EnrollProgram">
     <Type Name="EnrollProgram">
       <Column Name="ProgramID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -21,7 +29,6 @@
       <Column Name="SchoolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SchoolName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="EnrollSchool_EnrollProgram" Member="EnrollProgram" ThisKey="SchoolID" OtherKey="SchoolID" Type="EnrollProgram" />
-      <Association Name="EnrollSchool_User" Member="User" ThisKey="SchoolID" OtherKey="EnrollSchoolID" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.LiveCity" Member="LiveCity">
@@ -41,19 +48,11 @@
       <Association Name="LiveProvince_User" Member="User" ThisKey="ProvinceID" OtherKey="LiveProvinceID" Type="User" />
     </Type>
   </Table>
-  <Table Name="dbo.WorkplaceNature" Member="WorkplaceNature">
-    <Type Name="WorkplaceNature">
-      <Column Name="NatureID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="NatureCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NatureName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="WorkplaceNature_User" Member="User" ThisKey="NatureID" OtherKey="WorkplaceNatureID" Type="User" />
-    </Type>
-  </Table>
   <Table Name="dbo.[User]" Member="User">
     <Type Name="User">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PassWord" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PassWord" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Sex" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="BirthDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -72,12 +71,10 @@
       <Column Name="ClassNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="StudentNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
       <Column Name="EnrollYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="EnrollSchoolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EnrollProgramID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="GraduateYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="EmployCategory_User" Member="EmployCategory" ThisKey="EmployCategoryID" OtherKey="CategoryID" Type="EmployCategory" IsForeignKey="true" />
       <Association Name="EnrollProgram_User" Member="EnrollProgram" ThisKey="EnrollProgramID" OtherKey="ProgramID" Type="EnrollProgram" IsForeignKey="true" />
-      <Association Name="EnrollSchool_User" Member="EnrollSchool" ThisKey="EnrollSchoolID" OtherKey="SchoolID" Type="EnrollSchool" IsForeignKey="true" />
       <Association Name="LiveCity_User" Member="LiveCity" ThisKey="LiveCityID" OtherKey="CityID" Type="LiveCity" IsForeignKey="true" />
       <Association Name="LiveProvince_User" Member="LiveProvince" ThisKey="LiveProvinceID" OtherKey="ProvinceID" Type="LiveProvince" IsForeignKey="true" />
       <Association Name="WorkplaceNature_User" Member="WorkplaceNature" ThisKey="WorkplaceNatureID" OtherKey="NatureID" Type="WorkplaceNature" IsForeignKey="true" />

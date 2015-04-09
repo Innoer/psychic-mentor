@@ -49,11 +49,9 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result -%}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
-                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
-                                    <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif -%} 
+                                {% for item in column.ArticleGetter.Take[3].Result -%}
+                                <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
+                                <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
                                 {% endfor -%}
                             </ul>
                         </div>
@@ -73,11 +71,9 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result -%}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
-                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
-                                    <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif -%} 
+                                {% for item in column.ArticleGetter.Take[3].Result -%}
+                                <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
+                                <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
                                 {% endfor -%}
                             </ul>
                         </div>
@@ -97,11 +93,9 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result -%}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
-                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
-                                    <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif -%} 
+                                {% for item in column.ArticleGetter.Take[3].Result -%}
+                                <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a>
+                                <em style="color: white;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
                                 {% endfor -%}
                             </ul>
                         </div>
@@ -125,11 +119,9 @@
                         </div>
                     </div>
                     <ul class="listArticle">
-                    {% for item in column.ArticleGetter.Take[4].Result -%}
-                        {% if item.ArticleID != column.TopArticle.ArticleID -%}
-                            <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a></li>
-                        {% endif -%} 
-                    {% endfor -%}
+                        {% for item in column.ArticleGetter.Take[3].Result -%}
+                        <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: white;">{{ item.Title }}</a></li>
+                        {% endfor -%}
                     </ul>
                 </div>
             </div>
@@ -165,11 +157,9 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result -%}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
-                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
-                                    <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif -%} 
+                                {% for item in column.ArticleGetter.Take[3].Result -%}
+                                <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
+                                <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
                                 {% endfor -%}
                             </ul>
                         </div>
@@ -189,11 +179,9 @@
                                 </div>
                             </div>
                             <ul class="listArticle">
-                                {% for item in column.ArticleGetter.Take[4].Result -%}
-                                    {% if item.ArticleID != column.TopArticle.ArticleID -%}
-                                    <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
-                                    <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
-                                    {% endif -%} 
+                                {% for item in column.ArticleGetter.Take[3].Result -%}
+                                <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}" style="color: #0d184e;">{{ item.Title }}</a>
+                                <em style="color: #0d184e;">{{ item.PublishDate | Date: "MM-dd" }}</em></li>
                                 {% endfor -%}
                             </ul>
                         </div>
@@ -321,5 +309,28 @@
                 });
             }
         }
+
+        $(function () {
+            if (navigator.userAgent.indexOf("MSIE 6.0") == -1) // not IE6
+                $("#slider").bgStretcher({
+                    images: [
+                             '/Template/Common/Image/Slider/4.jpg',
+                             '/Template/Common/Image/Slider/2.jpg',
+                             '/Template/Common/Image/Slider/3.jpg',
+                             '/Template/Common/Image/Slider/1.jpg',
+                             '/Template/Common/Image/Slider/5.jpg'
+                            ],
+                    imageWidth: 1920,
+                    imageHeight: 386,
+                    slideShowSpeed: 1000,
+                    nextSlideDelay: 10000,
+                    transitionEffect: 'fade',
+                    sequenceMode: 'normal',
+                    buttonPrev: '#prev',
+                    buttonNext: '#next',
+                    anchoring: 'center center',
+                    anchoringImg: 'center center'
+                });
+        });
     </script>
 {% endblock -%}

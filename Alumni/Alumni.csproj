@@ -61,6 +61,7 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -88,6 +89,7 @@
     <Content Include="ShowDonation.aspx" />
     <Content Include="SNS\FindMate.aspx" />
     <Content Include="SNS\SignIn.aspx" />
+    <Content Include="SNS\SignUp.aspx" />
     <Content Include="Template\30Year\Column.html" />
     <Content Include="Template\30Year\Default.html" />
     <Content Include="Template\30Year\Layout.html" />
@@ -331,6 +333,7 @@
     <Content Include="Template\Common\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Template\Common\ckeditor\styles.js" />
     <Content Include="Template\Common\CSS\Article.css" />
+    <Content Include="Template\Common\CSS\bgStretcher.css" />
     <Content Include="Template\Common\CSS\Child.css" />
     <Content Include="Template\Common\CSS\Column.css" />
     <Content Include="Template\Common\CSS\Column_Red.css" />
@@ -340,6 +343,7 @@
     <Content Include="Template\Common\CSS\Default_Red.css" />
     <Content Include="Template\Common\CSS\SNS\FindMate.css" />
     <Content Include="Template\Common\CSS\SNS\SignIn.css" />
+    <Content Include="Template\Common\CSS\SNS\SignUp.css" />
     <Content Include="Template\Common\Image\30activity.png" />
     <Content Include="Template\Common\Image\30news.png" />
     <Content Include="Template\Common\Image\30year.png" />
@@ -358,6 +362,9 @@
     <Content Include="Template\Common\Image\Button\校友组织h.png" />
     <Content Include="Template\Common\Image\Button\通知公告.png" />
     <Content Include="Template\Common\Image\Button\通知公告h.png" />
+    <Content Include="Template\Common\Image\close1.png" />
+    <Content Include="Template\Common\Image\close2.png" />
+    <Content Include="Template\Common\Image\cover_bk.png" />
     <Content Include="Template\Common\Image\donations.png" />
     <Content Include="Template\Common\Image\find.png" />
     <Content Include="Template\Common\Image\find_mate.png" />
@@ -380,6 +387,11 @@
     <Content Include="Template\Common\Image\search.png" />
     <Content Include="Template\Common\Image\sec1_bk.jpg" />
     <Content Include="Template\Common\Image\sec2_bk.png" />
+    <Content Include="Template\Common\Image\select-icons.png" />
+    <Content Include="Template\Common\Image\signin_header_bk.png" />
+    <Content Include="Template\Common\Image\signin_logo.png" />
+    <Content Include="Template\Common\Image\signup_pic.png" />
+    <Content Include="Template\Common\Image\signup_title_bk.png" />
     <Content Include="Template\Common\Image\Slider\1.jpg" />
     <Content Include="Template\Common\Image\Slider\2.jpg" />
     <Content Include="Template\Common\Image\Slider\3.jpg" />
@@ -387,12 +399,22 @@
     <Content Include="Template\Common\Image\Slider\5.jpg" />
     <Content Include="Template\Common\Image\slider_img.jpg" />
     <Content Include="Template\Common\Image\slider_title_bk.png" />
+    <Content Include="Template\Common\Image\sms.png" />
+    <Content Include="Template\Common\Image\step1_arrow.png" />
+    <Content Include="Template\Common\Image\step2_arrow.png" />
+    <Content Include="Template\Common\JS\bgStretcher.js" />
     <Content Include="Template\Common\JS\Common.js" />
+    <Content Include="Template\Common\JS\csshover3.htc" />
     <Content Include="Template\Common\JS\DD_belatedPNG.js" />
     <Content Include="Template\Common\JS\html5shiv.min.js" />
     <Content Include="Template\Common\JS\jquery-1.11.2.min.js" />
+    <Content Include="Template\Common\JS\jquery-html5Validate.js" />
+    <Content Include="Template\Common\JS\jquery.md5.js" />
+    <Content Include="Template\Common\JS\jquery.pseudo.js" />
+    <Content Include="Template\Common\JS\jquery.selectbox-0.2.js" />
     <Content Include="Template\Common\JS\PIE.htc" />
     <Content Include="Template\Common\JS\Sign.js" />
+    <Content Include="Template\Common\JS\SNS.js" />
     <Content Include="Template\General\Article.html" />
     <Content Include="Template\General\Column.html" />
     <Content Include="Template\General\Default.html" />
@@ -400,6 +422,7 @@
     <Content Include="Template\General\Layout.html" />
     <Content Include="Template\SNS\FindMate.html" />
     <Content Include="Template\SNS\SignIn.html" />
+    <Content Include="Template\SNS\SignUp.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -465,6 +488,9 @@
     <Compile Include="ShowDonation.aspx.designer.cs">
       <DependentUpon>ShowDonation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SNS\CheckUser.ashx.cs">
+      <DependentUpon>CheckUser.ashx</DependentUpon>
+    </Compile>
     <Compile Include="SNS\FindMate.aspx.cs">
       <DependentUpon>FindMate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -478,6 +504,13 @@
     </Compile>
     <Compile Include="SNS\SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\SignUp.aspx.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\SignUp.aspx.designer.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -494,6 +527,13 @@
       <LastGenOutput>AlumniSNS.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="SNS\CheckUser.ashx" />
     <None Include="Template\Common\ckeditor\.DS_Store" />
     <None Include="Template\Common\ckeditor\CHANGES.md" />
     <None Include="Template\Common\ckeditor\LICENSE.md" />
@@ -503,12 +543,6 @@
     <None Include="Template\Common\ckeditor\plugins\wsc\README.md" />
     <None Include="Template\Common\ckeditor\README.md" />
     <None Include="Template\Common\ckeditor\skins\moono\readme.md" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="AlumniDB.dbml.layout">

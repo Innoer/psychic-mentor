@@ -57,31 +57,10 @@ $(document).ready(function () {
 
     updateTime();
 
-    if (navigator.userAgent.indexOf("MSIE 6.0") == -1) // not IE6
-        $("#slider").bgStretcher({
-            images: [
-                 '/Template/Common/Image/Slider/4.jpg',
-                 '/Template/Common/Image/Slider/2.jpg',
-                 '/Template/Common/Image/Slider/3.jpg',
-                 '/Template/Common/Image/Slider/1.jpg',
-                 '/Template/Common/Image/Slider/5.jpg'
-                ],
-            imageWidth: 1920,
-            imageHeight: 386,
-            slideShowSpeed: 1000,
-            nextSlideDelay: 10000,
-            transitionEffect: 'fade',
-            sequenceMode: 'normal',
-            buttonPrev: '#prev',
-            buttonNext: '#next',
-            anchoring: 'center center',
-            anchoringImg: 'center center'
-        });
-
     $('.dropdown').mouseenter(showSubMenu);
     $('.dropdown').click(showSubMenu);
 
-    $('#cover_bg').click(hideCover);
+    //$('#cover_bg').click(hideCover);
 });
 
 $(window).resize(function () {
@@ -97,7 +76,7 @@ function showCover(dialog) {
     var dialogWidth = $(dialog).width(), dialogHeight = $(dialog).height();
 
     $("#cover_bg").css({ height: wrapperHeight, display: "block" });
-    $(dialog).css({ left: (windowWidth - dialogWidth) / 2, top: (windowHeight - dialogHeight) / 2 });
+    $(dialog).css({ left: (windowWidth - dialogWidth) / 2 });
 
     $("#cover_bg").show("fast", function () { $(dialog).fadeIn(); });
 }
@@ -108,13 +87,12 @@ function hideCover() {
     });
 }
 
-function showLogin() {
-    $("#dialog_signin p").show();
-    $("#dialog_signin iframe").hide();
-    showCover('#dialog_signin');
+function showSign(dialog, iframe, src) {
+    $(dialog + " p").show();
+    showCover(dialog);
 
-    $("#signin_iframe").attr('src', '/SNS/SignIn.aspx?t=' + Math.random());
-    $("#signin_iframe").ready(function () {
-        $("#dialog_signin p").fadeOut("fast", function() { $("#dialog_signin iframe").fadeIn(); });
+    $(iframe).attr('src', src);
+    $(iframe).load(function () {
+        $(dialog + " p").fadeOut("fast", function () { $(iframe).show(); });
     });
 }

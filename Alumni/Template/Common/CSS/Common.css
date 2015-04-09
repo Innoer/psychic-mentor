@@ -215,9 +215,9 @@ body
 
 .dialog
 {
-    position: fixed !important;
     position: absolute;
     /* width and height is defined in html */
+    top: 165px; /* left is calced in js */
     background-color: white;
     border: 3px solid #b3beda;
     display: none;
@@ -230,17 +230,25 @@ body
     behavior: url(/Template/Common/JS/PIE.htc);
 }
 
-#dialog_signin, #signin_iframe
-{
-    width: 400px; height: 330px;
-}
-
 .loading
 {
     display: block;
     width: 100%; height: 100%;
-    line-height: 330px;
     text-align: center;
     vertical-align: middle;
     color: gray;
 }
+
+#dialog_signin, #signin_iframe
+{
+    position: fixed;
+    width: 400px; height: 330px;
+}
+#dialog_signin .loading { line-height: 330px; }
+
+#dialog_signup, #signup_iframe
+{ 
+    position: absolute;
+    width: 800px; height: 450px;
+}
+#dialog_signup .loading { line-height: 450px; }

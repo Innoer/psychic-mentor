@@ -1,0 +1,435 @@
+﻿/* Code by Shindo. March, 2015. */
+
+* 
+{ 
+    margin: 0; 
+    padding: 0; 
+}
+
+a, a:hover { text-decoration: none; }
+img { border: 0; }
+
+body 
+{
+    font: 14px/18px "Microsoft YaHei";
+    font-weight: 400;
+    width: 800px; height: 100%;
+    background-color: white;
+    behavior: url(/Template/Common/JS/csshover3.htc);
+    overflow: hidden;
+}
+
+.wrapper 
+{
+    width: 100%; height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.header .title  
+{
+    position: relative;
+    background: url(/Template/Common/Image/signup_title_bk.png) repeat-x;
+    width: 100%;
+    height: 48px; 
+}
+
+.header .title .step1
+{
+    background-color: #0e3b6a;
+    width: 300px; height: 48px;
+    float: left;
+    font-size: 16px;
+    color: white;
+    line-height: 48px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header .title .step1_arrow
+{
+    position: relative;
+    z-index: 30;
+    background: url(/Template/Common/Image/step1_arrow.png) no-repeat right center;
+    width: 17px; height: 48px;
+    float: left;
+}
+
+.header .title .step2
+{
+    position: relative;
+    z-index: 29;
+    margin-left: -17px;
+    background-color: #437be7;
+    width: 300px; height: 48px;
+    float: left;
+    font-size: 16px;
+    color: white;
+    line-height: 48px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header .title .step2_arrow
+{
+    background: url(/Template/Common/Image/step2_arrow.png) no-repeat right center;
+    width: 25px; height: 48px;
+    float: left;
+}
+
+.header .title a
+{
+    display: block;
+    position: absolute;
+    top: 9px; right: 10px;
+}
+
+.header .title img
+{
+    width: 32px; height: 29px;
+}
+
+/* Common */
+.button
+{
+    width: 100%; height: 40px;
+    padding-top: 20px;
+}
+
+.button button
+{
+    width: 200px; height: 100%;
+    display: block;
+    float: left;
+    background-color: #417ed8;
+    border: 0px;
+    color: white;
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+    
+    /* remove blur */
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+.button button:hover { cursor: pointer; }
+
+/* Step1 CSS */
+
+.form
+{
+    width: 330px; height: 350px;
+    margin: 25px;
+    /* fix for ie6 */
+    margin-left: 15px;
+    float: left;
+}
+
+.form .input 
+{
+    width: 100%; height: 32px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.form .input p 
+{ 
+    position: absolute;
+    top: 0; left: 0;
+    width: 110px; height: 32px;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 32px;
+    vertical-align: middle;
+    text-align: right;
+    color: #627a9f; 
+}
+
+.form .input input
+{
+    position: absolute;
+    top: 0; right: 0;
+    border: 1px solid #c9d0da;
+    width: 200px; height: 32px;
+    line-height: 30px;
+    vertical-align: middle;
+    font-size: 15px;
+    text-indent: 10px;
+    color: #627a9f; 
+    font-family: "Microsoft YaHei";
+}
+
+.form .input .select_wrapper
+{
+    position: absolute;
+    top: 0; right: 2px;
+    width: 200px; 
+}
+
+.pic
+{
+    background: url(/Template/Common/Image/signup_pic.png) no-repeat center top;
+    margin: 32px 20px 0 0;
+    /* fix for ie6 */
+    _margin-right: 10px;
+    width: 400px; height: 375px;
+    float: right;
+}
+
+.pic div
+{
+    width: 400px; height: 40px;
+    margin-top: 307px;
+    line-height: 40px;
+    vertical-align: middle;
+    font-size: 15px;
+    color: red;
+}
+
+/* Step2 CSS */
+.detail
+{
+    width: 100%; height: 630px; 
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.detail .info 
+{ 
+    width: 100%; 
+    margin: 15px auto;
+}
+
+.detail .info p 
+{
+    margin: 5px 0 0 30px;
+    color: #0e3b6a; 
+}
+
+.detail .separator
+{
+    background: url(/Template/Common/Image/signup_separator.png) no-repeat;
+    width: 600px; height: 18px;
+    margin: 15px 10px 15px 10px;
+    overflow: hidden;
+}
+
+.detail .separator p 
+{ 
+    margin-left: 65px; 
+    font-size: 18px;
+    line-height: 18px;
+    color: #9096a0;
+}
+
+.detail .clear 
+{ 
+    width: 0; height: 0; 
+    clear: both; 
+    overflow: hidden;
+}
+
+.detail .input 
+{
+    height: 30px;
+    margin-left: 80px;
+    position: relative;
+    float: left;
+}
+
+.detail .input p 
+{ 
+    width: 80px; height: 24px;
+    display: block;
+    float: left;
+    line-height: 24px;
+    vertical-align: middle;
+    color: #627a9f; 
+}
+
+.detail .input .text
+{
+    border: 1px solid #c9d0da;
+    width: 200px; height: 24px;
+    float: left;
+    line-height: 24px;
+    vertical-align: middle;
+    text-indent: 10px;
+    color: #627a9f; 
+    font-family: "Microsoft YaHei";
+}
+
+.detail .input .select_wrapper
+{
+    width: 200px; height: 24px;
+    float: left;
+}
+
+.detail .input .select_wrapper_small
+{
+    width: 100px; height: 24px;
+    float: left;
+}
+
+.detail .input .radio 
+{
+    height: 24px; 
+    float: left;
+}
+
+.detail .input span
+{
+    width: 38px; height: 24px;
+    margin-left: 5px;
+    display: block;
+    float: left;
+    line-height: 24px;
+    vertical-align: middle;
+    color: #627a9f; 
+}
+
+.detail .short 
+{
+    float: left;
+    width: 300px;
+}
+
+.detail .long
+{
+    float: left;
+    width: 640px;
+}
+
+.detail .long .text
+{
+    width: 540px;
+}
+
+/* SelectBox CSS */
+.sbHolder
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	position: relative;
+	width: 200px;
+}
+
+.sbHolderSmall
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	position: relative;
+	width: 100px;
+}
+
+.form .sbHolder { height: 32px; }
+.detail .sbHolder, .detail .sbHolderSmall { height: 24px; }
+
+.sbSelector
+{
+	display: block;
+	left: 0;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 170px;
+}
+
+.sbSelectorSmall
+{
+	display: block;
+	left: 0;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 70px;
+}
+
+.form .sbSelector { height: 32px; line-height: 32px; }
+.detail .sbSelector, .detail .sbSelectorSmall { height: 24px; line-height: 24px; }
+
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover,
+.sbSelectorSmall:link, .sbSelectorSmall:visited, .sbSelectorSmall:hover
+{
+	color: #627a9f;
+	outline: none;
+	text-decoration: none;
+}
+
+.sbToggle
+{
+	background: url(/Template/Common/Image/select-icons.jpg) 0 -116px no-repeat;
+	display: block;
+	outline: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 30px;
+}
+.sbToggle:hover { background: url(/Template/Common/Image/select-icons.jpg) 0 -167px no-repeat; }
+.sbToggleOpen { background: url(/Template/Common/Image/select-icons.jpg) 0 -16px no-repeat; }
+.sbToggleOpen:hover { background: url(/Template/Common/Image/select-icons.jpg) 0 -66px no-repeat; }
+
+.form .sbToggle { height: 32px; }
+.detail .sbToggle { height: 24px; }
+
+.sbOptions
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 200px;
+	z-index: 1;
+	overflow-y: auto;
+}
+
+.sbOptionsSmall
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 100px;
+	z-index: 1;
+	overflow-y: auto;
+}
+
+.sbOptions a, .sbOptionsSmall a
+{
+	color: #627a9f;
+    border-bottom: dotted 1px #515151;
+	display: block;
+	outline: none;
+	padding: 3px 10px 3px 10px;
+	font-size: 14px;
+	line-height: 18px;
+}
+.sbOptions a:link, .sbOptions a:visited,
+.sbOptionsSmall a:link, .sbOptionsSmall a:visited
+{
+	color: #627a9f;
+	text-decoration: none;
+}
+.sbOptions a:hover, .sbOptionsSmall a:hover,
+.sbOptions a:focus, .sbOptionsSmall a:focus,
+.sbOptions a.sbFocus, .sbOptionsSmall a.sbFocus
+{
+    background-color: #627a9f; 
+	color: white;
+}
+.sbOptions li.last a, .sbOptionsSmall li.last a { border-bottom: none; }
+.sbOptions .sbSub, .sbOptionsSmall .sbSub { padding-left: 17px; }

@@ -21,11 +21,23 @@
             <div class="logo"></div>
         </div>
         <div class="form">
-            <div class="input"><p>账&nbsp;号</p><input type="text" /></div>
-            <div class="input"><p>密&nbsp;码</p><input type="password" /></div>
-            <div class="button"><button type="button">登&ensp;录</button><button type="button">注&ensp;册</button></div>
+            <div id="info" style="display: none;"></div>
+            <div class="input" style="margin-top: 20px;"><p>账&nbsp;号</p><input type="text" id="username" /></div>
+            <div class="input"><p>密&nbsp;码</p><input type="password" id="password" /></div>
+            <div class="button"><button type="button" onclick="Signin();">登&ensp;录</button><button type="button" onclick="showSignup();">注&ensp;册</button></div>
         </div>
     </div>
+
+    <script language="javascript" type="text/javascript">
+        function showSignup() {
+            parent.$("#dialog_signin").hide();
+            parent.showSign('#dialog_signup', '#signup_iframe', '/SNS/SignUp.aspx');
+        }
+
+        function Signin() {
+            setSigninInfo("test", { color: "red" });
+        }
+    </script>
 </body>
 </html>
 

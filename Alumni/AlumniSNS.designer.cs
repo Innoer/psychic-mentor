@@ -31,6 +31,9 @@ namespace Alumni
     partial void InsertEmployCategory(AlumniSNSDB.EmployCategory instance);
     partial void UpdateEmployCategory(AlumniSNSDB.EmployCategory instance);
     partial void DeleteEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void InsertWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
+    partial void UpdateWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
+    partial void DeleteWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
     partial void InsertEnrollProgram(AlumniSNSDB.EnrollProgram instance);
     partial void UpdateEnrollProgram(AlumniSNSDB.EnrollProgram instance);
     partial void DeleteEnrollProgram(AlumniSNSDB.EnrollProgram instance);
@@ -43,9 +46,6 @@ namespace Alumni
     partial void InsertLiveProvince(AlumniSNSDB.LiveProvince instance);
     partial void UpdateLiveProvince(AlumniSNSDB.LiveProvince instance);
     partial void DeleteLiveProvince(AlumniSNSDB.LiveProvince instance);
-    partial void InsertWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
-    partial void UpdateWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
-    partial void DeleteWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
     partial void InsertUser(AlumniSNSDB.User instance);
     partial void UpdateUser(AlumniSNSDB.User instance);
     partial void DeleteUser(AlumniSNSDB.User instance);
@@ -89,6 +89,14 @@ namespace Alumni
 			}
 		}
 		
+		public System.Data.Linq.Table<AlumniSNSDB.WorkplaceNature> WorkplaceNature
+		{
+			get
+			{
+				return this.GetTable<AlumniSNSDB.WorkplaceNature>();
+			}
+		}
+		
 		public System.Data.Linq.Table<AlumniSNSDB.EnrollProgram> EnrollProgram
 		{
 			get
@@ -118,14 +126,6 @@ namespace Alumni
 			get
 			{
 				return this.GetTable<AlumniSNSDB.LiveProvince>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AlumniSNSDB.WorkplaceNature> WorkplaceNature
-		{
-			get
-			{
-				return this.GetTable<AlumniSNSDB.WorkplaceNature>();
 			}
 		}
 		
@@ -257,6 +257,144 @@ namespace AlumniSNSDB
 		{
 			this.SendPropertyChanging();
 			entity.EmployCategory = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkplaceNature")]
+	public partial class WorkplaceNature : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NatureID;
+		
+		private int _NatureCode;
+		
+		private string _NatureName;
+		
+		private EntitySet<User> _User;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNatureIDChanging(int value);
+    partial void OnNatureIDChanged();
+    partial void OnNatureCodeChanging(int value);
+    partial void OnNatureCodeChanged();
+    partial void OnNatureNameChanging(string value);
+    partial void OnNatureNameChanged();
+    #endregion
+		
+		public WorkplaceNature()
+		{
+			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NatureID
+		{
+			get
+			{
+				return this._NatureID;
+			}
+			set
+			{
+				if ((this._NatureID != value))
+				{
+					this.OnNatureIDChanging(value);
+					this.SendPropertyChanging();
+					this._NatureID = value;
+					this.SendPropertyChanged("NatureID");
+					this.OnNatureIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureCode", DbType="Int NOT NULL")]
+		public int NatureCode
+		{
+			get
+			{
+				return this._NatureCode;
+			}
+			set
+			{
+				if ((this._NatureCode != value))
+				{
+					this.OnNatureCodeChanging(value);
+					this.SendPropertyChanging();
+					this._NatureCode = value;
+					this.SendPropertyChanged("NatureCode");
+					this.OnNatureCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string NatureName
+		{
+			get
+			{
+				return this._NatureName;
+			}
+			set
+			{
+				if ((this._NatureName != value))
+				{
+					this.OnNatureNameChanging(value);
+					this.SendPropertyChanging();
+					this._NatureName = value;
+					this.SendPropertyChanged("NatureName");
+					this.OnNatureNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="WorkplaceNature_User", Storage="_User", ThisKey="NatureID", OtherKey="WorkplaceNatureID")]
+		public EntitySet<User> User
+		{
+			get
+			{
+				return this._User;
+			}
+			set
+			{
+				this._User.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.WorkplaceNature = this;
+		}
+		
+		private void detach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.WorkplaceNature = null;
 		}
 	}
 	
@@ -451,8 +589,6 @@ namespace AlumniSNSDB
 		
 		private EntitySet<EnrollProgram> _EnrollProgram;
 		
-		private EntitySet<User> _User;
-		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -466,7 +602,6 @@ namespace AlumniSNSDB
 		public EnrollSchool()
 		{
 			this._EnrollProgram = new EntitySet<EnrollProgram>(new Action<EnrollProgram>(this.attach_EnrollProgram), new Action<EnrollProgram>(this.detach_EnrollProgram));
-			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
 			OnCreated();
 		}
 		
@@ -523,19 +658,6 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EnrollSchool_User", Storage="_User", ThisKey="SchoolID", OtherKey="EnrollSchoolID")]
-		public EntitySet<User> User
-		{
-			get
-			{
-				return this._User;
-			}
-			set
-			{
-				this._User.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -563,18 +685,6 @@ namespace AlumniSNSDB
 		}
 		
 		private void detach_EnrollProgram(EnrollProgram entity)
-		{
-			this.SendPropertyChanging();
-			entity.EnrollSchool = null;
-		}
-		
-		private void attach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.EnrollSchool = this;
-		}
-		
-		private void detach_User(User entity)
 		{
 			this.SendPropertyChanging();
 			entity.EnrollSchool = null;
@@ -902,144 +1012,6 @@ namespace AlumniSNSDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkplaceNature")]
-	public partial class WorkplaceNature : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _NatureID;
-		
-		private int _NatureCode;
-		
-		private string _NatureName;
-		
-		private EntitySet<User> _User;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnNatureIDChanging(int value);
-    partial void OnNatureIDChanged();
-    partial void OnNatureCodeChanging(int value);
-    partial void OnNatureCodeChanged();
-    partial void OnNatureNameChanging(string value);
-    partial void OnNatureNameChanged();
-    #endregion
-		
-		public WorkplaceNature()
-		{
-			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int NatureID
-		{
-			get
-			{
-				return this._NatureID;
-			}
-			set
-			{
-				if ((this._NatureID != value))
-				{
-					this.OnNatureIDChanging(value);
-					this.SendPropertyChanging();
-					this._NatureID = value;
-					this.SendPropertyChanged("NatureID");
-					this.OnNatureIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureCode", DbType="Int NOT NULL")]
-		public int NatureCode
-		{
-			get
-			{
-				return this._NatureCode;
-			}
-			set
-			{
-				if ((this._NatureCode != value))
-				{
-					this.OnNatureCodeChanging(value);
-					this.SendPropertyChanging();
-					this._NatureCode = value;
-					this.SendPropertyChanged("NatureCode");
-					this.OnNatureCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NatureName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string NatureName
-		{
-			get
-			{
-				return this._NatureName;
-			}
-			set
-			{
-				if ((this._NatureName != value))
-				{
-					this.OnNatureNameChanging(value);
-					this.SendPropertyChanging();
-					this._NatureName = value;
-					this.SendPropertyChanged("NatureName");
-					this.OnNatureNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="WorkplaceNature_User", Storage="_User", ThisKey="NatureID", OtherKey="WorkplaceNatureID")]
-		public EntitySet<User> User
-		{
-			get
-			{
-				return this._User;
-			}
-			set
-			{
-				this._User.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.WorkplaceNature = this;
-		}
-		
-		private void detach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.WorkplaceNature = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1088,8 +1060,6 @@ namespace AlumniSNSDB
 		
 		private int _EnrollYear;
 		
-		private int _EnrollSchoolID;
-		
 		private int _EnrollProgramID;
 		
 		private System.Nullable<int> _GraduateYear;
@@ -1097,8 +1067,6 @@ namespace AlumniSNSDB
 		private EntityRef<EmployCategory> _EmployCategory;
 		
 		private EntityRef<EnrollProgram> _EnrollProgram;
-		
-		private EntityRef<EnrollSchool> _EnrollSchool;
 		
 		private EntityRef<LiveCity> _LiveCity;
 		
@@ -1152,8 +1120,6 @@ namespace AlumniSNSDB
     partial void OnStudentNoChanged();
     partial void OnEnrollYearChanging(int value);
     partial void OnEnrollYearChanged();
-    partial void OnEnrollSchoolIDChanging(int value);
-    partial void OnEnrollSchoolIDChanged();
     partial void OnEnrollProgramIDChanging(int value);
     partial void OnEnrollProgramIDChanged();
     partial void OnGraduateYearChanging(System.Nullable<int> value);
@@ -1164,7 +1130,6 @@ namespace AlumniSNSDB
 		{
 			this._EmployCategory = default(EntityRef<EmployCategory>);
 			this._EnrollProgram = default(EntityRef<EnrollProgram>);
-			this._EnrollSchool = default(EntityRef<EnrollSchool>);
 			this._LiveCity = default(EntityRef<LiveCity>);
 			this._LiveProvince = default(EntityRef<LiveProvince>);
 			this._WorkplaceNature = default(EntityRef<WorkplaceNature>);
@@ -1211,7 +1176,7 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassWord", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassWord", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string PassWord
 		{
 			get
@@ -1607,30 +1572,6 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollSchoolID", DbType="Int NOT NULL")]
-		public int EnrollSchoolID
-		{
-			get
-			{
-				return this._EnrollSchoolID;
-			}
-			set
-			{
-				if ((this._EnrollSchoolID != value))
-				{
-					if (this._EnrollSchool.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEnrollSchoolIDChanging(value);
-					this.SendPropertyChanging();
-					this._EnrollSchoolID = value;
-					this.SendPropertyChanged("EnrollSchoolID");
-					this.OnEnrollSchoolIDChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnrollProgramID", DbType="Int NOT NULL")]
 		public int EnrollProgramID
 		{
@@ -1739,40 +1680,6 @@ namespace AlumniSNSDB
 						this._EnrollProgramID = default(int);
 					}
 					this.SendPropertyChanged("EnrollProgram");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EnrollSchool_User", Storage="_EnrollSchool", ThisKey="EnrollSchoolID", OtherKey="SchoolID", IsForeignKey=true)]
-		public EnrollSchool EnrollSchool
-		{
-			get
-			{
-				return this._EnrollSchool.Entity;
-			}
-			set
-			{
-				EnrollSchool previousValue = this._EnrollSchool.Entity;
-				if (((previousValue != value) 
-							|| (this._EnrollSchool.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._EnrollSchool.Entity = null;
-						previousValue.User.Remove(this);
-					}
-					this._EnrollSchool.Entity = value;
-					if ((value != null))
-					{
-						value.User.Add(this);
-						this._EnrollSchoolID = value.SchoolID;
-					}
-					else
-					{
-						this._EnrollSchoolID = default(int);
-					}
-					this.SendPropertyChanged("EnrollSchool");
 				}
 			}
 		}

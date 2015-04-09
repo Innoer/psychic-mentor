@@ -48,8 +48,12 @@
                             {% for top in TopColumns -%}
 			                <ul>
                             {% if top.Visible -%}
-				                {% if top.IsSpecialCommand and top.SpecialCommandName == "url" -%} 
+				                {% if top.IsSpecialCommand -%}
+                                    {% if top.SpecialCommandName == "url" -%}
                                     <li><a href="{{ top.SpecialCommandArgument }}" target="_blank" class="dropdown">{{ top.ColumnName }}</a></li>
+                                    {% elsif top.SpecialCommandName == "column" -%}
+                                    <li><a href="/ShowColumn.aspx?ColumnID={{ top.SpecialCommandArgument }}" class="dropdown">{{ top.ColumnName }}</a></li>
+                                    {% endif -%}
                                 {% else -%}
                                     {% if top.ColumnName == "校庆专题" -%}
                                     <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" target="_blank" class="dropdown" style="color: #f7930a;">{{ top.ColumnName }}</a></li>
@@ -74,7 +78,8 @@
                             {% endfor -%}
                         </div>
                         <div class="sign">
-                            <a href="#">注册</a> <a href="#" style="background-color: #485b8f" onclick="showLogin();">登录校友网</a>
+                            <a href="javascript:void(0);" onclick="showSign('#dialog_signup', '#signup_iframe', '/SNS/SignUp.aspx');">注册</a>
+                            <a href="javascript:void(0);" style="background-color: #485b8f" onclick="showSign('#dialog_signin', '#signin_iframe', '/SNS/SignIn.aspx');">登录校友网</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +93,11 @@
     <div id="cover_bg"></div>
     <div class="dialog" id="dialog_signin">
         <p class='loading'>加载中…</p>
-        <iframe id="signin_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        <iframe id="signin_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="display: none;"></iframe>
+    </div>
+    <div class="dialog" id="dialog_signup">
+        <p class='loading'>加载中…</p>
+        <iframe id="signup_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="display: none;"></iframe>
     </div>
 
     {% block otherJS -%}{% endblock -%}

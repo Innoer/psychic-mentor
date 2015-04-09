@@ -21,6 +21,8 @@ namespace Alumni.SNS
             public String LivePlace { get; set; }
         }
 
+        private const int AllCitys = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DBDataContext context = new DBDataContext();
@@ -33,7 +35,7 @@ namespace Alumni.SNS
             int selectedYear = latestEnrollYear;
             int selectedSchool = 1, selectedProgram = 1;
             int selectedCategory = 1;
-            int selectedProvince = 1, selectedCity = 0;
+            int selectedProvince = 1, selectedCity = AllCitys;
             bool querySuccess = true; String queryStatus = "搜索条件不完整，请在左侧补充条件后重新搜索。";
             IQueryable<UserType> queryResult = null;
 
@@ -41,16 +43,16 @@ namespace Alumni.SNS
             if (!int.TryParse(Request.Params["enroll_year"], out selectedYear) || selectedYear < 1988 || selectedYear > latestEnrollYear) querySuccess = false;
             if (!int.TryParse(Request.Params["enroll_program"], out selectedProgram)) querySuccess = false;
             var _program = snsContext.EnrollProgram.FirstOrDefault(p => p.ProgramID == selectedProgram);
-            if (_program == null) querySuccess = false;
+            if (_program == null) { selectedSchool = 1; selectedProgram = 1; querySuccess = false; }
             else selectedSchool = _program.SchoolID;
 
             if (!int.TryParse(Request.Params["employ_category"], out selectedCategory)) querySuccess = false;
             if (!int.TryParse(Request.Params["live_province"], out selectedProvince)) querySuccess = false;
             int.TryParse(Request.Params["live_city"], out selectedCity); // this one is optional
-            if (selectedCity != 0) // but if not all the cities
+            if (selectedCity != AllCitys) // but if not all the cities
             {
                 var _city = snsContext.LiveCity.FirstOrDefault(c => c.CityID == selectedCity);
-                if (_city == null) querySuccess = false;
+                if (_city == null) { selectedProvince = 1; selectedCity = AllCitys; querySuccess = false; }
                 else selectedProvince = _city.ProvinceID;
             }
 
@@ -61,7 +63,7 @@ namespace Alumni.SNS
                                     item.EnrollProgramID == selectedProgram &&
                                     item.EmployCategoryID == selectedCategory &&
                                     item.LiveProvinceID == selectedProvince &&
-                                    (selectedCity != 0 ? item.LiveCityID == selectedCity : true)
+                                    (selectedCity != AllCitys ? item.LiveCityID == selectedCity : true)
                               select new UserType
                               {
                                   UserID = item.UserID,
