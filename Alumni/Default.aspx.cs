@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
@@ -23,11 +24,20 @@ namespace Alumni
             public String Name { get; set; }
             public String Amount { get; set; }
         }
+        private class OrganizationType : DotLiquid.Drop
+        {
+            public String OrganizationName { get; set; }
+            public String OrganizationURL { get; set; }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             DBDataContext context = new DBDataContext();
             SNSDataContext snsContext = new SNSDataContext();
+
+            bool signedIn = true;
+            if (Session["SNS_SignInUserName"] == null || string.IsNullOrEmpty(Session["SNS_SignInUserName"].ToString()))
+                signedIn = false;
 
             var topColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID);
 
@@ -46,6 +56,13 @@ namespace Alumni
                                 Amount = item.Amount
                             };
 
+            var organizations = from item in context.Organizations
+                                select new OrganizationType
+                                {
+                                    OrganizationName = item.OrganizationName,
+                                    OrganizationURL = item.OrganizationURL
+                                };
+
             var today = DateTime.Today;
             var latestEnrollYear = today.Year;
             if (today.Month < 9) latestEnrollYear--;
@@ -63,6 +80,7 @@ namespace Alumni
             var dataToRender = Hash.FromAnonymousObject(
                 new
                 {
+                    IsSignIn = signedIn,
                     TopColumns = topColumns,
 
                     Column = ColumnHelper.GetAllColumns(context).ToDictionary(k => k.ColumnName, v =>
@@ -87,7 +105,10 @@ namespace Alumni
                     LiveProvince = liveProvince.ToList(),
 
                     LinkGetter = new TableGetter<LinkType>(links),
-                    DonationGetter = new TableGetter<DonationType>(donations)
+                    DonationGetter = new TableGetter<DonationType>(donations),
+                    OrganizationGetter = new TableGetter<OrganizationType>(organizations),
+
+                    Logged = Request.IsAuthenticated,
                 });
 
             template.Render(Response.Output, new RenderParameters { LocalVariables = dataToRender });

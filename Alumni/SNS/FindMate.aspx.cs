@@ -27,6 +27,10 @@ namespace Alumni.SNS
         {
             DBDataContext context = new DBDataContext();
             SNSDataContext snsContext = new SNSDataContext();
+
+            bool signedIn = true;
+            if (Session["SNS_SignInUserName"] == null || string.IsNullOrEmpty(Session["SNS_SignInUserName"].ToString()))
+                signedIn = false;
             
             var today = DateTime.Today;
             var latestEnrollYear = today.Year;
@@ -67,9 +71,9 @@ namespace Alumni.SNS
                               select new UserType
                               {
                                   UserID = item.UserID,
-                                  Name = item.Name,
-                                  EmployCategory = item.EmployCategory.CategoryName,
-                                  WorkTitle = item.WorkTitle,
+                                  Name = HttpUtility.HtmlEncode(item.Name),
+                                  EmployCategory = HttpUtility.HtmlEncode(item.EmployCategory.CategoryName),
+                                  WorkTitle = HttpUtility.HtmlEncode(item.WorkTitle),
                                   LivePlace = item.LiveProvince.ProvinceName + (item.LiveCityID.HasValue ? item.LiveCity.CityName : String.Empty),
                               };
             }
@@ -95,6 +99,7 @@ namespace Alumni.SNS
             var dataToRender = Hash.FromAnonymousObject(
                 new
                 {
+                    IsSignIn = signedIn,
                     TopColumns = topColumns,
 
                     LatestEnrollYear = latestEnrollYear,

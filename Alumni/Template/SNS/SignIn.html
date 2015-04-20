@@ -10,6 +10,8 @@
 
     <script type="text/javascript" src="/Template/Common/JS/jquery-1.11.2.min.js"></script>
     <!--[if IE 6]><script type="text/javascript" src="/Template/Common/JS/DD_belatedPNG.js"></script><![endif]-->
+    <script type="text/javascript" src="/Template/Common/JS/jquery-html5Validate.js"></script>
+    <script type="text/javascript" src="/Template/Common/JS/jquery.md5.js"></script>
 
     <link href="/Template/Common/CSS/SNS/SignIn.css" rel="Stylesheet" />
     <script type="text/javascript" src="/Template/Common/JS/Sign.js"></script>
@@ -21,21 +23,60 @@
             <div class="logo"></div>
         </div>
         <div class="form">
+            <form id="login_form">
             <div id="info" style="display: none;"></div>
-            <div class="input" style="margin-top: 20px;"><p>账&nbsp;号</p><input type="text" id="username" /></div>
-            <div class="input"><p>密&nbsp;码</p><input type="password" id="password" /></div>
-            <div class="button"><button type="button" onclick="Signin();">登&ensp;录</button><button type="button" onclick="showSignup();">注&ensp;册</button></div>
+            <div class="input" style="margin-top: 30px;"><p>账&nbsp;号</p><input type="text" id="username" required /></div>
+            <div class="input"><p>密&nbsp;码</p><input type="password" id="password" required /></div>
+            <div class="button"><button type="submit" disabled="disabled">登&ensp;录</button><button type="button" onclick="showSignup();">注&ensp;册</button></div>
+            </form>
         </div>
     </div>
 
     <script language="javascript" type="text/javascript">
+        $(function () {
+            $('#login_form').html5Validate(function () {
+                $("#login_form button").attr('disabled', 'disabled');
+                setSigninInfo("加载中……", { color: "black"});
+
+                $.ajax({
+                    url: '/SNS/AuthenticateUser.ashx',
+                    data: {
+                        username: $("#username").val(),
+                        password: $.md5($("#password").val())
+                    },
+                    type: 'post',
+                    cache: false,
+                    dataType: 'text',
+                    success: function (data) {
+                        $("#login_form button").removeAttr('disabled');
+
+                        switch (parseInt(data)) {
+                            case -2: // invalid argument
+                                setSigninInfo("与服务器通讯失败，请刷新后重试。", { color: "red" });
+                                break;
+
+                            case -1: // wrong username or password
+                                setSigninInfo("用户名或密码错误，请重新输入。", { color: "red" });
+                                break;
+
+                            case 0: // success
+                                setSigninInfo("登陆成功，跳转中……", { color: "green"});
+                                parent.location.reload();
+                                break;
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) { 
+                        $("#login_form button").removeAttr('disabled');
+
+                        setSigninInfo("与服务器通讯失败，请刷新后重试。", { color: "red" });
+                    }
+                });
+            });
+        });
+
         function showSignup() {
             parent.$("#dialog_signin").hide();
             parent.showSign('#dialog_signup', '#signup_iframe', '/SNS/SignUp.aspx');
-        }
-
-        function Signin() {
-            setSigninInfo("test", { color: "red" });
         }
     </script>
 </body>

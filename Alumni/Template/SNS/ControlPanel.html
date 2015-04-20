@@ -1,0 +1,49 @@
+﻿{% extends /Template/General/Layout.html -%} 
+{% block otherCSS -%}
+<link href="/Template/Common/CSS/Child.css" rel="Stylesheet" />
+<link href="/Template/Common/CSS/SNS/Common.css" rel="Stylesheet" />
+
+<style>
+    #container .content .right .content
+    {
+        margin: 10px auto;
+        width: 620px;
+    }
+    #container .content .right .content p { padding-bottom: 10px; }
+</style>
+{% endblock -%}
+
+{% block content -%}
+        <div id="container">
+            <div class="content" style="height: 450px;">
+                <div class="left">
+                    <div class="top">
+                        <div class="title">个人中心</div>
+                        <div class="separator"></div>
+                        <ul> 
+                           <li><a href="/SNS/SMS.aspx">短消息</a></li>
+                           <li><a href="/SNS/ModifyInfo.aspx">修改个人信息</a></li>
+                           <li><a href="/SNS/ModifyPassword.aspx">修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="right">
+                    {% if IsSignIn -%}
+                    <div class="title"><span>个人中心&nbsp;<font color="red">&gt;&gt;</font></span></div>
+                    <div class="content">
+                        <p>请您选择左侧菜单中的链接，以执行您期望的操作。</p>
+                    </div>
+                    {% else -%}
+                    <div class="title"><span>请先登录&nbsp;<font color="red">&gt;&gt;</font></span></div>
+                    <div class="content">
+                        <p>请您点击右上角的“<font color="#485b8f">登录校友网</font>”，以登录至哈尔滨工业大学（威海）校友网。</p>
+                    </div>
+                    {% endif -%}
+                </div>
+            </div>
+            <div class="footer">
+                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.</div>
+            </div>
+        </div>
+{% endblock -%}

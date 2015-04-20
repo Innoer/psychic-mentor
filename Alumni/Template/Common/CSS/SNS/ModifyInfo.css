@@ -1,0 +1,246 @@
+﻿/* Code by Shindo. March, 2015. */
+.detail
+{
+    width: 980px; height: 100%; 
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.detail .info 
+{ 
+    width: 100%; 
+    margin: 15px auto;
+}
+
+.detail .info p 
+{
+    margin: 5px 0 0 30px;
+    color: #0e3b6a; 
+}
+
+.detail .separator
+{
+    background: url(/Template/Common/Image/signup_separator.png) no-repeat;
+    width: 600px; height: 18px;
+    margin: 15px 10px 15px 10px;
+    overflow: hidden;
+}
+
+.detail .separator p 
+{ 
+    margin-left: 65px; 
+    font-size: 18px;
+    line-height: 18px;
+    color: #9096a0;
+}
+
+.detail .clear 
+{ 
+    width: 0; height: 0; 
+    clear: both; 
+    overflow: hidden;
+}
+
+.detail .input 
+{
+    height: 30px;
+    margin-left: 40px;
+    position: relative;
+    float: left;
+}
+
+.detail .input p 
+{ 
+    width: 80px; height: 24px;
+    display: block;
+    float: left;
+    line-height: 24px;
+    vertical-align: middle;
+    color: #627a9f; 
+}
+
+.detail .input .text
+{
+    border: 1px solid #c9d0da;
+    width: 200px; height: 24px;
+    float: left;
+    line-height: 24px;
+    vertical-align: middle;
+    text-indent: 10px;
+    color: #627a9f; 
+    font-family: "Microsoft YaHei";
+}
+
+.detail .input .select_wrapper
+{
+    width: 200px; height: 24px;
+    float: left;
+}
+
+.detail .input .select_wrapper_small
+{
+    width: 100px; height: 24px;
+    float: left;
+}
+
+.detail .input .radio 
+{
+    height: 24px; 
+    float: left;
+}
+
+.detail .input span
+{
+    width: 38px; height: 24px;
+    margin-left: 5px;
+    display: block;
+    float: left;
+    line-height: 24px;
+    vertical-align: middle;
+    color: #627a9f; 
+}
+
+.detail .short 
+{
+    float: left;
+    width: 300px;
+}
+
+.detail .long
+{
+    float: left;
+    width: 640px;
+}
+
+.detail .long .text
+{
+    width: 540px;
+}
+
+/* SelectBox CSS */
+.sbHolder
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	position: relative;
+	width: 200px;
+}
+
+.sbHolderSmall
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	position: relative;
+	width: 100px;
+}
+
+.form .sbHolder { height: 32px; }
+.detail .sbHolder, .detail .sbHolderSmall { height: 24px; }
+
+.sbSelector
+{
+	display: block;
+	left: 0;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 170px;
+}
+
+.sbSelectorSmall
+{
+	display: block;
+	left: 0;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 70px;
+}
+
+.form .sbSelector { height: 32px; line-height: 32px; }
+.detail .sbSelector, .detail .sbSelectorSmall { height: 24px; line-height: 24px; }
+
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover,
+.sbSelectorSmall:link, .sbSelectorSmall:visited, .sbSelectorSmall:hover
+{
+	color: #627a9f;
+	outline: none;
+	text-decoration: none;
+}
+
+.sbToggle
+{
+	background: url(/Template/Common/Image/select-icons.jpg) 0 -116px no-repeat;
+	display: block;
+	outline: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 30px;
+}
+.sbToggle:hover { background: url(/Template/Common/Image/select-icons.jpg) 0 -167px no-repeat; }
+.sbToggleOpen { background: url(/Template/Common/Image/select-icons.jpg) 0 -16px no-repeat; }
+.sbToggleOpen:hover { background: url(/Template/Common/Image/select-icons.jpg) 0 -66px no-repeat; }
+
+.form .sbToggle { height: 32px; }
+.detail .sbToggle { height: 24px; }
+
+.sbOptions
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 200px;
+	z-index: 1;
+	overflow-y: auto;
+}
+
+.sbOptionsSmall
+{
+	background-color: white;
+	border: solid 1px #c9d0da;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 100px;
+	z-index: 1;
+	overflow-y: auto;
+}
+
+.sbOptions a, .sbOptionsSmall a
+{
+	color: #627a9f;
+    border-bottom: dotted 1px #515151;
+	display: block;
+	outline: none;
+	padding: 3px 10px 3px 10px;
+	font-size: 14px;
+	line-height: 18px;
+}
+.sbOptions a:link, .sbOptions a:visited,
+.sbOptionsSmall a:link, .sbOptionsSmall a:visited
+{
+	color: #627a9f;
+	text-decoration: none;
+}
+.sbOptions a:hover, .sbOptionsSmall a:hover,
+.sbOptions a:focus, .sbOptionsSmall a:focus,
+.sbOptions a.sbFocus, .sbOptionsSmall a.sbFocus
+{
+    background-color: #627a9f; 
+	color: white;
+}
+.sbOptions li.last a, .sbOptionsSmall li.last a { border-bottom: none; }
+.sbOptions .sbSub, .sbOptionsSmall .sbSub { padding-left: 17px; }

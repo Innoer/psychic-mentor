@@ -20,10 +20,11 @@ function fixZIndex(target) {
     }
 }
 
-function setSigninInfo(info, css) {
+function setSigninInfo(content, css) {
     var info = parent.$("#signin_iframe").contents().find("#info");
     info.css(css);
-    info.html(info);
+    info.html(content);
+    info.show();
     
     parent.$("#signin_iframe").contents().find(".input").eq(0).css("marginTop", "10px");
 }

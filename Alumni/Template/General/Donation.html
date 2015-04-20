@@ -27,7 +27,7 @@
                     <div class="title"><span>{{ ThisColumn.ColumnName }}&nbsp;<font color="red">&gt;&gt;</font></span></div>
                     <ul>
                         {% for item in DonationGetter.Take[Pager.ArticlesPerPage].Result -%}
-                            <li>{{ item.Name }}&ensp;{{ item.Amount }}</li>
+                            <li>{{ item.Name }}&ensp;{{ item.Amount }}&ensp;{{ item.Date | Date: "yyyy-MM-dd" }}</li>
                         {% endfor -%}
                      </ul>
                      <div class="pager">

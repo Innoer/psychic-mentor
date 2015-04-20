@@ -1,6 +1,6 @@
 /*
 	Background Stretcher jQuery Plugin
-	© 2011 ajaxBlender.com
+	?2011 ajaxBlender.com
 	For any questions please visit www.ajaxblender.com 
 	or email us at support@ajaxblender.com
 	
@@ -295,7 +295,7 @@
 				code = '<div id="' + settings.imageContainer + '" class="bgstretcher"><ul>';
 				// if swf
 				if (settings.images.length) {
-					var ext = settings.images[0].split('.');
+					var ext = settings.images[0].src.split('.');
 					ext = ext[ext.length-1];
 					
 					if (ext != 'swf') {
@@ -305,13 +305,13 @@
 								ind = settings.images.length-1-i;
 									else ind = i;
 							if ($.fn.bgStretcher.settings.preloadImg) {
-									code += '<li><span class="image-path">' + settings.images[ind] + '</span></li>';
+									code += '<li><span class="image-path">' + settings.images[ind].src + '</span></li>';
 								} else {
-									code += '<li class="img-loaded"><img src="' + settings.images[ind] + '" alt="" /></li>';
+									code += '<li class="img-loaded"><img src="' + settings.images[ind].src + '" alt="" image-index="' + ind + '" /></li>';
 								}		
 						}
 					} else {
-						code += '<li class="swf-mode">' + settings.images[0] + '</li>';	
+						code += '<li class="swf-mode">' + settings.images[0].src + '</li>';	
 					}
 				}
 				
@@ -432,7 +432,10 @@
 		// callback
 		if ($.fn.bgStretcher.settings.callbackfunction) {
 			if(typeof $.fn.bgStretcher.settings.callbackfunction == 'function')
-					$.fn.bgStretcher.settings.callbackfunction.call();
+            {
+                var index = parseInt(next.children().eq(0).attr('image-index'), 10);
+				$.fn.bgStretcher.settings.callbackfunction.call(next, index, $.fn.bgStretcher.settings.images[index].data);
+            }
 		}	
 		
 		if(!_bgStretcherPause){

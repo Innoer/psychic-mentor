@@ -68,7 +68,7 @@
                 </div>
                 <input type="hidden" name="Step" value="2" />
                 <div class="button">
-                    <button type="submit" style="margin-left: 90px; _margin-left: 45px;" disabled>注册校友网</button>
+                    <button type="submit" style="margin-left: 90px; _margin-left: 45px;" disabled="disabled">注册校友网</button>
                 </div>
             </form>
         </div>
@@ -87,9 +87,9 @@
                 <div class="clear"></div>
                 <div class="input short">
                     <p>性&emsp;&emsp;别&nbsp;<font color="red">*</font></p>
-                    <input type="radio" class="radio" name="sex" value="1" checked="checked" /><span>男</span>
+                    <input type="radio" class="radio" name="sex" value="1" /><span>男</span>
                     <input type="radio" class="radio" name="sex" value="2" /><span>女</span>
-                    <input type="radio" class="radio" name="sex" value="0" required /><span>保密</span>
+                    <input type="radio" class="radio" name="sex" value="0" checked="checked" required /><span>保密</span>
                 </div>
                 <div class="clear"></div>
                 <div class="input short">
@@ -210,7 +210,7 @@
                 <div class="clear"></div>
                 <input type="hidden" name="Step" value="3" />
                 <div class="button">
-                    <button type="submit" style="margin-left: 70px; background-color: #1a5e8e;" disabled>保存资料</button>
+                    <button type="submit" style="margin-left: 70px; background-color: #1a5e8e;" disabled="disabled">保存资料</button>
                     <button type="button" style="margin-left: 30px; background-color: #437be7;" onclick="showLogin();">以后完善</button>
                 </div>
             </form>
@@ -308,8 +308,8 @@
                         return false;
                     }
 
-                    if (!/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z ]){3,40}$/.test($("#name").val())) {
-                        $("#name").testRemind("只能包含汉字、字母和空格，且长度为3至40位！");
+                    if (!/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z ]){2,40}$/.test($("#name").val())) {
+                        $("#name").testRemind("只能包含汉字、字母和空格，且长度为2至40位！");
                         return false;
                     }
 
@@ -325,6 +325,9 @@
         function showLogin() {
             parent.$("#dialog_signup").hide();
             parent.showSign('#dialog_signin', '#signin_iframe', '/SNS/SignIn.aspx');
+            parent.$("#signin_iframe").load(function() {
+                setSigninInfo("您已注册成功，请登录。", { color: "green" });
+            });
         }
        
         $(function () {
@@ -347,7 +350,22 @@
             $("#live_province").selectbox({ classHolder: 'sbHolderSmall', classSelector: 'sbSelectorSmall', classOptions: 'sbOptionsSmall' });
             $("#live_city").selectbox({ classHolder: 'sbHolderSmall', classSelector: 'sbSelectorSmall', classOptions: 'sbOptionsSmall' });
 
-            $('#detail_form').html5Validate();
+            $('#detail_form').html5Validate(function() {
+                // show loading
+                parent.$("#signup_iframe").hide();
+                parent.$("#dialog_signup p").show();
+
+                this.submit();
+            }, {
+                validate: function () {
+                    if (!/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z ]){2,40}$/.test($("#name").val())) {
+                        $("#name").testRemind("只能包含汉字、字母和空格，且长度为2至40位！");
+                        return false;
+                    }
+                    
+                    return true;
+                }
+            });
         });
 
         function enrollYearChange(val) {

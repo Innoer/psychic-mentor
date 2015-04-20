@@ -13,7 +13,7 @@ body
 {
     font: 14px/18px "Microsoft YaHei";
     font-weight: 400;
-    width: 400px; height: 330px;
+    width: 400px; height: 350px;
     background-color: white;
     behavior: url(/Template/Common/JS/csshover3.htc);
     overflow: hidden;

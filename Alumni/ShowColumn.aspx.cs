@@ -30,6 +30,10 @@ namespace Alumni
         {
             DBDataContext context = new DBDataContext();
 
+            bool signedIn = true;
+            if (Session["SNS_SignInUserName"] == null || string.IsNullOrEmpty(Session["SNS_SignInUserName"].ToString()))
+                signedIn = false;
+
             int columnID, pageID = 1;
             ColumnItem column = null;
 
@@ -71,6 +75,7 @@ namespace Alumni
                 var dataToRender = Hash.FromAnonymousObject(
                     new
                     {
+                        IsSignIn = signedIn,
                         TopColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID),
  
                         ThisColumn = column,

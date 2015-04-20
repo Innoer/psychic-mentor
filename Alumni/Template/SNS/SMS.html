@@ -1,0 +1,146 @@
+﻿{% extends /Template/General/Layout.html -%} 
+{% block otherCSS -%}
+<link href="/Template/Common/CSS/Child.css" rel="Stylesheet" />
+<link href="/Template/Common/CSS/SNS/Common.css" rel="Stylesheet" />
+<link href="/Template/Common/CSS/SNS/SMS.css" rel="Stylesheet" />
+
+<script type="text/javascript" src="/Template/Common/JS/jquery-html5Validate.js"></script>
+<script type="text/javascript" src="/Template/Common/JS/jquery.md5.js"></script>
+
+<style>
+    
+</style>
+{% endblock -%}
+
+{% block content -%}
+    <div id="container">
+            <div class="content" style="background-color: rgb(240, 240, 240);">
+                <div class="left">
+                    <div class="top">
+                        <div class="title">个人中心</div>
+                        <div class="separator"></div>
+                        <ul> 
+                           <li><a href="/SNS/SMS.aspx">短消息</a></li>
+                           <li><a href="/SNS/ModifyInfo.aspx">修改个人信息</a></li>
+                           <li><a href="/SNS/ModifyPassword.aspx">修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="right" style="background-color: white;">
+                    <div class="title"><span>短消息&nbsp;<font color="red">&gt;&gt;</font></span></div>
+                    <div class="content">
+                        <div class="box" style="border-bottom: 1px solid #1a5e8e;">
+                            <a href="/SNS/SMS.aspx?Method=Inbox" {% if Method == "Inbox" %}class="selected"{% endif %}>收件箱</a>
+                            <a href="/SNS/SMS.aspx?Method=Outbox" {% if Method == "Outbox" %}class="selected"{% endif %}>发件箱</a>
+                            {% if Method == "Send" %}<a href="/SNS/SMS.aspx?Method=Send" class="selected">发消息</a>{% endif %}
+                        </div>
+                        {% if Method == "Send" -%}
+                            <div class="send">
+                                <form id="send_message" action="/SNS/SMSSend.aspx" method="post">
+                                    <p><b>收件人：</b>{{ Name }}</p>
+                                    <p><b>内容：</b></p>
+                                    <p><textarea name="content" cols="74" rows="12" wrap="hard" id="send_content" required maxlength="200"></textarea></p>
+                                    <input type="hidden" value="{{ UserID }}" name="userid" />
+                                    <button type="submit">发送</button>
+                                </form>
+                            </div>
+                        {% else -%}
+                            <div id="message_table">
+                                <p>共有 {{ Message.Count }} 条短消息。</p>
+                                {% if Message.Count > 0 -%}
+                                <table id="message_result" cellpadding="0" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>{% if Method == "Inbox" %}发件人{% else %}收件人{% endif %}</th>
+                                            <th>内容</th><th>时间</th>
+                                            <!--<th style="text-align: center;">{% if Method == "Inbox" %}回复{% else %}再发{% endif %}</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in Message.Result -%}
+                                        <tr data="{{ item.UserID }}">
+                                            <td data="{{ item.Name | StripHtml }}">{{ item.Name | StripHtml | Truncate: 5, '…' }}</td><td data="{{ item.Content | StripHtml }}">{{ item.Content | StripHtml | Truncate: 25, '…' }}</td><td>{{ item.Date | Date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                                            <!--<td style="text-align: center;" data="{{ item.UserID }}"><a href="/SNS/SMS.aspx?Method=Send&UserID={{ item.UserID }}" title="发送短消息"><img class="icon_sms" src="/Template/Common/Image/SMS.png" /></a></td>-->
+                                        </tr>
+                                    {% endfor -%}
+                                    </tbody>
+                                </table>
+                                {% endif -%}
+                            </div>
+
+                            <div id="message_detail" style="display: none;">
+                                <p><b>{% if Method == "Inbox" %}发件人：{% else %}收件人：{% endif %}</b><span id="message_name"></span></p>
+                                <p><b>时间：</b><span id="message_date"></span></p>
+                                <p><b>内容：</b></p>
+                                <p id="message_content"></p>
+
+                                <div class="box" style="margin-top: 10px; border-top: 1px solid #1a5e8e;">
+                                    <a href="javascript:void(0);" onclick="back();">返回</a>
+                                    {% if Method == "Inbox" %}<a id="message_reply">回复</a>{% endif %}
+                                </div>
+                            </div>
+                        {% endif -%}
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.</div>
+            </div>
+        </div>
+{% endblock -%}
+
+{% block otherJS -%}
+<script language="javascript" type="text/javascript">
+    function back() {
+        $("#message_detail").hide();
+        $("#message_table").show();
+    }
+
+    $(function () {
+        $("#send_message").html5Validate(function () {
+            this.submit();
+        });
+
+        $("#message_result tr:nth-child(even)").css("background-color", "#f3f9ff");
+
+        $("#message_result tbody tr:nth-child(odd)").hover(function () {
+            $(this).css({ backgroundColor: "#b8cceb", cursor: "pointer" });
+        }, function () {
+            $(this).css({ backgroundColor: "white", cursor: "default" });
+        });
+
+        $("#message_result tbody tr:nth-child(even)").hover(function () {
+            $(this).css({ backgroundColor: "#b8cceb", cursor: "pointer" });
+        }, function () {
+            $(this).css({ backgroundColor: "#f3f9ff", cursor: "default" });
+        });
+
+        $("#message_result tbody tr").click(function () {
+            $("#message_table").hide();
+            $("#message_detail").show();
+
+            var userid = $(this).attr('data');
+            var name = $(this).children().eq(0).attr('data');
+            var content = $(this).children().eq(1).attr('data');
+            var date = $(this).children().eq(2).html();
+
+            $("#message_name").html(name);
+            $("#message_date").html(date);
+            $("#message_content").html(content);
+            $("#message_reply").attr('href', '/SNS/SMS.aspx?Method=Send&UserID=' + userid);
+        });
+
+        $("#select_all").change(function () {
+            if (this.checked)
+                $("input[name='del_msg']").each(function () {
+                    this.checked = true;
+                });
+            else
+                $("input[name='del_msg']").each(function () {
+                    this.checked = false;
+                });
+        });
+    });
+</script>
+{% endblock -%}

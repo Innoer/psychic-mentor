@@ -75,8 +75,8 @@
                                 <tbody>
                                 {% for item in Query.Result -%}
                                     <tr>
-                                        <td>{{ item.Name }}</td><td>{{ item.EmployCategory }}</td><td>{{ item.WorkTitle }}</td><td>{{ item.LivePlace }}</td>
-                                        <td style="text-align: center;"><a href="/SNS/SendSMS.aspx?User={{ item.UserID }}" title="发送短消息"><img class="icon_sms" src="/Template/Common/Image/SMS.png" /></a></td>
+                                        <td>{{ item.Name | StripHtml }}</td><td>{{ item.EmployCategory | StripHtml }}</td><td>{{ item.WorkTitle | StripHtml }}</td><td>{{ item.LivePlace | StripHtml }}</td>
+                                        <td style="text-align: center;"><a href="/SNS/SMS.aspx?Method=Send&UserID={{ item.UserID }}" title="发送短消息"><img class="icon_sms" src="/Template/Common/Image/SMS.png" /></a></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

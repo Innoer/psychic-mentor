@@ -242,9 +242,10 @@ body
 #dialog_signin, #signin_iframe
 {
     position: fixed;
-    width: 400px; height: 330px;
+    _position: absolute; /* fix for ie6 */
+    width: 400px; height: 350px;
 }
-#dialog_signin .loading { line-height: 330px; }
+#dialog_signin .loading { line-height: 350px; }
 
 #dialog_signup, #signup_iframe
 { 
@@ -252,3 +253,46 @@ body
     width: 800px; height: 450px;
 }
 #dialog_signup .loading { line-height: 450px; }
+
+.service 
+{ 
+    width:40px; height:200px; 
+    background:url(/Template/Common/Image/service.png) no-repeat; 
+    position:fixed; 
+    right:0px; 
+    top:200px;
+    z-index: 9999;
+}
+.service ul 
+{ 
+    display:block; 
+    width:160px; height:200px; 
+    float:left; 
+    position:relative;
+}
+.service ul .right_bar
+{
+    position:absolute;
+    width:40px; height:200px; 
+    left:0; top:0; 
+    display:block;
+}
+.service ul .right_qq
+{ 
+    position:absolute; 
+    width:120px; height:85px; 
+    right:0; top:0; 
+    display:block;
+}
+.service ul .right_phone
+{ 
+    position:absolute; width:120px; height:105px; 
+    padding-top:10px;
+    right:0; bottom:0; 
+    display:block; 
+    text-align:center; 
+    color:#555; 
+    font-size:16px; 
+    font-family:'Microsoft Yahei'; 
+    text-decoration:none;
+}

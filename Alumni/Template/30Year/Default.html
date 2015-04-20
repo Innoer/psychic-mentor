@@ -23,16 +23,16 @@
             <div class="container">
                 <div class="inner">
                     <ul class="listArticle">
-                        {% for item in SubColumn['校庆活动公告'].ArticleGetter.Take[5].Result -%}
+                        {% for item in SubColumn['活动公告'].ArticleGetter.Take[5].Result -%}
                         <li><a href="/ShowArticle.aspx?ArticleID={{ item.ArticleID }}">{{ item.Title }}</a></li>
                         {% endfor -%}
                     </ul>
                 </div>
-            <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['校庆活动公告'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+            <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['活动公告'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
             </div>
         </div>
 
-        <div class="box2">{% assign articles = SubColumn['校庆新闻动态'].ArticleGetter.Take[2].ResultList -%}
+        <div class="box2">{% assign articles = SubColumn['新闻动态'].ArticleGetter.Take[2].ResultList -%}
             <img alt="新闻动态" class="icon" src="/Template/Common/Image/30news.png" />
             <div class="container">
                 <div class="inner">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['校庆新闻动态'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
+            <a href="/ShowColumn.aspx?ColumnID={{ SubColumn['新闻动态'].ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
         </div>
 </div>
 

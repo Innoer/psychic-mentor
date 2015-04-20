@@ -1,0 +1,99 @@
+﻿/* Code by Shindo. April, 2015. */
+#container .content .left .top
+{
+    width: 100%; height: 380px; 
+}
+
+#container .content .left .top .title
+{
+    width: 100%;
+    padding: 45px 0 5px 0;
+    margin-left: 15px;
+    color: #647160;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#container .content .left .top ul { list-style: none; }
+#container .content .left .top li 
+{
+    margin-left: 15px;
+    width: 270px; height: 40px;
+    border-bottom: 1px dashed #e1e2e1;
+    overflow: hidden;
+}
+
+#container .content .left .top li a
+{
+    display: block;
+    padding-top: 6px;
+    overflow: hidden;
+    margin-left: 20px;
+    font-size: 15px;
+    line-height: 45px;
+    color: #17588d;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#container .content .left .bottom p
+{
+    width: 100%; height: 45px;
+    margin-left: 15px;
+    color: #647160;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#container .content li a:hover { text-decoration: underline; }
+
+#container .content .right .title
+{
+    width: 620px; height: 110px;
+    background: url(/Template/Common/Image/build.gif) no-repeat right bottom;
+    margin: 0 auto;
+    border-bottom: 2px solid #ececec;
+    position: relative;
+}
+
+#container .content .right .title span
+{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.wrapper 
+{
+    width: 100%; height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+/* Common */
+.button
+{
+    width: 100%; height: 40px;
+    padding-top: 20px;
+}
+
+.button button
+{
+    width: 200px; height: 100%;
+    display: block;
+    float: left;
+    background-color: #417ed8;
+    border: 0px;
+    color: white;
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+    
+    /* remove blur */
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+.button button:hover { cursor: pointer; }

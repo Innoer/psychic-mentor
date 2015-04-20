@@ -16,6 +16,7 @@ namespace Alumni
         {
             public String Name { get; set; }
             public String Amount { get; set; }
+            public DateTime Date { get; set; }
         }
 
         private class PagerType : DotLiquid.Drop
@@ -36,6 +37,10 @@ namespace Alumni
         {
             DBDataContext context = new DBDataContext();
 
+            bool signedIn = true;
+            if (Session["SNS_SignInUserName"] == null || string.IsNullOrEmpty(Session["SNS_SignInUserName"].ToString()))
+                signedIn = false;
+
             int pageID = 1;
             ColumnItem column = ColumnHelper.GetColumnByID(context, 30);
 
@@ -53,7 +58,8 @@ namespace Alumni
                             select new DonationType
                             {
                                 Name = item.Name,
-                                Amount = item.Amount
+                                Amount = item.Amount,
+                                Date = item.Date
                             };
 
                 var subColumns = ColumnHelper.GetSubColumnsByID(context, column.ColumnID);
@@ -71,6 +77,7 @@ namespace Alumni
                 var dataToRender = Hash.FromAnonymousObject(
                     new
                     {
+                        IsSignIn = signedIn,
                         TopColumns = ColumnHelper.GetSubColumnsByID(context, SharedConfig.TopLevelParentID),
 
                         ThisColumn = column,

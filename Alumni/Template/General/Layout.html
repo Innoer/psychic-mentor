@@ -55,7 +55,7 @@
                                     <li><a href="/ShowColumn.aspx?ColumnID={{ top.SpecialCommandArgument }}" class="dropdown">{{ top.ColumnName }}</a></li>
                                     {% endif -%}
                                 {% else -%}
-                                    {% if top.ColumnName == "校庆专题" -%}
+                                    {% if top.ColumnName == "30周年活动" -%}
                                     <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" target="_blank" class="dropdown" style="color: #f7930a;">{{ top.ColumnName }}</a></li>
                                     {% else -%} 
                                     <li><a href="/ShowColumn.aspx?ColumnID={{ top.ColumnID }}" class="dropdown">{{ top.ColumnName }}</a></li>
@@ -65,10 +65,12 @@
                                 {% if top.SubColumns.size > 0 -%}
                                     <li class="sublinks">
                                     {% for child in top.SubColumns -%}
+                                        {% if child.Visible -%}
                                         {% if child.IsSpecialCommand and child.SpecialCommandName == "url" -%}
                                             <a href="{{ child.SpecialCommandArgument }}">{{ child.ColumnName }}</a>
                                         {% else -%}
                                             <a href="/ShowColumn.aspx?ColumnID={{ child.ColumnID }}">{{ child.ColumnName }}</a>
+                                        {% endif -%}
                                         {% endif -%}
                                     {% endfor -%}
                                     </li>
@@ -78,8 +80,13 @@
                             {% endfor -%}
                         </div>
                         <div class="sign">
+                            {% if IsSignIn -%}
+                            <a href="/SNS/SignOut.aspx" title="登出">登出</a>
+                            <a href="/SNS/ControlPanel.aspx" style="background-color: #485b8f" title="个人中心">个人中心</a>
+                            {% else -%}
                             <a href="javascript:void(0);" onclick="showSign('#dialog_signup', '#signup_iframe', '/SNS/SignUp.aspx');">注册</a>
                             <a href="javascript:void(0);" style="background-color: #485b8f" onclick="showSign('#dialog_signin', '#signin_iframe', '/SNS/SignIn.aspx');">登录校友网</a>
+                            {% endif -%}
                         </div>
                     </div>
                 </div>
@@ -98,6 +105,14 @@
     <div class="dialog" id="dialog_signup">
         <p class='loading'>加载中…</p>
         <iframe id="signup_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="display: none;"></iframe>
+    </div>
+
+    <div class="service">
+        <ul>
+            <span class="right_bar"></span>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=2381805381&site=qq&menu=yes" class="right_qq" target="_blank"></a>
+            <span class="right_phone">0631-5687959</span>
+        </ul>
     </div>
 
     {% block otherJS -%}{% endblock -%}

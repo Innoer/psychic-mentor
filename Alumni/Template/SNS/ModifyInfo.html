@@ -1,0 +1,250 @@
+﻿{% extends /Template/General/Layout.html -%} 
+{% block otherCSS -%}
+<link href="/Template/Common/CSS/Child.css" rel="Stylesheet" />
+<link href="/Template/Common/CSS/SNS/Common.css" rel="Stylesheet" />
+<link href="/Template/Common/CSS/SNS/ModifyInfo.css" rel="Stylesheet" />
+
+<script type="text/javascript" src="/Template/Common/JS/jquery.selectbox-0.2-modifyinfo.js"></script>
+<script type="text/javascript" src="/Template/Common/JS/jquery-html5Validate.js"></script>
+<script type="text/javascript" src="/Template/Common/JS/Sign.js"></script>
+<script type="text/javascript" src="/Template/Common/JS/SNS.js"></script>
+{% endblock -%}
+
+{% block content -%}
+        <div id="container">
+            <div class="content" style="height: 750px;">
+                <div class="left">
+                    <div class="top">
+                        <div class="title">个人中心</div>
+                        <div class="separator"></div>
+                        <ul> 
+                           <li><a href="/SNS/SMS.aspx">短消息</a></li>
+                           <li><a href="/SNS/ModifyInfo.aspx">修改个人信息</a></li>
+                           <li><a href="/SNS/ModifyPassword.aspx">修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <div class="title"><span>修改个人信息&nbsp;<font color="red">&gt;&gt;</font></span></div>
+                    <div class="content" style="height: 630px; width: 700px;">
+                         <div class="detail">
+                            <form id="detail_form" method="post" action="/SNS/ModifyInfo.aspx">
+                                {% if RequestModify -%}
+                                    {% if ModifySuccess -%}
+                                    <div class="info"><p style="color: green;">个人信息修改成功！</p></div>
+                                    {% else -%}
+                                    <div class="info"><p style="color: red;">个人信息修改失败，请检查您输入数据的格式是否正确。</p></div>
+                                    {% endif -%}
+                                {% endif -%}
+                                <div class="separator"><p>基&ensp;本&ensp;资&ensp;料</p></div>
+                                <div class="input short"><p>姓&emsp;&emsp;名&nbsp;<font color="red">*</font></p><input type="text" class="text" name="name" id="name" value="{{ Name }}" required /></div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>性&emsp;&emsp;别&nbsp;<font color="red">*</font></p>
+                                    <input type="radio" class="radio" name="sex" value="1" {% if Sex == 1 %}checked="checked"{% endif %} /><span>男</span>
+                                    <input type="radio" class="radio" name="sex" value="2" {% if Sex == 2 %}checked="checked"{% endif %} /><span>女</span>
+                                    <input type="radio" class="radio" name="sex" value="0" required {% if Sex == 0 %}checked="checked"{% endif %} /><span>保密</span>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>生&emsp;&emsp;日</p>
+                                    <input type="date" class="text" name="birth_date" id="birth_date" value="{{ BirthDate | Date: 'yyyy-MM-dd' }}" />
+                                </div>
+                                <div class="input short" style="margin-left: 10px;"><p style="width: 300px;">格式：yyyy-MM-dd，如1987-12-23</p></div>
+                                <div class="clear"></div>
+
+                                <div class="separator"><p>联&ensp;系&ensp;方&ensp;式</p></div>
+                                <div class="input short">
+                                    <p>所在城市&nbsp;<font color="red">*</font></p>
+                                    <div class="select_wrapper_small">
+                                        <select name="live_province" id="live_province" onchange="liveProvinceChange();">
+                                        {% for item in LiveProvince -%}
+                                            <option value="{{ item.ID }}" {% if item.ID == LiveProvinceID %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                                        {% endfor -%}
+                                        </select>
+                                    </div>
+                                    <div class="select_wrapper_small"><select name="live_city" id="live_city"></select></div>
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>固定电话</p><input type="number" class="text" name="fixed_phone" id="fixed_phone" maxlength="20" value="{{ FixedPhone }}" />
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>行业类别&nbsp;<font color="red">*</font></p>
+                                    <div class="select_wrapper">
+                                        <select name="employ_category" id="employ_category">
+                                        {% for item in EmployCategory -%}
+                                            <option value="{{ item.ID }}" {% if item.ID == EmployCategoryID %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                                        {% endfor -%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>手&emsp;&emsp;机</p><input type="number" class="text" name="mobile_phone" id="mobile_phone" maxlength="20" value="{{ MobilePhone }}" />
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>单位性质</p>
+                                    <div class="select_wrapper">
+                                        <select name="workplace_nature" id="workplace_nature">
+                                        {% for item in WorkplaceNature -%}
+                                            <option value="{{ item.ID }}" {% if item.ID == WorkplaceNatureID %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                                        {% endfor -%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>邮&emsp;&emsp;箱</p><input type="email" class="text" name="email" id="email" maxlength="90" value="{{ EMail }}" />
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>单位名称</p><input type="text" class="text" name="workplace_name" id="workplace_name" maxlength="90" value="{{ WorkplaceName }}" />
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>腾讯&ensp;QQ</p><input type="number" class="text" name="qqno" id="qqno" maxlength="20" value="{{ QQNo }}" />
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>担任职务</p><input type="text" class="text" name="worktitle" id="worktitle" maxlength="40" value="{{ WorkTitle }}" />
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>微&ensp;信&ensp;号</p><input type="text" class="text" name="wechatid" id="wechatid" maxlength="40" value="{{ WeChatID }}" />
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input long">
+                                    <p>通信地址</p><input type="text" class="text" name="mailing_address" id="mailing_address" maxlength="100" value="{{ MailingAddress }}" />
+                                </div>
+
+                                <div class="clear"></div>
+                                <div class="separator"><p>在&ensp;校&ensp;信&ensp;息</p></div>
+                                <div class="input short">
+                                    <p>班&emsp;&emsp;号</p>
+                                    <input type="text" class="text" name="classno" id="classno" maxlength="15" value="{{ ClasSnO }}" />
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>学&emsp;&emsp;号</p><input type="text" class="text" name="studentno" id="studentno" maxlength="25" value="{{ StudentNo }}" />
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>入学时间<font color="red">*</font></p>
+                                    <div class="select_wrapper">
+                                        <select name="enroll_year" id="enroll_year">
+                                        {% for i in (1988...LatestEnrollYear) reversed -%}
+                                            <option value="{{ i }}" {% if i == EnrollYear %}selected="selected"{% endif %}>{{ i }}</option>
+                                        {% endfor -%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>毕业时间</p>
+                                    <div class="select_wrapper">
+                                        <select name="graduate_year" id="graduate_year">
+                                        {% for i in (1988...LatestGraduateYear) reversed -%}
+                                            <option value="{{ i }}" {% if i == GraduteYear %}selected="selected"{% endif %}>{{ i }}</option>
+                                        {% endfor -%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="input short">
+                                    <p>学&emsp;&emsp;院<font color="red">*</font></p>
+                                    <div class="select_wrapper">
+                                        <select name="enroll_school" id="enroll_school" onchange="enrollSchoolChange();">
+                                        {% for item in EnrollSchool -%}
+                                            <option value="{{ item.ID }}" {% if item.ID == EnrollSchoolID %}selected="selected"{% endif %}>{{ item.Name }}</option>
+                                        {% endfor -%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input short" style="margin-left: 40px;">
+                                    <p>专&emsp;&emsp;业<font color="red">*</font></p>
+                                    <div class="select_wrapper"><select name="enroll_program" id="enroll_program"></select></div>
+                                </div>
+
+                                <div class="clear"></div>
+                                <input type="hidden" name="DoModify" value="1" />
+                                <div class="button">
+                                    <button type="submit" style="margin-left: 70px; background-color: #1a5e8e;" disabled="disabled">保存资料</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div style="display: none;">
+                            <select id="programData">
+                                {% for item in EnrollProgram -%}
+                                <option value="{{ item.ID }}" schoolID="{{ item.SchoolID }}">{{ item.Name }}</option>
+                                {% endfor -%}
+                            </select>
+
+                            <select id="cityData">
+                                {% for item in LiveCity -%}
+                                <option value="{{ item.ID }}" provinceID="{{ item.ProvinceID }}">{{ item.Name }}</option>
+                                {% endfor -%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="content">版权所有© 哈尔滨工业大学(威海) All rights reserved.</div>
+            </div>
+        </div>
+{% endblock -%}
+
+{% block otherJS %}
+<script language="javascript" type="text/javascript">
+        $(function () {
+            OBJREG.DATE = "^[1|2]\\d{3}\\-[0|1]?\\d\\-[0-3]?\\d$";
+
+            setProgramBySchool({{ EnrollSchoolID }}, {{ EnrollProgramID }});
+            setCityByProvince({{ LiveProvinceID }}, {{ LiveCityID }});
+
+            $("#enroll_year").selectbox({
+                onChange: function(val, inst) {
+                    enrollYearChange(val);
+                }
+            });
+            $("#graduate_year").selectbox();
+            $("#employ_category").selectbox();
+            $("#workplace_nature").selectbox();
+            $("#enroll_school").selectbox();
+            $("#enroll_program").selectbox();
+            $("#live_province").selectbox({ classHolder: 'sbHolderSmall', classSelector: 'sbSelectorSmall', classOptions: 'sbOptionsSmall' });
+            $("#live_city").selectbox({ classHolder: 'sbHolderSmall', classSelector: 'sbSelectorSmall', classOptions: 'sbOptionsSmall' });
+
+            $('#detail_form').html5Validate(function() {
+                this.submit();
+            }, {
+                validate: function () {
+                    if (!/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z ]){2,40}$/.test($("#name").val())) {
+                        $("#name").testRemind("只能包含汉字、字母和空格，且长度为2至40位！");
+                        return false;
+                    }
+
+                    return true;
+                }
+            });
+        });
+
+        function enrollYearChange(val) {
+            $("#graduate_year").selectbox("detach");
+            $("#graduate_year").val(parseInt(val, 10) + 4);
+            $("#graduate_year").selectbox("attach");
+        }
+
+        function enrollSchoolChange() { 
+            $("#enroll_program").selectbox("detach");
+            setProgramBySchool($("#enroll_school option:selected").val(), 1);
+            $("#enroll_program").selectbox("attach");
+        }
+
+        function liveProvinceChange() { 
+            $("#live_city").selectbox("detach");
+            setCityByProvince($("#live_province option:selected").val(), 0); 
+            $("#live_city").selectbox({ classHolder: 'sbHolderSmall', classSelector: 'sbSelectorSmall', classOptions: 'sbOptionsSmall' });
+        }
+
+        fixZIndex("#detail_form");
+    </script>
+{% endblock %}

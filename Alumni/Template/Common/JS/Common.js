@@ -60,6 +60,12 @@ $(document).ready(function () {
     $('.dropdown').mouseenter(showSubMenu);
     $('.dropdown').click(showSubMenu);
 
+    $(".service").hover(function () {
+        $(this).animate({ width: '160px' });
+    }, function () {
+        $(this).animate({ width: '40px' });
+    });
+
     //$('#cover_bg').click(hideCover);
 });
 
@@ -78,7 +84,7 @@ function showCover(dialog) {
     $("#cover_bg").css({ height: wrapperHeight, display: "block" });
     $(dialog).css({ left: (windowWidth - dialogWidth) / 2 });
 
-    $("#cover_bg").show("fast", function () { $(dialog).fadeIn(); });
+    $("#cover_bg").fadeIn("fast", function () { $(dialog).fadeIn(); });
 }
 
 function hideCover() {

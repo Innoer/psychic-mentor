@@ -82,16 +82,53 @@
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Manage\Article.aspx" />
+    <Content Include="Manage\come.htm" />
+    <Content Include="Manage\images\button1.jpg" />
+    <Content Include="Manage\images\button3.jpg" />
+    <Content Include="Manage\images\title.jpg" />
+    <Content Include="Manage\left.aspx" />
+    <Content Include="Manage\LoginManage.aspx" />
+    <Content Include="Manage\main.aspx" />
+    <Content Include="Manage\middel.aspx" />
+    <Content Include="Manage\tab\AddAlumnus.aspx" />
+    <Content Include="Manage\tab\addArticle.aspx" />
+    <Content Include="Manage\tab\addTitle.aspx" />
+    <Content Include="Manage\tab\CommentManagement.aspx" />
+    <Content Include="Manage\tab\DelAlumnus.aspx" />
+    <Content Include="Manage\tab\deleteArticle.aspx" />
+    <Content Include="Manage\tab\deleteTitle.aspx" />
+    <Content Include="Manage\tab\DonationsManagement.aspx" />
+    <Content Include="Manage\tab\ModifyAlumnus.aspx" />
+    <Content Include="Manage\tab\OrganizationManagement.aspx" />
+    <Content Include="Manage\tab\SearchAlumnus.aspx" />
+    <Content Include="Manage\tab\searchArticle.aspx" />
+    <Content Include="Manage\tab\searchSMS.aspx" />
+    <Content Include="Manage\tab\updateArticle.aspx" />
+    <Content Include="Manage\tab\updateTitle.aspx" />
+    <Content Include="Manage\tab\UserManagement.aspx" />
+    <Content Include="Manage\top.aspx" />
     <Content Include="Search.aspx" />
     <Content Include="ShowArticle.aspx" />
     <Content Include="ShowColumn.aspx" />
     <Content Include="ShowDonation.aspx" />
     <Content Include="SNS\FindMate.aspx" />
+    <Content Include="SNS\ControlPanel.aspx" />
     <Content Include="SNS\SignIn.aspx" />
+    <Content Include="SNS\SignOut.aspx" />
     <Content Include="SNS\SignUp.aspx" />
+    <Content Include="SNS\ModifyInfo.aspx" />
+    <Content Include="SNS\ModifyPassword.aspx" />
+    <Content Include="SNS\SMS.aspx" />
+    <Content Include="SNS\SMSDelete.aspx" />
+    <Content Include="SNS\SMSSend.aspx" />
     <Content Include="Template\30Year\Column.html" />
     <Content Include="Template\30Year\Default.html" />
+    <Content Include="Template\Common\CSS\SNS\Common.css" />
+    <Content Include="Template\Common\CSS\SNS\ModifyInfo.css" />
+    <Content Include="Template\Common\CSS\SNS\ModifyPassword.css" />
+    <Content Include="Template\Common\CSS\SNS\SMS.css" />
+    <Content Include="Template\Common\JS\jquery.selectbox-0.2-modifyinfo.js" />
+    <Content Include="Template\SNS\ControlPanel.html" />
     <Content Include="Template\30Year\Layout.html" />
     <Content Include="Template\Common\ckeditor\adapters\jquery.js" />
     <Content Include="Template\Common\ckeditor\build-config.js" />
@@ -420,12 +457,17 @@
     <Content Include="Template\General\Default.html" />
     <Content Include="Template\General\Donation.html" />
     <Content Include="Template\General\Layout.html" />
+    <Content Include="Template\General\Organization.html" />
     <Content Include="Template\SNS\FindMate.html" />
     <Content Include="Template\SNS\SignIn.html" />
     <Content Include="Template\SNS\SignUp.html" />
+    <Content Include="Template\SNS\ModifyInfo.html" />
+    <Content Include="Template\SNS\ModifyPassword.html" />
+    <Content Include="Template\SNS\SMS.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ShowOrganization.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlumniDB.designer.cs">
@@ -451,12 +493,140 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Manage\Article.aspx.cs">
-      <DependentUpon>Article.aspx</DependentUpon>
+    <Compile Include="Manage\left.aspx.cs">
+      <DependentUpon>left.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Manage\Article.aspx.designer.cs">
-      <DependentUpon>Article.aspx</DependentUpon>
+    <Compile Include="Manage\LoginManage.aspx.cs">
+      <DependentUpon>LoginManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\LoginManage.aspx.designer.cs">
+      <DependentUpon>LoginManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\main.aspx.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\middel.aspx.cs">
+      <DependentUpon>middel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\AddAlumnus.aspx.cs">
+      <DependentUpon>AddAlumnus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\AddAlumnus.aspx.designer.cs">
+      <DependentUpon>AddAlumnus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\addArticle.aspx.cs">
+      <DependentUpon>addArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\addArticle.aspx.designer.cs">
+      <DependentUpon>addArticle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\addTitle.aspx.cs">
+      <DependentUpon>addTitle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\addTitle.aspx.designer.cs">
+      <DependentUpon>addTitle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\CommentManagement.aspx.cs">
+      <DependentUpon>CommentManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\CommentManagement.aspx.designer.cs">
+      <DependentUpon>CommentManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\DelAlumnus.aspx.cs">
+      <DependentUpon>DelAlumnus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\DelAlumnus.aspx.designer.cs">
+      <DependentUpon>DelAlumnus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\deleteArticle.aspx.cs">
+      <DependentUpon>deleteArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\deleteArticle.aspx.designer.cs">
+      <DependentUpon>deleteArticle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\deleteTitle.aspx.cs">
+      <DependentUpon>deleteTitle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\deleteTitle.aspx.designer.cs">
+      <DependentUpon>deleteTitle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\DonationsManagement.aspx.cs">
+      <DependentUpon>DonationsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\DonationsManagement.aspx.designer.cs">
+      <DependentUpon>DonationsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\ModifyAlumnus.aspx.cs">
+      <DependentUpon>ModifyAlumnus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\ModifyAlumnus.aspx.designer.cs">
+      <DependentUpon>ModifyAlumnus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\OrganizationManagement.aspx.cs">
+      <DependentUpon>OrganizationManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\OrganizationManagement.aspx.designer.cs">
+      <DependentUpon>OrganizationManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\SearchAlumnus.aspx.cs">
+      <DependentUpon>SearchAlumnus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\SearchAlumnus.aspx.designer.cs">
+      <DependentUpon>SearchAlumnus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\searchArticle.aspx.cs">
+      <DependentUpon>searchArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\searchArticle.aspx.designer.cs">
+      <DependentUpon>searchArticle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\searchSMS.aspx.cs">
+      <DependentUpon>searchSMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\searchSMS.aspx.designer.cs">
+      <DependentUpon>searchSMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\updateArticle.aspx.cs">
+      <DependentUpon>updateArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\updateArticle.aspx.designer.cs">
+      <DependentUpon>updateArticle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\updateTitle.aspx.cs">
+      <DependentUpon>updateTitle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\updateTitle.aspx.designer.cs">
+      <DependentUpon>updateTitle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\tab\UserManagement.aspx.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\tab\UserManagement.aspx.designer.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\top.aspx.cs">
+      <DependentUpon>top.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -488,6 +658,9 @@
     <Compile Include="ShowDonation.aspx.designer.cs">
       <DependentUpon>ShowDonation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SNS\AuthenticateUser.ashx.cs">
+      <DependentUpon>AuthenticateUser.ashx</DependentUpon>
+    </Compile>
     <Compile Include="SNS\CheckUser.ashx.cs">
       <DependentUpon>CheckUser.ashx</DependentUpon>
     </Compile>
@@ -498,12 +671,26 @@
     <Compile Include="SNS\FindMate.aspx.designer.cs">
       <DependentUpon>FindMate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SNS\ControlPanel.aspx.cs">
+      <DependentUpon>ControlPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\ControlPanel.aspx.designer.cs">
+      <DependentUpon>ControlPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SNS\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SNS\SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\SignOut.aspx.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\SignOut.aspx.designer.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
     </Compile>
     <Compile Include="SNS\SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
@@ -512,6 +699,49 @@
     <Compile Include="SNS\SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ShowOrganization.aspx.cs">
+      <DependentUpon>ShowOrganization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowOrganization.aspx.designer.cs">
+      <DependentUpon>ShowOrganization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\ModifyInfo.aspx.cs">
+      <DependentUpon>ModifyInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\ModifyInfo.aspx.designer.cs">
+      <DependentUpon>ModifyInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\ModifyPassword.aspx.cs">
+      <DependentUpon>ModifyPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\ModifyPassword.aspx.designer.cs">
+      <DependentUpon>ModifyPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\SMS.aspx.cs">
+      <DependentUpon>SMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\SMS.aspx.designer.cs">
+      <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\SMSDelete.aspx.cs">
+      <DependentUpon>SMSDelete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\SMSDelete.aspx.designer.cs">
+      <DependentUpon>SMSDelete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SNS\SMSSend.aspx.cs">
+      <DependentUpon>SMSSend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SNS\SMSSend.aspx.designer.cs">
+      <DependentUpon>SMSSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -534,6 +764,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="SNS\CheckUser.ashx" />
+    <Content Include="SNS\AuthenticateUser.ashx" />
     <None Include="Template\Common\ckeditor\.DS_Store" />
     <None Include="Template\Common\ckeditor\CHANGES.md" />
     <None Include="Template\Common\ckeditor\LICENSE.md" />

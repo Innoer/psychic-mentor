@@ -28,12 +28,15 @@ namespace Alumni
 		
     #region 可扩展性方法定义
     partial void OnCreated();
-    partial void InsertEmployCategory(AlumniSNSDB.EmployCategory instance);
-    partial void UpdateEmployCategory(AlumniSNSDB.EmployCategory instance);
-    partial void DeleteEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void InsertComment(AlumniSNSDB.Comment instance);
+    partial void UpdateComment(AlumniSNSDB.Comment instance);
+    partial void DeleteComment(AlumniSNSDB.Comment instance);
     partial void InsertWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
     partial void UpdateWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
     partial void DeleteWorkplaceNature(AlumniSNSDB.WorkplaceNature instance);
+    partial void InsertEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void UpdateEmployCategory(AlumniSNSDB.EmployCategory instance);
+    partial void DeleteEmployCategory(AlumniSNSDB.EmployCategory instance);
     partial void InsertEnrollProgram(AlumniSNSDB.EnrollProgram instance);
     partial void UpdateEnrollProgram(AlumniSNSDB.EnrollProgram instance);
     partial void DeleteEnrollProgram(AlumniSNSDB.EnrollProgram instance);
@@ -46,6 +49,9 @@ namespace Alumni
     partial void InsertLiveProvince(AlumniSNSDB.LiveProvince instance);
     partial void UpdateLiveProvince(AlumniSNSDB.LiveProvince instance);
     partial void DeleteLiveProvince(AlumniSNSDB.LiveProvince instance);
+    partial void InsertSMS(AlumniSNSDB.SMS instance);
+    partial void UpdateSMS(AlumniSNSDB.SMS instance);
+    partial void DeleteSMS(AlumniSNSDB.SMS instance);
     partial void InsertUser(AlumniSNSDB.User instance);
     partial void UpdateUser(AlumniSNSDB.User instance);
     partial void DeleteUser(AlumniSNSDB.User instance);
@@ -81,11 +87,11 @@ namespace Alumni
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<AlumniSNSDB.EmployCategory> EmployCategory
+		public System.Data.Linq.Table<AlumniSNSDB.Comment> Comment
 		{
 			get
 			{
-				return this.GetTable<AlumniSNSDB.EmployCategory>();
+				return this.GetTable<AlumniSNSDB.Comment>();
 			}
 		}
 		
@@ -94,6 +100,14 @@ namespace Alumni
 			get
 			{
 				return this.GetTable<AlumniSNSDB.WorkplaceNature>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AlumniSNSDB.EmployCategory> EmployCategory
+		{
+			get
+			{
+				return this.GetTable<AlumniSNSDB.EmployCategory>();
 			}
 		}
 		
@@ -129,6 +143,14 @@ namespace Alumni
 			}
 		}
 		
+		public System.Data.Linq.Table<AlumniSNSDB.SMS> SMS
+		{
+			get
+			{
+				return this.GetTable<AlumniSNSDB.SMS>();
+			}
+		}
+		
 		public System.Data.Linq.Table<AlumniSNSDB.User> User
 		{
 			get
@@ -146,84 +168,205 @@ namespace AlumniSNSDB
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmployCategory")]
-	public partial class EmployCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
+	public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CategoryID;
+		private int _CommentID;
 		
-		private string _CategoryName;
+		private int _CommentUserID;
 		
-		private EntitySet<User> _User;
+		private System.DateTime _CommentDate;
+		
+		private string _CommentContent;
+		
+		private string _AdminReply;
+		
+		private System.Nullable<System.DateTime> _AdminReplyDate;
+		
+		private EntityRef<User> _User;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCategoryIDChanging(int value);
-    partial void OnCategoryIDChanged();
-    partial void OnCategoryNameChanging(string value);
-    partial void OnCategoryNameChanged();
+    partial void OnCommentIDChanging(int value);
+    partial void OnCommentIDChanged();
+    partial void OnCommentUserIDChanging(int value);
+    partial void OnCommentUserIDChanged();
+    partial void OnCommentDateChanging(System.DateTime value);
+    partial void OnCommentDateChanged();
+    partial void OnCommentContentChanging(string value);
+    partial void OnCommentContentChanged();
+    partial void OnAdminReplyChanging(string value);
+    partial void OnAdminReplyChanged();
+    partial void OnAdminReplyDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnAdminReplyDateChanged();
     #endregion
 		
-		public EmployCategory()
+		public Comment()
 		{
-			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CategoryID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CommentID
 		{
 			get
 			{
-				return this._CategoryID;
+				return this._CommentID;
 			}
 			set
 			{
-				if ((this._CategoryID != value))
+				if ((this._CommentID != value))
 				{
-					this.OnCategoryIDChanging(value);
+					this.OnCommentIDChanging(value);
 					this.SendPropertyChanging();
-					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
+					this._CommentID = value;
+					this.SendPropertyChanged("CommentID");
+					this.OnCommentIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string CategoryName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentUserID", DbType="Int NOT NULL")]
+		public int CommentUserID
 		{
 			get
 			{
-				return this._CategoryName;
+				return this._CommentUserID;
 			}
 			set
 			{
-				if ((this._CategoryName != value))
+				if ((this._CommentUserID != value))
 				{
-					this.OnCategoryNameChanging(value);
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCommentUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._CategoryName = value;
-					this.SendPropertyChanged("CategoryName");
-					this.OnCategoryNameChanged();
+					this._CommentUserID = value;
+					this.SendPropertyChanged("CommentUserID");
+					this.OnCommentUserIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployCategory_User", Storage="_User", ThisKey="CategoryID", OtherKey="EmployCategoryID")]
-		public EntitySet<User> User
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CommentDate
 		{
 			get
 			{
-				return this._User;
+				return this._CommentDate;
 			}
 			set
 			{
-				this._User.Assign(value);
+				if ((this._CommentDate != value))
+				{
+					this.OnCommentDateChanging(value);
+					this.SendPropertyChanging();
+					this._CommentDate = value;
+					this.SendPropertyChanged("CommentDate");
+					this.OnCommentDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentContent", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string CommentContent
+		{
+			get
+			{
+				return this._CommentContent;
+			}
+			set
+			{
+				if ((this._CommentContent != value))
+				{
+					this.OnCommentContentChanging(value);
+					this.SendPropertyChanging();
+					this._CommentContent = value;
+					this.SendPropertyChanged("CommentContent");
+					this.OnCommentContentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminReply", DbType="NVarChar(MAX)")]
+		public string AdminReply
+		{
+			get
+			{
+				return this._AdminReply;
+			}
+			set
+			{
+				if ((this._AdminReply != value))
+				{
+					this.OnAdminReplyChanging(value);
+					this.SendPropertyChanging();
+					this._AdminReply = value;
+					this.SendPropertyChanged("AdminReply");
+					this.OnAdminReplyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminReplyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> AdminReplyDate
+		{
+			get
+			{
+				return this._AdminReplyDate;
+			}
+			set
+			{
+				if ((this._AdminReplyDate != value))
+				{
+					this.OnAdminReplyDateChanging(value);
+					this.SendPropertyChanging();
+					this._AdminReplyDate = value;
+					this.SendPropertyChanged("AdminReplyDate");
+					this.OnAdminReplyDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment", Storage="_User", ThisKey="CommentUserID", OtherKey="UserID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Comment.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Comment.Add(this);
+						this._CommentUserID = value.UserID;
+					}
+					else
+					{
+						this._CommentUserID = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
 			}
 		}
 		
@@ -245,18 +388,6 @@ namespace AlumniSNSDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.EmployCategory = this;
-		}
-		
-		private void detach_User(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.EmployCategory = null;
 		}
 	}
 	
@@ -395,6 +526,120 @@ namespace AlumniSNSDB
 		{
 			this.SendPropertyChanging();
 			entity.WorkplaceNature = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmployCategory")]
+	public partial class EmployCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CategoryID;
+		
+		private string _CategoryName;
+		
+		private EntitySet<User> _User;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCategoryIDChanging(int value);
+    partial void OnCategoryIDChanged();
+    partial void OnCategoryNameChanging(string value);
+    partial void OnCategoryNameChanged();
+    #endregion
+		
+		public EmployCategory()
+		{
+			this._User = new EntitySet<User>(new Action<User>(this.attach_User), new Action<User>(this.detach_User));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					this.OnCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryID = value;
+					this.SendPropertyChanged("CategoryID");
+					this.OnCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this.OnCategoryNameChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryName = value;
+					this.SendPropertyChanged("CategoryName");
+					this.OnCategoryNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployCategory_User", Storage="_User", ThisKey="CategoryID", OtherKey="EmployCategoryID")]
+		public EntitySet<User> User
+		{
+			get
+			{
+				return this._User;
+			}
+			set
+			{
+				this._User.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.EmployCategory = this;
+		}
+		
+		private void detach_User(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.EmployCategory = null;
 		}
 	}
 	
@@ -1012,6 +1257,270 @@ namespace AlumniSNSDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SMS")]
+	public partial class SMS : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SMSID;
+		
+		private int _SenderUserID;
+		
+		private int _ReceiverUserID;
+		
+		private string _SMSContent;
+		
+		private System.DateTime _SMSDate;
+		
+		private bool _SMSReaded;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<User> _User1;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSMSIDChanging(int value);
+    partial void OnSMSIDChanged();
+    partial void OnSenderUserIDChanging(int value);
+    partial void OnSenderUserIDChanged();
+    partial void OnReceiverUserIDChanging(int value);
+    partial void OnReceiverUserIDChanged();
+    partial void OnSMSContentChanging(string value);
+    partial void OnSMSContentChanged();
+    partial void OnSMSDateChanging(System.DateTime value);
+    partial void OnSMSDateChanged();
+    partial void OnSMSReadedChanging(bool value);
+    partial void OnSMSReadedChanged();
+    #endregion
+		
+		public SMS()
+		{
+			this._User = default(EntityRef<User>);
+			this._User1 = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SMSID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SMSID
+		{
+			get
+			{
+				return this._SMSID;
+			}
+			set
+			{
+				if ((this._SMSID != value))
+				{
+					this.OnSMSIDChanging(value);
+					this.SendPropertyChanging();
+					this._SMSID = value;
+					this.SendPropertyChanged("SMSID");
+					this.OnSMSIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderUserID", DbType="Int NOT NULL")]
+		public int SenderUserID
+		{
+			get
+			{
+				return this._SenderUserID;
+			}
+			set
+			{
+				if ((this._SenderUserID != value))
+				{
+					if (this._User1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSenderUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._SenderUserID = value;
+					this.SendPropertyChanged("SenderUserID");
+					this.OnSenderUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiverUserID", DbType="Int NOT NULL")]
+		public int ReceiverUserID
+		{
+			get
+			{
+				return this._ReceiverUserID;
+			}
+			set
+			{
+				if ((this._ReceiverUserID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnReceiverUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiverUserID = value;
+					this.SendPropertyChanged("ReceiverUserID");
+					this.OnReceiverUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SMSContent", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string SMSContent
+		{
+			get
+			{
+				return this._SMSContent;
+			}
+			set
+			{
+				if ((this._SMSContent != value))
+				{
+					this.OnSMSContentChanging(value);
+					this.SendPropertyChanging();
+					this._SMSContent = value;
+					this.SendPropertyChanged("SMSContent");
+					this.OnSMSContentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SMSDate", DbType="DateTime NOT NULL")]
+		public System.DateTime SMSDate
+		{
+			get
+			{
+				return this._SMSDate;
+			}
+			set
+			{
+				if ((this._SMSDate != value))
+				{
+					this.OnSMSDateChanging(value);
+					this.SendPropertyChanging();
+					this._SMSDate = value;
+					this.SendPropertyChanged("SMSDate");
+					this.OnSMSDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SMSReaded", DbType="Bit NOT NULL")]
+		public bool SMSReaded
+		{
+			get
+			{
+				return this._SMSReaded;
+			}
+			set
+			{
+				if ((this._SMSReaded != value))
+				{
+					this.OnSMSReadedChanging(value);
+					this.SendPropertyChanging();
+					this._SMSReaded = value;
+					this.SendPropertyChanged("SMSReaded");
+					this.OnSMSReadedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_SMS", Storage="_User", ThisKey="ReceiverUserID", OtherKey="UserID", IsForeignKey=true)]
+		public User User_Receiver
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.SMS_Receiver.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.SMS_Receiver.Add(this);
+						this._ReceiverUserID = value.UserID;
+					}
+					else
+					{
+						this._ReceiverUserID = default(int);
+					}
+					this.SendPropertyChanged("User_Receiver");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_SMS1", Storage="_User1", ThisKey="SenderUserID", OtherKey="UserID", IsForeignKey=true)]
+		public User User_Sender
+		{
+			get
+			{
+				return this._User1.Entity;
+			}
+			set
+			{
+				User previousValue = this._User1.Entity;
+				if (((previousValue != value) 
+							|| (this._User1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User1.Entity = null;
+						previousValue.SMS_Sender.Remove(this);
+					}
+					this._User1.Entity = value;
+					if ((value != null))
+					{
+						value.SMS_Sender.Add(this);
+						this._SenderUserID = value.UserID;
+					}
+					else
+					{
+						this._SenderUserID = default(int);
+					}
+					this.SendPropertyChanged("User_Sender");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1026,7 +1535,7 @@ namespace AlumniSNSDB
 		
 		private string _Name;
 		
-		private System.Nullable<int> _Sex;
+		private int _Sex;
 		
 		private System.Nullable<System.DateTime> _BirthDate;
 		
@@ -1036,7 +1545,7 @@ namespace AlumniSNSDB
 		
 		private int _EmployCategoryID;
 		
-		private System.Nullable<int> _WorkplaceNatureID;
+		private int _WorkplaceNatureID;
 		
 		private string _WorkplaceName;
 		
@@ -1062,7 +1571,13 @@ namespace AlumniSNSDB
 		
 		private int _EnrollProgramID;
 		
-		private System.Nullable<int> _GraduateYear;
+		private int _GraduateYear;
+		
+		private EntitySet<Comment> _Comment;
+		
+		private EntitySet<SMS> _SMS;
+		
+		private EntitySet<SMS> _SMS1;
 		
 		private EntityRef<EmployCategory> _EmployCategory;
 		
@@ -1086,7 +1601,7 @@ namespace AlumniSNSDB
     partial void OnPassWordChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void OnSexChanging(System.Nullable<int> value);
+    partial void OnSexChanging(int value);
     partial void OnSexChanged();
     partial void OnBirthDateChanging(System.Nullable<System.DateTime> value);
     partial void OnBirthDateChanged();
@@ -1096,7 +1611,7 @@ namespace AlumniSNSDB
     partial void OnLiveCityIDChanged();
     partial void OnEmployCategoryIDChanging(int value);
     partial void OnEmployCategoryIDChanged();
-    partial void OnWorkplaceNatureIDChanging(System.Nullable<int> value);
+    partial void OnWorkplaceNatureIDChanging(int value);
     partial void OnWorkplaceNatureIDChanged();
     partial void OnWorkplaceNameChanging(string value);
     partial void OnWorkplaceNameChanged();
@@ -1122,12 +1637,15 @@ namespace AlumniSNSDB
     partial void OnEnrollYearChanged();
     partial void OnEnrollProgramIDChanging(int value);
     partial void OnEnrollProgramIDChanged();
-    partial void OnGraduateYearChanging(System.Nullable<int> value);
+    partial void OnGraduateYearChanging(int value);
     partial void OnGraduateYearChanged();
     #endregion
 		
 		public User()
 		{
+			this._Comment = new EntitySet<Comment>(new Action<Comment>(this.attach_Comment), new Action<Comment>(this.detach_Comment));
+			this._SMS = new EntitySet<SMS>(new Action<SMS>(this.attach_SMS), new Action<SMS>(this.detach_SMS));
+			this._SMS1 = new EntitySet<SMS>(new Action<SMS>(this.attach_SMS1), new Action<SMS>(this.detach_SMS1));
 			this._EmployCategory = default(EntityRef<EmployCategory>);
 			this._EnrollProgram = default(EntityRef<EnrollProgram>);
 			this._LiveCity = default(EntityRef<LiveCity>);
@@ -1216,8 +1734,8 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sex", DbType="Int")]
-		public System.Nullable<int> Sex
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sex", DbType="Int NOT NULL")]
+		public int Sex
 		{
 			get
 			{
@@ -1328,8 +1846,8 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WorkplaceNatureID", DbType="Int")]
-		public System.Nullable<int> WorkplaceNatureID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WorkplaceNatureID", DbType="Int NOT NULL")]
+		public int WorkplaceNatureID
 		{
 			get
 			{
@@ -1596,8 +2114,8 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GraduateYear", DbType="Int")]
-		public System.Nullable<int> GraduateYear
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GraduateYear", DbType="Int NOT NULL")]
+		public int GraduateYear
 		{
 			get
 			{
@@ -1613,6 +2131,45 @@ namespace AlumniSNSDB
 					this.SendPropertyChanged("GraduateYear");
 					this.OnGraduateYearChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment", Storage="_Comment", ThisKey="UserID", OtherKey="CommentUserID")]
+		public EntitySet<Comment> Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				this._Comment.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_SMS", Storage="_SMS", ThisKey="UserID", OtherKey="ReceiverUserID")]
+		public EntitySet<SMS> SMS_Receiver
+		{
+			get
+			{
+				return this._SMS;
+			}
+			set
+			{
+				this._SMS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_SMS1", Storage="_SMS1", ThisKey="UserID", OtherKey="SenderUserID")]
+		public EntitySet<SMS> SMS_Sender
+		{
+			get
+			{
+				return this._SMS1;
+			}
+			set
+			{
+				this._SMS1.Assign(value);
 			}
 		}
 		
@@ -1779,7 +2336,7 @@ namespace AlumniSNSDB
 					}
 					else
 					{
-						this._WorkplaceNatureID = default(Nullable<int>);
+						this._WorkplaceNatureID = default(int);
 					}
 					this.SendPropertyChanged("WorkplaceNature");
 				}
@@ -1804,6 +2361,42 @@ namespace AlumniSNSDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Comment(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Comment(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_SMS(SMS entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Receiver = this;
+		}
+		
+		private void detach_SMS(SMS entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Receiver = null;
+		}
+		
+		private void attach_SMS1(SMS entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Sender = this;
+		}
+		
+		private void detach_SMS1(SMS entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Sender = null;
 		}
 	}
 }
