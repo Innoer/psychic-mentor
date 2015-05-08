@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="middel.aspx.cs" Inherits="admin_middel" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="middel.aspx.cs" Inherits="admin_middel" %>
 
 <!doctype HTML public "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,9 +24,17 @@
         }
         #leftContainer
         {
-            height: 458px;
+            height: 468px;
         }
-    </style>
+        .style1
+        {
+            width: 20px;
+        }
+        .style2
+        {
+            width: 10px;
+        }
+        </style>
 
     <script type="text/javascript">
         function switchSysBar() {
@@ -47,24 +55,24 @@
 <body style="overflow: hidden">
     <table border="0" cellpadding="0" cellspacing="0" 
         
-        style="table-layout: fixed; margin-left:-8px; margin-top: -12px; height: 100%; width: 100%;" 
-        bgcolor="#E6EDF8">
+        style="table-layout: fixed; margin-left:-8px; margin-top: -12px; height: 100%; width: 100%; background-color: #FFFFFF;" 
+        >
         <tr>
             <td width="171" id="frmTitle" nowrap name="fmTitle" align="center" valign="top">
                 <table width="171" border="0" cellpadding="0" cellspacing="0" 
-                    style="table-layout: fixed; height: 465px;">
+                    style="table-layout: fixed; height: 100%; background-color: #FFFFFF;">
                     <tr>
-                        <td bgcolor="#1873aa" style="width: 6px;">
+                        <td bgcolor="White" class="style2">
                             &nbsp;
                         </td>
                         <td width="165">
-                            <iframe name="I1" width="165" height="100%" id="leftContainer" src="left.aspx" border="0"
-                                frameborder="0"  height="5000">浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe>
+                            <iframe name="I1" height= 100% width="165" id="leftContainer" src="left1.aspx" border="0"
+                                frameborder="0" style="background-color: #FFFFFF">浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe>
                         </td>
                     </tr>
                 </table>
             </td>
-            <td width="6" style="width: 6px;" valign="middle" bgcolor="1873aa" onclick="switchSysBar()">
+            <td valign="middle" bgcolor="White" onclick="switchSysBar()" class="style1">
                 <span class="navPoint" id="switchPoint" title="关闭/打开左栏">
                    </span>
             </td>

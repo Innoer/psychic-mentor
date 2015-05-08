@@ -12,47 +12,21 @@ namespace Alumni.Manage.tag
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            SNSDataContext context = new SNSDataContext();
-            var cols = from item in context.User
-                       join itemcity in context.LiveCity on item.LiveCityID equals itemcity.CityID
-                       join itemprovince in context.LiveProvince on item.LiveProvinceID equals itemprovince.ProvinceID
-                       join itemprogram in context.EnrollProgram on item.EnrollProgramID equals itemprogram.ProgramID
-                       join itemcategory in context.EmployCategory on item.EmployCategoryID equals itemcategory.CategoryID
-                       join itemnature in context.WorkplaceNature on item.WorkplaceNatureID equals itemnature.NatureID
-                       join itemschool in context.EnrollSchool on itemprogram.SchoolID equals itemschool.SchoolID
-                       select new
-                       {
-                           item.UserID,
-                           item.UserName,
-                           item.PassWord,
-                           item.Name,
-                           item.Sex,
-                           item.BirthDate,
-                           itemprovince.ProvinceName,
-                           itemcity.CityName,
-                           itemcategory.CategoryName,
-                           item.WorkplaceName,
-                           itemnature.NatureName,
-                           item.WorkTitle,
-                           item.MailingAddress,
-                           item.FixedPhone,
-                           item.MobilePhone,
-                           item.EMail,
-                           item.QQNo,
-                           item.WeChatID,
-                           item.ClassNo,
-                           item.StudentNo,
-                           item.EnrollYear,
-                           itemprogram.ProgramName,
-                           itemschool.SchoolName
-                       };
-            if (!IsPostBack)
+            try
             {
-                GridView1.DataSource = cols;
-                GridView1.DataBind();
-
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
                 
+                    //Response.Redirect("overTime.htm", true);
             }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+                //Response.Write("<script>window.open('overTime.htm','_blank')</script>");
+               
+                //Response.Redirect("overTime.htm", true);
+            }
+            
         }
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,7 +48,7 @@ namespace Alumni.Manage.tag
                 PassWord = TextBox2.Text,
                 Name = TextBox4.Text,
                 Sex = int.Parse(DropDownList6.SelectedValue.ToString()),
-                BirthDate = Calendar1.SelectedDate.Date,
+                BirthDate = Convert.ToDateTime(TextBox18.Text.ToString()),
                 LiveProvinceID = int.Parse(DropDownList1.SelectedValue.ToString()),
                 LiveCityID = int.Parse(DropDownList2.SelectedValue),
                 EmployCategoryID = int.Parse(DropDownList3.SelectedValue.ToString()),
@@ -91,10 +65,12 @@ namespace Alumni.Manage.tag
                 StudentNo = TextBox15.Text,
                 EnrollYear = int.Parse(TextBox16.Text.ToString()),
                 EnrollProgramID = int.Parse(DropDownList5.SelectedValue.ToString()),
-                GraduateYear = int.Parse(TextBox17.Text)
+                GraduateYear = int.Parse(TextBox17.Text),
+                IsApproved=true
             };
             context.User.InsertOnSubmit(add);
             context.SubmitChanges();
+            Response.Redirect("/Manage/tab/AddAlumnus.aspx", true);
             
         }
 
@@ -110,45 +86,6 @@ namespace Alumni.Manage.tag
             DropDownList2.ClearSelection();
         }
 
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            SNSDataContext context = new SNSDataContext();
-            var cols = from item in context.User
-                       join itemcity in context.LiveCity on item.LiveCityID equals itemcity.CityID
-                       join itemprovince in context.LiveProvince on item.LiveProvinceID equals itemprovince.ProvinceID
-                       join itemprogram in context.EnrollProgram on item.EnrollProgramID equals itemprogram.ProgramID
-                       join itemcategory in context.EmployCategory on item.EmployCategoryID equals itemcategory.CategoryID
-                       join itemnature in context.WorkplaceNature on item.WorkplaceNatureID equals itemnature.NatureID
-                       join itemschool in context.EnrollSchool on itemprogram.SchoolID equals itemschool.SchoolID
-                       select new
-                       {
-                           item.UserID,
-                           item.UserName,
-                           item.PassWord,
-                           item.Name,
-                           item.Sex,
-                           item.BirthDate,
-                           itemprovince.ProvinceName,
-                           itemcity.CityName,
-                           itemcategory.CategoryName,
-                           item.WorkplaceName,
-                           itemnature.NatureName,
-                           item.WorkTitle,
-                           item.MailingAddress,
-                           item.FixedPhone,
-                           item.MobilePhone,
-                           item.EMail,
-                           item.QQNo,
-                           item.WeChatID,
-                           item.ClassNo,
-                           item.StudentNo,
-                           item.EnrollYear,
-                           itemprogram.ProgramName,
-                           itemschool.SchoolName
-                       };
-            GridView1.DataSource = cols;
-            GridView1.PageIndex = e.NewPageIndex;
-            GridView1.DataBind();
-        }
+        
     }
 }

@@ -29,17 +29,10 @@
                 </div>
 
                 <div class="right">
-                    {% if IsSignIn -%}
-                    <div class="title"><span>个人中心&nbsp;<font color="red">&gt;&gt;</font></span></div>
+                    <div class="title"><span>{{ ErrorTitle }}&nbsp;<font color="red">&gt;&gt;</font></span></div>
                     <div class="content">
-                        <p>请您选择左侧菜单中的链接，以执行您期望的操作。</p>
+                        <p>{{ ErrorText }}</p>
                     </div>
-                    {% else -%}
-                    <div class="title"><span>请先登录&nbsp;<font color="red">&gt;&gt;</font></span></div>
-                    <div class="content">
-                        <p>请您点击右上角的“<font color="#485b8f">登录校友网</font>”，以登录至哈尔滨工业大学（威海）校友网。</p>
-                    </div>
-                    {% endif -%}
                 </div>
             </div>
             <div class="footer">

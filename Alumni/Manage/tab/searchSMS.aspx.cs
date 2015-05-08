@@ -11,7 +11,31 @@ namespace Alumni.Manage.tab
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            SNSDataContext context = new SNSDataContext();
+            var cols = from item in context.SMS
+                       select new
+                       {
+                           SenderUserID = item.SenderUserID,
+                           ReceiverUserID = item.ReceiverUserID,
+                           SMSDate = item.SMSDate,
+                           SMSReaded = item.SMSReaded
+                       };
+            
+            GridView1.DataSource = cols;
+            GridView1.DataBind();
+            if (cols.Count() == 0)
+            {
+                Label12.Visible = true;
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -24,6 +48,35 @@ namespace Alumni.Manage.tab
 
             Label1.Text = article.SMSContent.ToString();
             
+        }
+
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            e.Cancel = true;
+
+            int articleID = Convert.ToInt32(e.Keys[0]);
+            SNSDataContext context = new SNSDataContext();
+            var article = context.SMS.Single(item => item.SMSID == articleID);
+            context.SMS.DeleteOnSubmit(article);
+
+            context.SubmitChanges();
+            Response.Redirect("/Manage/tab/searchSMS.aspx", true);
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            SNSDataContext context = new SNSDataContext();
+            var cols = from item in context.SMS
+                       select new
+                       {
+                           SenderUserID = item.SenderUserID,
+                           ReceiverUserID = item.ReceiverUserID,
+                           SMSDate = item.SMSDate,
+                           SMSReaded = item.SMSReaded
+                       };
+            GridView1.DataSource = cols;
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
         }
     }
 }

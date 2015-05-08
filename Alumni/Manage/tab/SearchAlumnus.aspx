@@ -4,44 +4,73 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!-- viewport的<meta>标签，这个标签可以修改在大部分的移动设备上面的显示，为了确保适当的绘制和触屏缩放。-->
+
+<title></title>
+
+<!--样式文件引用-->
+<style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style2
+        {
+            width: 20%;
+            height: 25px;
+        }
+        .style3
+        {
+            width: 30%;
+            height: 25px;
+        }
+        </style>
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    
-        <asp:Label ID="Label4" runat="server" Text="当前位置：查询校友"></asp:Label>
         <br />
+    <asp:Label ID="Label11" runat="server" Text="当前位置：校友管理&gt;&gt;查询校友" 
+            Font-Size="10pt"></asp:Label>
+        <br />
+        <asp:Image ID="Image5" runat="server" Height="1px" Width="97%" 
+            BackColor="Blue" />
+        <br />
+        <br />
+    </div>
+    <div>
+    
+        
     
         <asp:Label ID="Label1" runat="server" Text="请输入校友姓名："></asp:Label>
 &nbsp;<asp:TextBox ID="TextBox1" runat="server" style="text-align: left"></asp:TextBox>
 &nbsp;
-        <asp:CheckBox ID="CheckBox1" runat="server" 
-            oncheckedchanged="CheckBox1_CheckedChanged" AutoPostBack="True" />
-&nbsp;<asp:Label ID="Label2" runat="server" Text="校友专业："></asp:Label>
-&nbsp;<asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource3" 
-            DataTextField="CategoryName" DataValueField="CategoryName" Enabled="False">
+        &nbsp;<asp:Label ID="Label2" runat="server" Text="校友专业："></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:DropDownList ID="DropDownList1" 
+            runat="server" >
         </asp:DropDownList>
-&nbsp;&nbsp;<asp:CheckBox ID="CheckBox2" runat="server" 
-            oncheckedchanged="CheckBox2_CheckedChanged" AutoPostBack="True" />
-&nbsp;<asp:Label ID="Label3" runat="server" Text="校友毕业时间："></asp:Label>
-&nbsp;<asp:DropDownList ID="TimeDownList" runat="server" DataSourceID="SqlDataSource2" 
-            DataTextField="EnrollYear" DataValueField="EnrollYear" 
-            onselectedindexchanged="TimeDownList_SelectedIndexChanged" Enabled="False">
+&nbsp;&nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Text="校友入学时间："></asp:Label>
+&nbsp;<asp:DropDownList ID="TimeDownList" runat="server">
         </asp:DropDownList>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="SearchButton" runat="server" onclick="SearchButton_Click" 
             Text="确认查询" />
         <br />
-        <asp:GridView ID="GridView1" runat="server" CellPadding="4" 
-            EnableModelValidation="True" ForeColor="#333333" GridLines="None" 
-            Width="100%" AutoGenerateColumns="False">
-            <AlternatingRowStyle BackColor="White" />
+        <asp:GridView ID="GridView1" runat="server" CellPadding="3" 
+            EnableModelValidation="True" GridLines="None" 
+            Width="100%" AutoGenerateColumns="False" BackColor="White" 
+            BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
+            DataKeyNames="UserID" 
+            onselectedindexchanged="GridView1_SelectedIndexChanged" 
+            onrowdeleting="GridView1_RowDeleting" PageSize="5" AllowPaging="True" 
+            onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
-                <asp:BoundField DataField="UserName" HeaderText="用户名" 
-                    SortExpression="UserName" />
-                <asp:BoundField DataField="PassWord" HeaderText="密码" 
-                    SortExpression="PassWord" />
+                
                 <asp:BoundField DataField="Name" HeaderText="校友名" SortExpression="Name" />
                 <asp:BoundField DataField="Sex" HeaderText="性别" SortExpression="Sex" />
                 <asp:BoundField DataField="BirthDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="生日" 
@@ -50,40 +79,24 @@
                     SortExpression="ProvinceName" />
                 <asp:BoundField DataField="CityName" HeaderText="所在市" 
                     SortExpression="CityName" />
-                <asp:BoundField DataField="CategoryName" HeaderText="从事专业" 
-                    SortExpression="CategoryName" />
-                <asp:BoundField DataField="NatureName" HeaderText="工作方向" 
-                    SortExpression="NatureName" />
-                <asp:BoundField DataField="WorkplaceName" HeaderText="公司名称" 
-                    SortExpression="WorkplaceName" />
-                <asp:BoundField DataField="WorkTitle" HeaderText="职务" 
-                    SortExpression="WorkTitle" />
-                <asp:BoundField DataField="MailingAddress" HeaderText="家庭住址" 
-                    SortExpression="MailingAddress" />
-                <asp:BoundField DataField="FixedPhone" HeaderText="传真号" 
-                    SortExpression="FixedPhone" />
-                <asp:BoundField DataField="MobilePhone" HeaderText="移动电话" 
-                    SortExpression="MobilePhone" />
-                <asp:BoundField DataField="EMail" HeaderText="EMail地址" SortExpression="EMail" />
-                <asp:BoundField DataField="QQNo" HeaderText="QQ号" SortExpression="QQNo" />
-                <asp:BoundField DataField="WeChatID" HeaderText="WeChatID" 
-                    SortExpression="WeChatID" />
                 <asp:BoundField DataField="ClassNo" HeaderText="班号" SortExpression="ClassNo" />
                 <asp:BoundField DataField="StudentNo" HeaderText="学号" 
                     SortExpression="StudentNo" />
                 <asp:BoundField DataField="EnrollYear" HeaderText="入学年份" 
                     SortExpression="EnrollYear" />
-                <asp:BoundField DataField="ProgramName" HeaderText="所学专业" 
-                    SortExpression="ProgramName" />
-                <asp:BoundField DataField="SchoolName" HeaderText="学校" 
+                <asp:BoundField DataField="SchoolName" HeaderText="入学院系" 
                     SortExpression="SchoolName" />
+                <asp:ButtonField CommandName="select" Text="查看" ButtonType="Link" 
+                                HeaderText="具体信息" >
+                            <ItemStyle HorizontalAlign="Center" />
+                            </asp:ButtonField>
+                
             </Columns>
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+            <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#DEDFDE" ForeColor="Black" HorizontalAlign="Center" />
+            <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
         </asp:GridView>
         <br />
 
@@ -97,6 +110,100 @@
         </asp:SqlDataSource>
     
     </div>
+    <asp:Panel ID="panel1" runat="server" Visible="false">
+    <table class="style1">
+            <tr>
+                <td class="style2">
+                    请输入用户名:</td>
+                <td class="style3">
+                    <asp:Label ID="Label18" runat="server"></asp:Label>
+                </td>
+                <td class="style2">
+                    家庭住址:</td>
+                <td class="style3">
+                    <asp:Label ID="Label25" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2">
+                    请输入密码：</td>
+                <td class="style3">
+                    <asp:Label ID="Label19" runat="server"></asp:Label>
+                </td>
+                <td class="style2">
+                    传真地址：</td>
+                <td class="style3">
+                    <asp:Label ID="Label26" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2">
+                    姓名：</td>
+                <td class="style3">
+                    <asp:Label ID="Label20" runat="server"></asp:Label>
+                </td>
+                <td class="style2">
+                    移动电话号码：</td>
+                <td class="style3">
+                    <asp:Label ID="Label27" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2">
+                    从事行业：</td>
+                <td class="style3">
+                    <asp:Label ID="Label21" runat="server"></asp:Label>
+                </td>
+                <td class="style2">
+                    EMail地址：</td>
+                <td class="style3">
+                    <asp:Label ID="Label28" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2">
+                    工作方向：</td>
+                <td class="style3">
+                    <asp:Label ID="Label22" runat="server"></asp:Label>
+                </td>
+                <td class="style2">
+                    QQ号码：</td>
+                <td class="style3">
+                    <asp:Label ID="Label29" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2" >
+                    公司名称：</td>
+                <td class="style3">
+                    <asp:Label ID="Label23" runat="server"></asp:Label>
+                    <br />
+                </td>
+                <td class="style2">
+                    WetChatID:</td>
+                <td class="style3">
+                    <asp:Label ID="Label30" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2">
+                    职务：</td>
+                <td class="style3">
+                    <asp:Label ID="Label24" runat="server"></asp:Label>
+                </td>
+                <td class="style2">
+                    所学专业:</td>
+                <td class="style3">
+                    <asp:Label ID="Label31" runat="server"></asp:Label>
+                </td>
+            </tr>
+            
+        </table>
+    </asp:Panel>
+    <asp:TextBox ID="TextBox2" runat="server" Visible="False"></asp:TextBox>
     </form>
+    <script type="text/javascript" src="../bootstrap/js/jquery-2.1.3.min.js"></script>
+
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

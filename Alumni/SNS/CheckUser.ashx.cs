@@ -55,7 +55,8 @@ namespace Alumni.SNS
                 WorkplaceNatureID = 1,
                 EnrollYear = enrollYear,
                 EnrollProgramID = enrollProgram,
-                GraduateYear = enrollYear + 4
+                GraduateYear = enrollYear + 4,
+                IsApproved = false
             };
             snsContext.User.InsertOnSubmit(user);
             snsContext.SubmitChanges();

@@ -52,7 +52,7 @@ namespace Alumni
             string userName;
             if (Session["SNS_SignInUserName"] == null || string.IsNullOrEmpty(userName = Session["SNS_SignInUserName"].ToString()))
             {
-                Response.Redirect("/SNS/ControlPanel.aspx");
+                Response.Redirect("/SNS/ControlPanel.aspx?ErrorID=1");
                 return;
             }
 

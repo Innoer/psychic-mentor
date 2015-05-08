@@ -36,7 +36,7 @@
         $(function () {
             $('#login_form').html5Validate(function () {
                 $("#login_form button").attr('disabled', 'disabled');
-                setSigninInfo("加载中……", { color: "black"});
+                setSigninInfo("加载中……", { color: "black" });
 
                 $.ajax({
                     url: '/SNS/AuthenticateUser.ashx',
@@ -60,12 +60,12 @@
                                 break;
 
                             case 0: // success
-                                setSigninInfo("登陆成功，跳转中……", { color: "green"});
-                                parent.location.reload();
+                                setSigninInfo("登陆成功，跳转中……", { color: "green" });
+                                parent.location.href = "/SNS/ControlPanel.aspx";
                                 break;
                         }
                     },
-                    error: function (jqXHR, textStatus, errorThrown) { 
+                    error: function (jqXHR, textStatus, errorThrown) {
                         $("#login_form button").removeAttr('disabled');
 
                         setSigninInfo("与服务器通讯失败，请刷新后重试。", { color: "red" });

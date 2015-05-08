@@ -4,7 +4,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!-- viewport的<meta>标签，这个标签可以修改在大部分的移动设备上面的显示，为了确保适当的绘制和触屏缩放。-->
+
+<title></title>
+
+<!--样式文件引用-->
+
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .style1
         {
@@ -27,41 +37,53 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:Label ID="Label6" runat="server" Text="当前位置：用户与管理员短消息"></asp:Label>
+    <div>
+        <br />
+    <asp:Label ID="Label11" runat="server" Text="当前位置：短消息管理&gt;&gt;用户与管理员" 
+            Font-Size="10pt"></asp:Label>
+        <br />
+        <asp:Image ID="Image5" runat="server" Height="1px" Width="97%" 
+            BackColor="Blue" />
+        <br />
+        <br />
+    </div>
+    <div>
     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
-        AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CommentID" 
-        DataSourceID="SqlDataSource1" EnableModelValidation="True" ForeColor="#333333" 
+        AutoGenerateColumns="False" CellPadding="3" DataKeyNames="CommentID" 
+        EnableModelValidation="True" 
         GridLines="None" onselectedindexchanged="GridView1_SelectedIndexChanged" 
-        Width="100%">
-        <AlternatingRowStyle BackColor="White" />
+        Width="100%" BackColor="White" BorderColor="White" BorderStyle="Ridge" 
+        BorderWidth="2px" CellSpacing="1" PageSize="5" 
+            onpageindexchanging="GridView1_PageIndexChanging">
 
         <Columns>
-        <asp:TemplateField>
-	            <ItemTemplate>
-		            <asp:Button ID="editButton" runat="server" CommandName="Select" Text="查看信息" />
-	            </ItemTemplate>
-            </asp:TemplateField>
-            <asp:BoundField DataField="CommentID" HeaderText="消息编号" 
-                InsertVisible="False" ReadOnly="True" SortExpression="CommentID" />
+        
+            
             <asp:BoundField DataField="CommentUserID" HeaderText="用户ID" 
                 SortExpression="CommentUserID" />
             <asp:BoundField DataField="CommentDate" HeaderText="发送时间" 
                 SortExpression="CommentDate" />
             <asp:BoundField DataField="AdminReplyDate" HeaderText="管理员回复时间" 
                 SortExpression="AdminReplyDate" />
+                <asp:ButtonField CommandName="select" Text="查看" ButtonType="Link" 
+                                HeaderText="信息查看" >
+                            <ItemStyle HorizontalAlign="Center" />
+                            </asp:ButtonField>
         </Columns>
-        <EditRowStyle BackColor="#2461BF" />
-        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#EFF3FB" />
-        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+        <EditRowStyle HorizontalAlign="Center" />
+        <FooterStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Center" />
+        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+        <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+        <RowStyle BackColor="#DEDFDE" ForeColor="Black" HorizontalAlign="Center" />
+        <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:AlumniSNSConnectionString %>" 
         SelectCommand="SELECT [CommentID], [CommentUserID], [CommentDate], [AdminReplyDate] FROM [Comment]">
     </asp:SqlDataSource>
+        <asp:Label ID="Label12" runat="server" Text="现在没有用户与管理员的短消息" Visible="False"></asp:Label>
     <asp:Label ID="Label5" runat="server" Text="Label" Visible="False"></asp:Label>
+    </div>
     <div>
     
 
@@ -114,5 +136,8 @@
     
     </div>
     </form>
+    <script type="text/javascript" src="../bootstrap/js/jquery-2.1.3.min.js"></script>
+
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

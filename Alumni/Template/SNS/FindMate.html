@@ -12,11 +12,12 @@
                 <div class="left">
                     <div class="curpos"><span>当前位置&nbsp;>>&nbsp;<em>校友搜索</em></span></div>
                     <div class="separator"></div>
-                    <form method="post" action="/SNS/FindMate.aspx">
+                    <form method="get" action="/SNS/FindMate.aspx">
                     <b>搜索条件：</b>
                     <div class="condition">
                         <h3>入学年份</h3>
                         <select name="enroll_year" id="enroll_year">
+                            <option value="0" {% if SelectedYear == 0 %}selected="selected"{% endif %}>（全部）</option>
                         {% for i in (1988...LatestEnrollYear) reversed -%}
                             <option value="{{ i }}" {% if i == SelectedYear %}selected="selected"{% endif %}>{{ i }}</option>
                         {% endfor -%}
@@ -25,6 +26,7 @@
                     <div class="condition">
                         <h3>就读学院</h3>
                         <select name="enroll_school" id="enroll_school" onchange="enrollSchoolChange();">
+                            <option value="0" {% if SelectedSchool == 0 %}selected="selected"{% endif %}>（全部）</option>
                         {% for item in EnrollSchool -%}
                             <option value="{{ item.ID }}" {% if item.ID == SelectedSchool %}selected="selected"{% endif %}>{{ item.Name }}</option>
                         {% endfor -%}
@@ -37,6 +39,7 @@
                     <div class="condition">
                         <h3>从事行业</h3>
                         <select name="employ_category" id="employ_category">
+                            <option value="0" {% if SelectedCategory == 0 %}selected="selected"{% endif %}>（全部）</option>
                         {% for item in EmployCategory -%}
                             <option value="{{ item.ID }}" {% if item.ID == SelectedCategory %}selected="selected"{% endif %}>{{ item.Name }}</option>
                         {% endfor -%}
@@ -45,6 +48,7 @@
                     <div class="condition">
                         <h3>所在省份</h3>
                         <select name="live_province" id="live_province" onchange="liveProvinceChange();">
+                            <option value="0" {% if SelectedProvince == 0 %}selected="selected"{% endif %}>（全部）</option>
                         {% for item in LiveProvince -%}
                             <option value="{{ item.ID }}" {% if item.ID == SelectedProvince %}selected="selected"{% endif %}>{{ item.Name }}</option>
                         {% endfor -%}
@@ -64,7 +68,7 @@
                         {% if Query.Success == false -%}
                         <p>{{ Query.Status }}</p>
                         {% else -%}
-                        <p>找到相关结果 {{ Query.Count }} 个。</p>
+                        <p>找到相关结果 {{ Query.Count }} 个，当前第显示第 {{ Pager.CurrentCountStart }} - {{ Pager.CurrentCountStop }} 条。</p>
                             {% if Query.Count > 0 -%}
                             <table id="find_result" cellpadding="0" cellspacing="0">
                                 <thead>
@@ -73,7 +77,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {% for item in Query.Result -%}
+                                {% for item in Query.Result.Take[Pager.ArticlesPerPage].Result -%}
                                     <tr>
                                         <td>{{ item.Name | StripHtml }}</td><td>{{ item.EmployCategory | StripHtml }}</td><td>{{ item.WorkTitle | StripHtml }}</td><td>{{ item.LivePlace | StripHtml }}</td>
                                         <td style="text-align: center;"><a href="/SNS/SMS.aspx?Method=Send&UserID={{ item.UserID }}" title="发送短消息"><img class="icon_sms" src="/Template/Common/Image/SMS.png" /></a></td>
@@ -81,6 +85,13 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            <div class="pager">
+                                {% if Pager.First -%}<a href="/SNS/FindMate.aspx?enroll_year={{ SelectedYear }}&enroll_program={{ SelectedProgram }}&employ_category={{ SelectedCategory }}&live_province={{ SelectedProvince }}&live_city={{ SelectedCity }}&PageID=1">首页</a>{% else -%}首页{% endif -%}&ensp;
+                                {% if Pager.Previous -%}<a href="/SNS/FindMate.aspx?enroll_year={{ SelectedYear }}&enroll_program={{ SelectedProgram }}&employ_category={{ SelectedCategory }}&live_province={{ SelectedProvince }}&live_city={{ SelectedCity }}&PageID={{ Pager.CurrentPageID | Minus:1 }}">上一页</a>{% else -%}上一页{% endif -%}&ensp;
+                                {% if Pager.Next -%}<a href="/SNS/FindMate.aspx?enroll_year={{ SelectedYear }}&enroll_program={{ SelectedProgram }}&employ_category={{ SelectedCategory }}&live_province={{ SelectedProvince }}&live_city={{ SelectedCity }}&PageID={{ Pager.CurrentPageID | Plus:1 }}">下一页</a>{% else -%}下一页{% endif -%}&ensp;
+                                {% if Pager.Last -%}<a href="/SNS/FindMate.aspx?enroll_year={{ SelectedYear }}&enroll_program={{ SelectedProgram }}&employ_category={{ SelectedCategory }}&live_province={{ SelectedProvince }}&live_city={{ SelectedCity }}&PageID={{ Pager.TotalPageCount }}">尾页</a>{% else -%}尾页{% endif -%}&ensp;
+                                页次：<font color="red">{{ Pager.CurrentPageID }}</font>/{{ Pager.TotalPageCount}}页&ensp;共{{ Pager.TotalArticleCount }}条&ensp;{{ Pager.ArticlesPerPage }}条/页
+                             </div>
                             {% endif -%}
                         {% endif -%}
                     </div>
@@ -108,11 +119,11 @@
 
 {% block otherJS %}
 <script language="javascript" type="text/javascript">
-    function enrollSchoolChange() { setProgramBySchool($("#enroll_school option:selected").val(), 1); }
+    function enrollSchoolChange() { setProgramBySchool($("#enroll_school option:selected").val(), 0, true); }
     function liveProvinceChange() { setCityByProvince($("#live_province option:selected").val(), 0); }
 
     $(document).ready(function () {
-        setProgramBySchool({{ SelectedSchool }}, {{ SelectedProgram }});
+        setProgramBySchool({{ SelectedSchool }}, {{ SelectedProgram }}, true);
         setCityByProvince({{ SelectedProvince }}, {{ SelectedCity }});
 
         $("#find_result tr:nth-child(even)").css("background-color", "#f3f9ff");

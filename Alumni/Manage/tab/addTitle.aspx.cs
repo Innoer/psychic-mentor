@@ -10,8 +10,21 @@ namespace Alumni.Manage.tab
     public partial class addTitle : System.Web.UI.Page
     {
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            CKFinder.FileBrowser _FileBrowser = new CKFinder.FileBrowser();
+            _FileBrowser.BasePath = "../../ckfinder/";
+            _FileBrowser.SetupCKEditor(textContent);
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
             if (!IsPostBack)
             {
                 DropDownList1.Enabled = false;

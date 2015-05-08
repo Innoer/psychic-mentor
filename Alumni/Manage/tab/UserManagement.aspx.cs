@@ -12,11 +12,22 @@ namespace Alumni.Manage.tag
         public String userIDtemp;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
             
         }
 
         protected void AddButton_Click(object sender, EventArgs e)
         {
+            panel1.Visible = true;
+            panelView.Visible = false;
             DBDataContext context = new DBDataContext();
             var users = new AlumniDB.Users
             {
@@ -65,6 +76,7 @@ namespace Alumni.Manage.tag
             users.Level = int.Parse(LevelTextBox0.Text);
             context.SubmitChanges();
             UsersGridView.DataBind();
+            Response.Redirect("/Manage/tab/UserManagement.aspx", true);
             
         }
 
@@ -76,6 +88,20 @@ namespace Alumni.Manage.tag
             LevelTextBox.Text = "";
             panel1.Visible = true;
             panelView.Visible = false;
+            Response.Redirect("/Manage/tab/UserManagement.aspx", true);
+        }
+
+        protected void UsersGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            e.Cancel = true;
+
+            int articleID = Convert.ToInt32(e.Keys[0]);
+            DBDataContext context = new DBDataContext();
+            var article = context.Users.Single(item => item.UserID == articleID);
+            context.Users.DeleteOnSubmit(article);
+
+            context.SubmitChanges();
+            Response.Redirect("/Manage/tab/UserManagement.aspx", true);
         }
             
     }

@@ -189,7 +189,7 @@ namespace Alumni.SNS
 
                         Session["SNS_SignInUserName"] = Session["SNS_RegisterUserName"];
                         Session.Remove("SNS_RegisterUserName");
-                        Response.Write("<script language='javascript' type='text/javascript'>parent.location.reload();</script>");
+                        Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='/SNS/ControlPanel.aspx';</script>");
                         Response.End();
                         break;
 

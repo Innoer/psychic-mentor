@@ -68,7 +68,7 @@
       <Column Name="SMSDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="SMSReaded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="User_SMS" Member="User_Receiver" Storage="_User" ThisKey="ReceiverUserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
-      <Association Name="User_SMS1" Member="User_Sender" Storage="_User1" ThisKey="SenderUserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="User_SMS1" Member="User_Sender" Storage="_User1" ThisKey="SenderUserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="User">
@@ -96,6 +96,7 @@
       <Column Name="EnrollYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EnrollProgramID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="GraduateYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="User_Comment" Member="Comment" ThisKey="UserID" OtherKey="CommentUserID" Type="Comment" />
       <Association Name="User_SMS" Member="SMS_Receiver" Storage="_SMS" ThisKey="UserID" OtherKey="ReceiverUserID" Type="SMS" />
       <Association Name="User_SMS1" Member="SMS_Sender" Storage="_SMS1" ThisKey="UserID" OtherKey="SenderUserID" Type="SMS" />

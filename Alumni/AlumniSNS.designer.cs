@@ -1466,7 +1466,7 @@ namespace AlumniSNSDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_SMS1", Storage="_User1", ThisKey="SenderUserID", OtherKey="UserID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_SMS1", Storage="_User1", ThisKey="SenderUserID", OtherKey="UserID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public User User_Sender
 		{
 			get
@@ -1573,6 +1573,8 @@ namespace AlumniSNSDB
 		
 		private int _GraduateYear;
 		
+		private bool _IsApproved;
+		
 		private EntitySet<Comment> _Comment;
 		
 		private EntitySet<SMS> _SMS;
@@ -1639,6 +1641,8 @@ namespace AlumniSNSDB
     partial void OnEnrollProgramIDChanged();
     partial void OnGraduateYearChanging(int value);
     partial void OnGraduateYearChanged();
+    partial void OnIsApprovedChanging(bool value);
+    partial void OnIsApprovedChanged();
     #endregion
 		
 		public User()
@@ -2130,6 +2134,26 @@ namespace AlumniSNSDB
 					this._GraduateYear = value;
 					this.SendPropertyChanged("GraduateYear");
 					this.OnGraduateYearChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsApproved", DbType="Bit NOT NULL")]
+		public bool IsApproved
+		{
+			get
+			{
+				return this._IsApproved;
+			}
+			set
+			{
+				if ((this._IsApproved != value))
+				{
+					this.OnIsApprovedChanging(value);
+					this.SendPropertyChanging();
+					this._IsApproved = value;
+					this.SendPropertyChanged("IsApproved");
+					this.OnIsApprovedChanged();
 				}
 			}
 		}

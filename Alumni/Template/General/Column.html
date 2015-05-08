@@ -6,7 +6,11 @@
 
 {% block content -%}
         <div id="container">
+            {% if ThisColumn.IsSpecialCommand and ThisColumn.SpecialCommandName == "content" -%}
+            <div class="content" style="background-color: #f0f0f0;">
+            {% else -%}
             <div class="content" style="height: 700px;">
+            {% endif -%}
                 <div class="left">
                     <div class="top">
                         <div class="title">栏目子类</div>
@@ -43,7 +47,7 @@
                     {% endunless -%}
                 </div>
 
-                <div class="right">
+                <div class="right" {% if ThisColumn.IsSpecialCommand and ThisColumn.SpecialCommandName == "content" %}style="background-color: white; min-height: 400px;"{% endif %}>
                     <div class="title"><span>{{ ThisColumn.ColumnName }}&nbsp;<font color="red">&gt;&gt;</font></span></div>
                     {% if ThisColumn.IsSpecialCommand and ThisColumn.SpecialCommandName == "content" -%}
                     <div class="article"><div class="news">{{ ThisColumn.SpecialCommandArgument }}</div></div>

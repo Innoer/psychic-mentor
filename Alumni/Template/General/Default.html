@@ -230,13 +230,14 @@
 <div class="section3">
     <div class="content">
         <div class="icon"></div>
-        <form target="_blank" method="post" action="/SNS/FindMate.aspx">
+        <form target="_blank" method="get" action="/SNS/FindMate.aspx">
         <div class="center">
             <p>欢迎使用【找校友】功能！在这里，你可以找到多年前一起上过课的老朋友！</p>
             <p>你也可以通过<a href="#">注册校友网</a>，让他/她也能在这里找到你！</p>
             <div class="condition">
                 <p>入学年份</p>
                 <select name="enroll_year">
+                    <option value="0">（全部）</option>
                 {% for i in (1988...LatestEnrollYear) reversed -%}
                     <option value="{{ i }}">{{ i }}</option>
                 {% endfor -%}
@@ -245,6 +246,7 @@
             <div class="condition">
                 <p>就读专业</p>
                 <select name="enroll_program">
+                    <option value="0">（全部）</option>
                 {% for item in EnrollPrograms -%}
                     <option value="{{ item.ID }}">{{ item.Name }}</option>
                 {% endfor -%}
@@ -253,6 +255,7 @@
             <div class="condition">
                 <p>从事行业</p>
                 <select name="employ_category">
+                    <option value="0">（全部）</option>
                 {% for item in EmployCategory -%}
                     <option value="{{ item.ID }}">{{ item.Name }}</option>
                 {% endfor -%}
@@ -261,6 +264,7 @@
             <div class="condition">
                 <p>所在地区</p>
                 <select name="live_province">
+                    <option value="0">（全部）</option>
                 {% for item in LiveProvince -%}
                     <option value="{{ item.ID }}">{{ item.Name }}</option>
                 {% endfor -%}

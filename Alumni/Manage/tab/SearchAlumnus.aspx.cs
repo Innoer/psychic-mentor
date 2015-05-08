@@ -13,43 +13,68 @@ namespace Alumni.Manage.tag
 
      protected void Page_Load(object sender, EventArgs e)
      {
-         
-         var cols = from item in context.User
-                    join itemcity in context.LiveCity on item.LiveCityID equals itemcity.CityID
-                    join itemprovince in context.LiveProvince on item.LiveProvinceID equals itemprovince.ProvinceID
-                    join itemprogram in context.EnrollProgram on item.EnrollProgramID equals itemprogram.ProgramID
-                    join itemcategory in context.EmployCategory on item.EmployCategoryID equals itemcategory.CategoryID
-                    join itemnature in context.WorkplaceNature on item.WorkplaceNatureID equals itemnature.NatureID
-                    join itemschool in context.EnrollSchool on itemprogram.SchoolID equals itemschool.SchoolID
-                    select new
-                    {
-                        item.UserID,
-                        item.UserName,
-                        item.PassWord,
-                        item.Name,
-                        item.Sex,
-                        item.BirthDate,
-                        itemprovince.ProvinceName,
-                        itemcity.CityName,
-                        itemcategory.CategoryName,
-                        item.WorkplaceName,
-                        itemnature.NatureName,
-                        item.WorkTitle,
-                        item.MailingAddress,
-                        item.FixedPhone,
-                        item.MobilePhone,
-                        item.EMail,
-                        item.QQNo,
-                        item.WeChatID,
-                        item.ClassNo,
-                        item.StudentNo,
-                        item.EnrollYear,
-                        itemprogram.ProgramName,
-                        itemschool.SchoolName
-                    };
+         try
+         {
+             if (Session["logged"].ToString() != "true")
+                 Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+         }
+         catch (Exception)
+         {
+             Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+         }
+         if (!IsPostBack)
+         {
+             SNSDataContext context2 = new SNSDataContext();
+             var cols2 = from item in context2.EmployCategory
 
-         GridView1.DataSource = cols;
-         GridView1.DataBind();
+                         select new ListItem { Value = item.CategoryName.ToString(), Text = item.CategoryName };
+
+             DropDownList1.Items.AddRange(cols2.ToArray());
+             DropDownList1.Items.Insert(0, new ListItem("全部", "-1"));
+             DropDownList1.ClearSelection();
+             
+
+            SNSDataContext context3 = new SNSDataContext();
+            var cols3 = (from item in context3.User
+
+                        select new ListItem { Value = item.EnrollYear.ToString(), Text = item.EnrollYear.ToString() }).Distinct();
+
+             TimeDownList.Items.AddRange(cols3.ToArray());
+             TimeDownList.Items.Insert(0, new ListItem("全部", "-1"));
+             TimeDownList.ClearSelection();
+
+             var cols = from item in context.User
+                        where item.IsApproved==true
+                        select new
+                        {
+                            UserID = item.UserID,
+                            UserName = item.UserName,
+                            PassWord = item.PassWord,
+                            Name = item.Name,
+                            Sex = item.Sex == 0 ? "保密" : (item.Sex == 1 ? "男" : "女"),
+                            BirthDate = item.BirthDate,
+                            ProvinceName = item.LiveProvince.ProvinceName,
+                            CityName = item.LiveCity.CityName,
+                            CategoryName = item.EmployCategory.CategoryName,
+                            WorkplaceName = item.WorkplaceName,
+                            NatureName = item.WorkplaceNature.NatureName,
+                            WorkTitle = item.WorkTitle,
+                            MailingAddress = item.MailingAddress,
+                            FixedPhone = item.FixedPhone,
+                            MobilePhone = item.MobilePhone,
+                            EMail = item.EMail,
+                            QQNo = item.QQNo,
+                            WeChatID = item.WeChatID,
+                            ClassNo = item.ClassNo,
+                            StudentNo = item.StudentNo,
+                            EnrollYear = item.EnrollYear,
+                            ProgramName = item.EnrollProgram.ProgramName,
+                            SchoolName = item.EnrollProgram.EnrollSchool.SchoolName
+                        };
+
+             GridView1.DataSource = cols;
+             GridView1.DataBind();
+         }
       }
 
         protected void TimeDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,38 +83,34 @@ namespace Alumni.Manage.tag
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
+            
             var cols = from item in context.User
-                       join itemcity in context.LiveCity on item.LiveCityID equals itemcity.CityID
-                       join itemprovince in context.LiveProvince on item.LiveProvinceID equals itemprovince.ProvinceID
-                       join itemprogram in context.EnrollProgram on item.EnrollProgramID equals itemprogram.ProgramID
-                       join itemcategory in context.EmployCategory on item.EmployCategoryID equals itemcategory.CategoryID
-                       join itemnature in context.WorkplaceNature on item.WorkplaceNatureID equals itemnature.NatureID
-                       join itemschool in context.EnrollSchool on itemprogram.SchoolID equals itemschool.SchoolID
+                       where item.IsApproved == true
                        select new
                        {
-                           item.UserID,
-                           item.UserName,
-                           item.PassWord,
-                           item.Name,
-                           item.Sex,
-                           item.BirthDate,
-                           itemprovince.ProvinceName,
-                           itemcity.CityName,
-                           itemcategory.CategoryName,
-                           item.WorkplaceName,
-                           itemnature.NatureName,
-                           item.WorkTitle,
-                           item.MailingAddress,
-                           item.FixedPhone,
-                           item.MobilePhone,
-                           item.EMail,
-                           item.QQNo,
-                           item.WeChatID,
-                           item.ClassNo,
-                           item.StudentNo,
-                           item.EnrollYear,
-                           itemprogram.ProgramName,
-                           itemschool.SchoolName
+                           UserID = item.UserID,
+                           UserName = item.UserName,
+                           PassWord = item.PassWord,
+                           Name = item.Name,
+                           Sex = item.Sex == 0 ? "保密" : (item.Sex == 1 ? "男" : "女"),
+                           BirthDate = item.BirthDate,
+                           ProvinceName = item.LiveProvince.ProvinceName,
+                           CityName = item.LiveCity.CityName,
+                           CategoryName = item.EmployCategory.CategoryName,
+                           WorkplaceName = item.WorkplaceName,
+                           NatureName = item.WorkplaceNature.NatureName,
+                           WorkTitle = item.WorkTitle,
+                           MailingAddress = item.MailingAddress,
+                           FixedPhone = item.FixedPhone,
+                           MobilePhone = item.MobilePhone,
+                           EMail = item.EMail,
+                           QQNo = item.QQNo,
+                           WeChatID = item.WeChatID,
+                           ClassNo = item.ClassNo,
+                           StudentNo = item.StudentNo,
+                           EnrollYear = item.EnrollYear,
+                           ProgramName = item.EnrollProgram.ProgramName,
+                           SchoolName = item.EnrollProgram.EnrollSchool.SchoolName
                        };
             if (TextBox1.Text != "")
             {
@@ -98,14 +119,14 @@ namespace Alumni.Manage.tag
                           select item;
                 cols = col;
             }
-            if ((DropDownList1.SelectedIndex != -1) && (DropDownList1.Enabled == true))
+            if ((DropDownList1.SelectedValue.ToString()!="-1")&&DropDownList1.SelectedIndex != -1)
             {
                 var col = from item in cols
                           where item.CategoryName == DropDownList1.SelectedValue.ToString()
                           select item;
                 cols = col;
             }
-            if ((TimeDownList.SelectedIndex != -1)&& (TimeDownList.Enabled == true))
+            if ((TimeDownList.SelectedIndex != -1) && (TimeDownList.SelectedValue.ToString() != "-1"))
             {
                 var col = from item in cols
                           where item.EnrollYear == Convert.ToInt32(TimeDownList.SelectedValue)
@@ -117,29 +138,120 @@ namespace Alumni.Manage.tag
             GridView1.DataBind();
         }
 
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+       
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CheckBox1.Checked == true)
-            {
-                DropDownList1.Enabled = true;
-            }
-            else
-            {
-                DropDownList1.Enabled = false;
-            }
+            
+            var cols1 = from item in context.User
+                        where item.IsApproved == true
+                       select new
+                       {
+                           UserID = item.UserID,
+                           UserName = item.UserName,
+                           PassWord = item.PassWord,
+                           Name = item.Name,
+                           Sex = item.Sex == 0 ? "保密" : (item.Sex == 1 ? "男" : "女"),
+                           BirthDate = item.BirthDate,
+                           ProvinceName = item.LiveProvince.ProvinceName,
+                           CityName = item.LiveCity.CityName,
+                           CategoryName = item.EmployCategory.CategoryName,
+                           WorkplaceName = item.WorkplaceName,
+                           NatureName = item.WorkplaceNature.NatureName,
+                           WorkTitle = item.WorkTitle,
+                           MailingAddress = item.MailingAddress,
+                           FixedPhone = item.FixedPhone,
+                           MobilePhone = item.MobilePhone,
+                           EMail = item.EMail,
+                           QQNo = item.QQNo,
+                           WeChatID = item.WeChatID,
+                           ClassNo = item.ClassNo,
+                           StudentNo = item.StudentNo,
+                           EnrollYear = item.EnrollYear,
+                           ProgramName = item.EnrollProgram.ProgramName,
+                           SchoolName = item.EnrollProgram.EnrollSchool.SchoolName
+                       };
+            panel1.Visible = true;
+            int articleID = Convert.ToInt32(GridView1.SelectedValue);
+            TextBox2.Text = articleID.ToString();
+            var ID = int.Parse(TextBox2.Text.ToString());
+            var article = cols1.First(ar => ar.UserID == ID);
+            Label18.Text = article.UserName;
+            Label19.Text = article.PassWord;
+            Label20.Text = article.Name;
+            Label21.Text = article.CategoryName;
+            Label22.Text = article.NatureName;
+            Label23.Text = article.WorkplaceName;
+            Label24.Text = article.WorkTitle;
+            Label25.Text = article.MailingAddress;
+            Label26.Text = article.FixedPhone;
+            Label27.Text = article.MobilePhone;
+            Label28.Text = article.EMail;
+            Label29.Text = article.QQNo;
+            Label30.Text = article.WeChatID;
+            Label31.Text = article.ProgramName;
         }
 
-        protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (CheckBox2.Checked == true)
-            {
+            
+        }
 
-                TimeDownList.Enabled = true;
-            }
-            else
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            var cols = from item in context.User
+                       where item.IsApproved == true
+                       select new
+                       {
+                           UserID = item.UserID,
+                           UserName = item.UserName,
+                           PassWord = item.PassWord,
+                           Name = item.Name,
+                           Sex = item.Sex == 0 ? "保密" : (item.Sex == 1 ? "男" : "女"),
+                           BirthDate = item.BirthDate,
+                           ProvinceName = item.LiveProvince.ProvinceName,
+                           CityName = item.LiveCity.CityName,
+                           CategoryName = item.EmployCategory.CategoryName,
+                           WorkplaceName = item.WorkplaceName,
+                           NatureName = item.WorkplaceNature.NatureName,
+                           WorkTitle = item.WorkTitle,
+                           MailingAddress = item.MailingAddress,
+                           FixedPhone = item.FixedPhone,
+                           MobilePhone = item.MobilePhone,
+                           EMail = item.EMail,
+                           QQNo = item.QQNo,
+                           WeChatID = item.WeChatID,
+                           ClassNo = item.ClassNo,
+                           StudentNo = item.StudentNo,
+                           EnrollYear = item.EnrollYear,
+                           ProgramName = item.EnrollProgram.ProgramName,
+                           SchoolName = item.EnrollProgram.EnrollSchool.SchoolName
+                       };
+            if (TextBox1.Text != "")
             {
-                TimeDownList.Enabled = false;
+                var col = from item in cols
+                          where item.Name == TextBox1.Text
+                          select item;
+                cols = col;
             }
+            if ((DropDownList1.SelectedValue.ToString() != "-1") && DropDownList1.SelectedIndex != -1)
+            {
+                var col = from item in cols
+                          where item.CategoryName == DropDownList1.SelectedValue.ToString()
+                          select item;
+                cols = col;
+            }
+            if ((TimeDownList.SelectedIndex != -1) && (TimeDownList.SelectedValue.ToString() != "-1"))
+            {
+                var col = from item in cols
+                          where item.EnrollYear == Convert.ToInt32(TimeDownList.SelectedValue)
+                          select item;
+                cols = col;
+            }
+
+            GridView1.DataSource = cols;
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
         }
     }
 }

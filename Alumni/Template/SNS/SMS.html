@@ -33,7 +33,7 @@
                         <div class="box" style="border-bottom: 1px solid #1a5e8e;">
                             <a href="/SNS/SMS.aspx?Method=Inbox" {% if Method == "Inbox" %}class="selected"{% endif %}>收件箱</a>
                             <a href="/SNS/SMS.aspx?Method=Outbox" {% if Method == "Outbox" %}class="selected"{% endif %}>发件箱</a>
-                            {% if Method == "Send" %}<a href="/SNS/SMS.aspx?Method=Send" class="selected">发消息</a>{% endif %}
+                            <a href="/SNS/SMS.aspx?Method=Send" {% if Method == "Send" %}class="selected"{% endif %}>发消息</a>
                         </div>
                         {% if Method == "Send" -%}
                             <div class="send">

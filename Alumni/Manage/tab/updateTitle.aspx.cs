@@ -12,6 +12,19 @@ namespace Alumni.Manage.tab
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            CKFinder.FileBrowser _FileBrowser = new CKFinder.FileBrowser();
+            _FileBrowser.BasePath = "../../ckfinder/";
+            
+            _FileBrowser.SetupCKEditor(textContent);
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
             if (!IsPostBack)
             {
                 Button1.Enabled = false;
@@ -30,7 +43,7 @@ namespace Alumni.Manage.tab
 
         protected void newsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //panel1.Visible = true;
             Button1.Enabled = true;
             DBDataContext context = new DBDataContext();
             //nt columnID = int.Parse(newsGridView.DataKeys[e.NewSelectedIndex].Value.ToString());
@@ -155,6 +168,7 @@ namespace Alumni.Manage.tab
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            
             DBDataContext context = new DBDataContext();
             if (CheckBox2.Checked)
             {
@@ -267,6 +281,7 @@ namespace Alumni.Manage.tab
             }
 
             Response.Redirect("/Manage/tab/updateTitle.aspx", true);
+            panel1.Visible = false;
         }
 
         protected void CheckBox2_CheckedChanged(object sender, EventArgs e)

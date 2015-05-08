@@ -9,6 +9,14 @@ public partial class admin_left : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        try
+        {
+            if (Session["logged"].ToString() != "true")
+                Response.Redirect("tab/overTime.htm", true);
+        }
+        catch (Exception)
+        {
+            Response.Redirect("tab/overTime.htm", true);
+        }
     }
 }

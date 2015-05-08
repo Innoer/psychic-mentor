@@ -49,7 +49,7 @@
                                 <div class="clear"></div>
                                 <div class="input short">
                                     <p>生&emsp;&emsp;日</p>
-                                    <input type="date" class="text" name="birth_date" id="birth_date" value="{{ BirthDate | Date: 'yyyy-MM-dd' }}" />
+                                    <input type="text" class="text" name="birth_date" id="birth_date" value="{{ BirthDate | Date: 'yyyy-MM-dd' }}" />
                                 </div>
                                 <div class="input short" style="margin-left: 10px;"><p style="width: 300px;">格式：yyyy-MM-dd，如1987-12-23</p></div>
                                 <div class="clear"></div>
@@ -195,9 +195,7 @@
 {% block otherJS %}
 <script language="javascript" type="text/javascript">
         $(function () {
-            OBJREG.DATE = "^[1|2]\\d{3}\\-[0|1]?\\d\\-[0-3]?\\d$";
-
-            setProgramBySchool({{ EnrollSchoolID }}, {{ EnrollProgramID }});
+            setProgramBySchool({{ EnrollSchoolID }}, {{ EnrollProgramID }}, false);
             setCityByProvince({{ LiveProvinceID }}, {{ LiveCityID }});
 
             $("#enroll_year").selectbox({
@@ -219,6 +217,11 @@
                 validate: function () {
                     if (!/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z ]){2,40}$/.test($("#name").val())) {
                         $("#name").testRemind("只能包含汉字、字母和空格，且长度为2至40位！");
+                        return false;
+                    }
+
+                    if ($("#birth_date").val().length > 0 && !/^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$/.test($("#birth_date").val())) {
+                        $("#birth_date").testRemind("日期格式不正确！");
                         return false;
                     }
 

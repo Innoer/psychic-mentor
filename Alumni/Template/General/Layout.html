@@ -97,6 +97,7 @@
         {% block content -%}{% endblock -%}
     </div>
 
+    {% if IsSignIn == false -%}
     <div id="cover_bg"></div>
     <div class="dialog" id="dialog_signin">
         <p class='loading'>加载中…</p>
@@ -106,6 +107,7 @@
         <p class='loading'>加载中…</p>
         <iframe id="signup_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="display: none;"></iframe>
     </div>
+    {% endif -%}
 
     <div class="service">
         <ul>

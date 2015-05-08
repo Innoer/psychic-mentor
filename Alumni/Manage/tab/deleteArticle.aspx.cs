@@ -11,7 +11,15 @@ namespace Alumni.Manage.tab
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
         }
 
         protected void GridView_RowDeleting(object sender, GridViewDeleteEventArgs e)

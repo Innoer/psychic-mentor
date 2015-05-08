@@ -12,7 +12,15 @@ namespace Alumni.Manage.tab
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
             if (!IsPostBack)
             {
                 DBDataContext context = new DBDataContext();
@@ -96,6 +104,8 @@ namespace Alumni.Manage.tab
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /*
+            //panel1.Visible = true;
             DBDataContext context = new DBDataContext();
             int articleID = Convert.ToInt32(GridView1.SelectedValue);
             TextBox2.Text = articleID.ToString();
@@ -108,7 +118,9 @@ namespace Alumni.Manage.tab
             label12.Text = article.PictureURL;
             label13.Text = article.Keywords;
             label14.Text = article.Source;
-            label15.Text = article.Content;
+            label15.Text = article.Content;*/
+            int ID = int.Parse(GridView1.SelectedValue.ToString());
+            Response.Write("<script>window.open('/ShowArticle.aspx?ArticleID=" + ID + "','_blank')</script>");
 
 
         }

@@ -31,9 +31,9 @@ namespace Alumni
     partial void InsertArticles(AlumniDB.Articles instance);
     partial void UpdateArticles(AlumniDB.Articles instance);
     partial void DeleteArticles(AlumniDB.Articles instance);
-    partial void InsertUsers(AlumniDB.Users instance);
-    partial void UpdateUsers(AlumniDB.Users instance);
-    partial void DeleteUsers(AlumniDB.Users instance);
+    partial void InsertVideos(AlumniDB.Videos instance);
+    partial void UpdateVideos(AlumniDB.Videos instance);
+    partial void DeleteVideos(AlumniDB.Videos instance);
     partial void InsertColumns(AlumniDB.Columns instance);
     partial void UpdateColumns(AlumniDB.Columns instance);
     partial void DeleteColumns(AlumniDB.Columns instance);
@@ -46,13 +46,13 @@ namespace Alumni
     partial void InsertTemplates(AlumniDB.Templates instance);
     partial void UpdateTemplates(AlumniDB.Templates instance);
     partial void DeleteTemplates(AlumniDB.Templates instance);
-    partial void InsertVideos(AlumniDB.Videos instance);
-    partial void UpdateVideos(AlumniDB.Videos instance);
-    partial void DeleteVideos(AlumniDB.Videos instance);
+    partial void InsertUsers(AlumniDB.Users instance);
+    partial void UpdateUsers(AlumniDB.Users instance);
+    partial void DeleteUsers(AlumniDB.Users instance);
     #endregion
 		
 		public DBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["AlumniConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -89,11 +89,11 @@ namespace Alumni
 			}
 		}
 		
-		public System.Data.Linq.Table<AlumniDB.Users> Users
+		public System.Data.Linq.Table<AlumniDB.Videos> Videos
 		{
 			get
 			{
-				return this.GetTable<AlumniDB.Users>();
+				return this.GetTable<AlumniDB.Videos>();
 			}
 		}
 		
@@ -145,11 +145,11 @@ namespace Alumni
 			}
 		}
 		
-		public System.Data.Linq.Table<AlumniDB.Videos> Videos
+		public System.Data.Linq.Table<AlumniDB.Users> Users
 		{
 			get
 			{
-				return this.GetTable<AlumniDB.Videos>();
+				return this.GetTable<AlumniDB.Users>();
 			}
 		}
 	}
@@ -192,9 +192,9 @@ namespace AlumniDB
 		
 		private string _Content;
 		
-		private EntityRef<Users> _Users;
-		
 		private EntityRef<Columns> _Columns;
+		
+		private EntityRef<Users> _Users;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -228,8 +228,8 @@ namespace AlumniDB
 		
 		public Articles()
 		{
-			this._Users = default(EntityRef<Users>);
 			this._Columns = default(EntityRef<Columns>);
+			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
 		
@@ -481,40 +481,6 @@ namespace AlumniDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Articles", Storage="_Users", ThisKey="PublishUserID", OtherKey="UserID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Users Users
-		{
-			get
-			{
-				return this._Users.Entity;
-			}
-			set
-			{
-				Users previousValue = this._Users.Entity;
-				if (((previousValue != value) 
-							|| (this._Users.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Users.Entity = null;
-						previousValue.Articles.Remove(this);
-					}
-					this._Users.Entity = value;
-					if ((value != null))
-					{
-						value.Articles.Add(this);
-						this._PublishUserID = value.UserID;
-					}
-					else
-					{
-						this._PublishUserID = default(int);
-					}
-					this.SendPropertyChanged("Users");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Columns_Articles", Storage="_Columns", ThisKey="ColumnID", OtherKey="ColumnID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Columns Columns
 		{
@@ -549,6 +515,40 @@ namespace AlumniDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Articles", Storage="_Users", ThisKey="PublishUserID", OtherKey="UserID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.Articles.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.Articles.Add(this);
+						this._PublishUserID = value.UserID;
+					}
+					else
+					{
+						this._PublishUserID = default(int);
+					}
+					this.SendPropertyChanged("Users");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -570,148 +570,205 @@ namespace AlumniDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Videos")]
+	public partial class Videos : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _UserID;
+		private int _VideoID;
 		
-		private string _UserName;
+		private string _VideoTitle;
 		
-		private string _PassWord;
+		private string _VideoIntroduction;
 		
-		private int _Level;
+		private System.DateTime _VideoUploadTime;
 		
-		private EntitySet<Articles> _Articles;
+		private int _VideoUploaderID;
 		
-		private EntitySet<Videos> _Videos;
+		private string _VideoURL;
+		
+		private EntityRef<Users> _Users;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserIDChanging(int value);
-    partial void OnUserIDChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPassWordChanging(string value);
-    partial void OnPassWordChanged();
-    partial void OnLevelChanging(int value);
-    partial void OnLevelChanged();
+    partial void OnVideoIDChanging(int value);
+    partial void OnVideoIDChanged();
+    partial void OnVideoTitleChanging(string value);
+    partial void OnVideoTitleChanged();
+    partial void OnVideoIntroductionChanging(string value);
+    partial void OnVideoIntroductionChanged();
+    partial void OnVideoUploadTimeChanging(System.DateTime value);
+    partial void OnVideoUploadTimeChanged();
+    partial void OnVideoUploaderIDChanging(int value);
+    partial void OnVideoUploaderIDChanged();
+    partial void OnVideoURLChanging(string value);
+    partial void OnVideoURLChanged();
     #endregion
 		
-		public Users()
+		public Videos()
 		{
-			this._Articles = new EntitySet<Articles>(new Action<Articles>(this.attach_Articles), new Action<Articles>(this.detach_Articles));
-			this._Videos = new EntitySet<Videos>(new Action<Videos>(this.attach_Videos), new Action<Videos>(this.detach_Videos));
+			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UserID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int VideoID
 		{
 			get
 			{
-				return this._UserID;
+				return this._VideoID;
 			}
 			set
 			{
-				if ((this._UserID != value))
+				if ((this._VideoID != value))
 				{
-					this.OnUserIDChanging(value);
+					this.OnVideoIDChanging(value);
 					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
+					this._VideoID = value;
+					this.SendPropertyChanged("VideoID");
+					this.OnVideoIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoTitle", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string VideoTitle
 		{
 			get
 			{
-				return this._UserName;
+				return this._VideoTitle;
 			}
 			set
 			{
-				if ((this._UserName != value))
+				if ((this._VideoTitle != value))
 				{
-					this.OnUserNameChanging(value);
+					this.OnVideoTitleChanging(value);
 					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
+					this._VideoTitle = value;
+					this.SendPropertyChanged("VideoTitle");
+					this.OnVideoTitleChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassWord", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string PassWord
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoIntroduction", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string VideoIntroduction
 		{
 			get
 			{
-				return this._PassWord;
+				return this._VideoIntroduction;
 			}
 			set
 			{
-				if ((this._PassWord != value))
+				if ((this._VideoIntroduction != value))
 				{
-					this.OnPassWordChanging(value);
+					this.OnVideoIntroductionChanging(value);
 					this.SendPropertyChanging();
-					this._PassWord = value;
-					this.SendPropertyChanged("PassWord");
-					this.OnPassWordChanged();
+					this._VideoIntroduction = value;
+					this.SendPropertyChanged("VideoIntroduction");
+					this.OnVideoIntroductionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Level]", Storage="_Level", DbType="Int NOT NULL")]
-		public int Level
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoUploadTime", DbType="DateTime NOT NULL")]
+		public System.DateTime VideoUploadTime
 		{
 			get
 			{
-				return this._Level;
+				return this._VideoUploadTime;
 			}
 			set
 			{
-				if ((this._Level != value))
+				if ((this._VideoUploadTime != value))
 				{
-					this.OnLevelChanging(value);
+					this.OnVideoUploadTimeChanging(value);
 					this.SendPropertyChanging();
-					this._Level = value;
-					this.SendPropertyChanged("Level");
-					this.OnLevelChanged();
+					this._VideoUploadTime = value;
+					this.SendPropertyChanged("VideoUploadTime");
+					this.OnVideoUploadTimeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Articles", Storage="_Articles", ThisKey="UserID", OtherKey="PublishUserID")]
-		public EntitySet<Articles> Articles
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoUploaderID", DbType="Int NOT NULL")]
+		public int VideoUploaderID
 		{
 			get
 			{
-				return this._Articles;
+				return this._VideoUploaderID;
 			}
 			set
 			{
-				this._Articles.Assign(value);
+				if ((this._VideoUploaderID != value))
+				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnVideoUploaderIDChanging(value);
+					this.SendPropertyChanging();
+					this._VideoUploaderID = value;
+					this.SendPropertyChanged("VideoUploaderID");
+					this.OnVideoUploaderIDChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Videos", Storage="_Videos", ThisKey="UserID", OtherKey="VideoUploaderID")]
-		public EntitySet<Videos> Videos
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoURL", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string VideoURL
 		{
 			get
 			{
-				return this._Videos;
+				return this._VideoURL;
 			}
 			set
 			{
-				this._Videos.Assign(value);
+				if ((this._VideoURL != value))
+				{
+					this.OnVideoURLChanging(value);
+					this.SendPropertyChanging();
+					this._VideoURL = value;
+					this.SendPropertyChanged("VideoURL");
+					this.OnVideoURLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Videos", Storage="_Users", ThisKey="VideoUploaderID", OtherKey="UserID", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.Videos.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.Videos.Add(this);
+						this._VideoUploaderID = value.UserID;
+					}
+					else
+					{
+						this._VideoUploaderID = default(int);
+					}
+					this.SendPropertyChanged("Users");
+				}
 			}
 		}
 		
@@ -733,30 +790,6 @@ namespace AlumniDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Articles(Articles entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_Articles(Articles entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-		
-		private void attach_Videos(Videos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_Videos(Videos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
 		}
 	}
 	
@@ -1546,205 +1579,148 @@ namespace AlumniDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Videos")]
-	public partial class Videos : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _VideoID;
+		private int _UserID;
 		
-		private string _VideoTitle;
+		private string _UserName;
 		
-		private string _VideoIntroduction;
+		private string _PassWord;
 		
-		private System.DateTime _VideoUploadTime;
+		private int _Level;
 		
-		private int _VideoUploaderID;
+		private EntitySet<Articles> _Articles;
 		
-		private string _VideoURL;
-		
-		private EntityRef<Users> _Users;
+		private EntitySet<Videos> _Videos;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnVideoIDChanging(int value);
-    partial void OnVideoIDChanged();
-    partial void OnVideoTitleChanging(string value);
-    partial void OnVideoTitleChanged();
-    partial void OnVideoIntroductionChanging(string value);
-    partial void OnVideoIntroductionChanged();
-    partial void OnVideoUploadTimeChanging(System.DateTime value);
-    partial void OnVideoUploadTimeChanged();
-    partial void OnVideoUploaderIDChanging(int value);
-    partial void OnVideoUploaderIDChanged();
-    partial void OnVideoURLChanging(string value);
-    partial void OnVideoURLChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPassWordChanging(string value);
+    partial void OnPassWordChanged();
+    partial void OnLevelChanging(int value);
+    partial void OnLevelChanged();
     #endregion
 		
-		public Videos()
+		public Users()
 		{
-			this._Users = default(EntityRef<Users>);
+			this._Articles = new EntitySet<Articles>(new Action<Articles>(this.attach_Articles), new Action<Articles>(this.detach_Articles));
+			this._Videos = new EntitySet<Videos>(new Action<Videos>(this.attach_Videos), new Action<Videos>(this.detach_Videos));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int VideoID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UserID
 		{
 			get
 			{
-				return this._VideoID;
+				return this._UserID;
 			}
 			set
 			{
-				if ((this._VideoID != value))
+				if ((this._UserID != value))
 				{
-					this.OnVideoIDChanging(value);
+					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._VideoID = value;
-					this.SendPropertyChanged("VideoID");
-					this.OnVideoIDChanged();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoTitle", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string VideoTitle
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UserName
 		{
 			get
 			{
-				return this._VideoTitle;
+				return this._UserName;
 			}
 			set
 			{
-				if ((this._VideoTitle != value))
+				if ((this._UserName != value))
 				{
-					this.OnVideoTitleChanging(value);
+					this.OnUserNameChanging(value);
 					this.SendPropertyChanging();
-					this._VideoTitle = value;
-					this.SendPropertyChanged("VideoTitle");
-					this.OnVideoTitleChanged();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoIntroduction", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string VideoIntroduction
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassWord", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PassWord
 		{
 			get
 			{
-				return this._VideoIntroduction;
+				return this._PassWord;
 			}
 			set
 			{
-				if ((this._VideoIntroduction != value))
+				if ((this._PassWord != value))
 				{
-					this.OnVideoIntroductionChanging(value);
+					this.OnPassWordChanging(value);
 					this.SendPropertyChanging();
-					this._VideoIntroduction = value;
-					this.SendPropertyChanged("VideoIntroduction");
-					this.OnVideoIntroductionChanged();
+					this._PassWord = value;
+					this.SendPropertyChanged("PassWord");
+					this.OnPassWordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoUploadTime", DbType="DateTime NOT NULL")]
-		public System.DateTime VideoUploadTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Level]", Storage="_Level", DbType="Int NOT NULL")]
+		public int Level
 		{
 			get
 			{
-				return this._VideoUploadTime;
+				return this._Level;
 			}
 			set
 			{
-				if ((this._VideoUploadTime != value))
+				if ((this._Level != value))
 				{
-					this.OnVideoUploadTimeChanging(value);
+					this.OnLevelChanging(value);
 					this.SendPropertyChanging();
-					this._VideoUploadTime = value;
-					this.SendPropertyChanged("VideoUploadTime");
-					this.OnVideoUploadTimeChanged();
+					this._Level = value;
+					this.SendPropertyChanged("Level");
+					this.OnLevelChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoUploaderID", DbType="Int NOT NULL")]
-		public int VideoUploaderID
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Articles", Storage="_Articles", ThisKey="UserID", OtherKey="PublishUserID")]
+		public EntitySet<Articles> Articles
 		{
 			get
 			{
-				return this._VideoUploaderID;
+				return this._Articles;
 			}
 			set
 			{
-				if ((this._VideoUploaderID != value))
-				{
-					if (this._Users.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnVideoUploaderIDChanging(value);
-					this.SendPropertyChanging();
-					this._VideoUploaderID = value;
-					this.SendPropertyChanged("VideoUploaderID");
-					this.OnVideoUploaderIDChanged();
-				}
+				this._Articles.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VideoURL", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string VideoURL
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Videos", Storage="_Videos", ThisKey="UserID", OtherKey="VideoUploaderID")]
+		public EntitySet<Videos> Videos
 		{
 			get
 			{
-				return this._VideoURL;
+				return this._Videos;
 			}
 			set
 			{
-				if ((this._VideoURL != value))
-				{
-					this.OnVideoURLChanging(value);
-					this.SendPropertyChanging();
-					this._VideoURL = value;
-					this.SendPropertyChanged("VideoURL");
-					this.OnVideoURLChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Videos", Storage="_Users", ThisKey="VideoUploaderID", OtherKey="UserID", IsForeignKey=true)]
-		public Users Users
-		{
-			get
-			{
-				return this._Users.Entity;
-			}
-			set
-			{
-				Users previousValue = this._Users.Entity;
-				if (((previousValue != value) 
-							|| (this._Users.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Users.Entity = null;
-						previousValue.Videos.Remove(this);
-					}
-					this._Users.Entity = value;
-					if ((value != null))
-					{
-						value.Videos.Add(this);
-						this._VideoUploaderID = value.UserID;
-					}
-					else
-					{
-						this._VideoUploaderID = default(int);
-					}
-					this.SendPropertyChanged("Users");
-				}
+				this._Videos.Assign(value);
 			}
 		}
 		
@@ -1766,6 +1742,30 @@ namespace AlumniDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Articles(Articles entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_Articles(Articles entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_Videos(Videos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_Videos(Videos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
 		}
 	}
 }

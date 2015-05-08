@@ -1,12 +1,21 @@
 ﻿<%@ Page Language="C#" ValidateRequest="false" AutoEventWireup="true" CodeBehind="addTitle.aspx.cs" Inherits="Alumni.Manage.tab.addTitle" %>
 
-
+<%@ Register assembly="CKEditor.NET" namespace="CKEditor.NET" tagprefix="CKEditor" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-    <script type="text/javascript" src="/Template/Common/ckeditor/ckeditor.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- viewport的<meta>标签，这个标签可以修改在大部分的移动设备上面的显示，为了确保适当的绘制和触屏缩放。-->
+
+<title></title>
+
+<!--样式文件引用-->
+
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
      
     <style type="text/css">
         .style1
@@ -28,12 +37,22 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div align="left">
-        <asp:Label ID="Label1" runat="server" Text="当前位置：增加栏目"></asp:Label>
+    <div>
         <br />
+    <asp:Label ID="Label11" runat="server" Text="当前位置：栏目管理&gt;&gt;增加栏目" 
+            Font-Size="10pt"></asp:Label>
+        <br />
+        <asp:Image ID="Image5" runat="server" Height="1px" Width="97%" 
+            BackColor="Blue" />
+        <br />
+        <br />
+    </div>
+    <div align="left">
+        
         <table>
             <tr>
                 <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:CheckBox ID="CheckBox2" runat="server" Text="一级标题" 
                         
                         oncheckedchanged="CheckBox2_CheckedChanged" AutoPostBack="True" />
@@ -44,7 +63,7 @@
                         DataTextField="ColumnName" DataValueField="ColumnID">
                     </asp:DropDownList>
                     &nbsp;&nbsp;&nbsp;
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" Visible="False"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -53,34 +72,31 @@
                 </td>
                 <td class="style1">
                     &nbsp;
-                   <asp:TextBox ID="textTitle" runat="server" Width="220px"></asp:TextBox>
+                   <asp:TextBox ID="textTitle" runat="server" Width="219px"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td>
-                    可见性：
+                    可见：
                 </td>
                 <td class="style1">
-                    &nbsp;
-                    <asp:CheckBox ID="CheckBox1" runat="server" Text="可见"  />
+                    <asp:CheckBox ID="CheckBox1" runat="server"  />
                 </td>
             </tr>
             <tr>
                 <td class="style2">
-                    可否删除：
+                    可删除：
                 </td>
                 <td class="style3">
-                    &nbsp;
-                    <asp:CheckBox ID="CheckBox3" runat="server" Text="可删除"  />
+                    <asp:CheckBox ID="CheckBox3" runat="server"  />
                 </td>
             </tr>
             <tr>
                 <td class="style2">
-                    是否有特殊跳转：
+                    有特殊跳转：
                 </td>
                 <td class="style3">
-                    &nbsp;
-                    <asp:CheckBox ID="CheckBox4" runat="server" Text="是" AutoPostBack="True" 
+                    <asp:CheckBox ID="CheckBox4" runat="server" AutoPostBack="True" 
                         oncheckedchanged="CheckBox4_CheckedChanged"  />
                 </td>
             </tr>
@@ -114,8 +130,9 @@
                 </td>
                 <td class="style1">
                     &nbsp;
-                    <asp:TextBox ID="textContent" runat="server" CssClass="ckeditor" Rows="10" 
-            TextMode="MultiLine" Width="100%"></asp:TextBox></td>
+                    <CKEditor:CKEditorControl ID="textContent" runat="server">
+        </CKEditor:CKEditorControl>
+                    
             </tr>
             <tr>
                 <td>
@@ -140,5 +157,8 @@
         SelectCommand="SELECT [ColumnID], [ColumnName] FROM [Columns]">
     </asp:SqlDataSource>
     </form>
+    <script type="text/javascript" src="../bootstrap/js/jquery-2.1.3.min.js"></script>
+
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

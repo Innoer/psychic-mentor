@@ -12,8 +12,17 @@ namespace Alumni.Manage.tab
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
             SNSDataContext context = new SNSDataContext();
-            var cols = from item in context.User
+            /*var cols = from item in context.User
                        join itemcity in context.LiveCity on item.LiveCityID equals itemcity.CityID
                        join itemprovince in context.LiveProvince on item.LiveProvinceID equals itemprovince.ProvinceID
                        join itemprogram in context.EnrollProgram on item.EnrollProgramID equals itemprogram.ProgramID
@@ -45,6 +54,34 @@ namespace Alumni.Manage.tab
                            item.EnrollYear,
                            itemprogram.ProgramName,
                            itemschool.SchoolName
+                       };*/
+            var cols = from item in context.User
+                       where item.IsApproved == true
+                       select new
+                       {
+                           UserID = item.UserID,
+                           UserName = item.UserName,
+                           PassWord = item.PassWord,
+                           Name = item.Name,
+                           Sex = item.Sex == 0 ? "保密" : (item.Sex == 1 ? "男" : "女"),
+                           BirthDate = item.BirthDate,
+                           ProvinceName = item.LiveProvince.ProvinceName,
+                           CityName = item.LiveCity.CityName,
+                           CategoryName = item.EmployCategory.CategoryName,
+                           WorkplaceName = item.WorkplaceName,
+                           NatureName = item.WorkplaceNature.NatureName,
+                           WorkTitle = item.WorkTitle,
+                           MailingAddress = item.MailingAddress,
+                           FixedPhone = item.FixedPhone,
+                           MobilePhone = item.MobilePhone,
+                           EMail = item.EMail,
+                           QQNo = item.QQNo,
+                           WeChatID = item.WeChatID,
+                           ClassNo = item.ClassNo,
+                           StudentNo = item.StudentNo,
+                           EnrollYear = item.EnrollYear,
+                           ProgramName = item.EnrollProgram.ProgramName,
+                           SchoolName = item.EnrollProgram.EnrollSchool.SchoolName
                        };
             if (!IsPostBack)
             {
@@ -72,6 +109,7 @@ namespace Alumni.Manage.tab
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //panel1.Visible = false;
             SNSDataContext context = new SNSDataContext();
             var articleID = int.Parse(TextBox18.Text.ToString());
             var article = context.User.Single(item => item.UserID == articleID);
@@ -82,7 +120,7 @@ namespace Alumni.Manage.tab
              article.Name=TextBox4.Text;
              article.Sex = int.Parse(DropDownList6.SelectedValue);
             article.LiveProvinceID=int.Parse(DropDownList1.SelectedValue);
-           article.BirthDate=Calendar1.SelectedDate.Date;
+            article.BirthDate = Convert.ToDateTime(TextBox19.Text.ToString());
            article.LiveCityID = int.Parse(DropDownList2.SelectedValue);
            article.EmployCategoryID = int.Parse(DropDownList3.SelectedValue);
            article.WorkplaceNatureID = int.Parse(DropDownList4.SelectedValue);
@@ -109,6 +147,7 @@ namespace Alumni.Manage.tab
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //panel1.Visible = true;
             SNSDataContext context = new SNSDataContext();
             int articleID = Convert.ToInt32(GridView1.SelectedValue);
             TextBox18.Text = articleID.ToString();
@@ -125,7 +164,7 @@ namespace Alumni.Manage.tab
             DropDownList1.ClearSelection();
             DropDownList1.Items.FindByValue(article.LiveProvinceID.ToString()).Selected = true;
 
-            Calendar1.SelectedDate = article.BirthDate.Value.Date;
+            TextBox19.Text = article.BirthDate.Value.Date.ToString();
 
 
             DropDownList2.ClearSelection();
@@ -244,7 +283,7 @@ namespace Alumni.Manage.tab
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             SNSDataContext context = new SNSDataContext();
-            var cols = from item in context.User
+            /*var cols = from item in context.User
                        join itemcity in context.LiveCity on item.LiveCityID equals itemcity.CityID
                        join itemprovince in context.LiveProvince on item.LiveProvinceID equals itemprovince.ProvinceID
                        join itemprogram in context.EnrollProgram on item.EnrollProgramID equals itemprogram.ProgramID
@@ -276,6 +315,34 @@ namespace Alumni.Manage.tab
                            item.EnrollYear,
                            itemprogram.ProgramName,
                            itemschool.SchoolName
+                       };*/
+            var cols = from item in context.User
+                       where item.IsApproved == true
+                       select new
+                       {
+                           UserID = item.UserID,
+                           UserName = item.UserName,
+                           PassWord = item.PassWord,
+                           Name = item.Name,
+                           Sex = item.Sex == 0 ? "保密" : (item.Sex == 1 ? "男" : "女"),
+                           BirthDate = item.BirthDate,
+                           ProvinceName = item.LiveProvince.ProvinceName,
+                           CityName = item.LiveCity.CityName,
+                           CategoryName = item.EmployCategory.CategoryName,
+                           WorkplaceName = item.WorkplaceName,
+                           NatureName = item.WorkplaceNature.NatureName,
+                           WorkTitle = item.WorkTitle,
+                           MailingAddress = item.MailingAddress,
+                           FixedPhone = item.FixedPhone,
+                           MobilePhone = item.MobilePhone,
+                           EMail = item.EMail,
+                           QQNo = item.QQNo,
+                           WeChatID = item.WeChatID,
+                           ClassNo = item.ClassNo,
+                           StudentNo = item.StudentNo,
+                           EnrollYear = item.EnrollYear,
+                           ProgramName = item.EnrollProgram.ProgramName,
+                           SchoolName = item.EnrollProgram.EnrollSchool.SchoolName
                        };
             GridView1.DataSource = cols;
             GridView1.PageIndex = e.NewPageIndex;

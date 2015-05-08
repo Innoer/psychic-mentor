@@ -11,7 +11,30 @@ namespace Alumni.Manage.tag
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            SNSDataContext context = new SNSDataContext();
+            var cols = from item in context.Comment
+                       select new
+                       {
+                           CommentUserID = item.CommentUserID,
+                           CommentDate = item.CommentDate,
+                           AdminReplyDate = item.AdminReplyDate,
+                       };
 
+            GridView1.DataSource = cols;
+            GridView1.DataBind();
+            if (cols.Count() == 0)
+            {
+                Label12.Visible = true;
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -42,6 +65,23 @@ namespace Alumni.Manage.tag
             com.AdminReplyDate = DateTime.Now.Date;
             context.SubmitChanges();
             GridView1.DataBind();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            SNSDataContext context = new SNSDataContext();
+            var cols = from item in context.Comment
+                       select new
+                       {
+                           CommentUserID = item.CommentUserID,
+                           CommentDate = item.CommentDate,
+                           AdminReplyDate = item.AdminReplyDate,
+                       };
+
+            GridView1.DataSource = cols;
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+
         }
     }
 }

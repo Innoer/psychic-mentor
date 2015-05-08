@@ -4,28 +4,41 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- viewport的<meta>标签，这个标签可以修改在大部分的移动设备上面的显示，为了确保适当的绘制和触屏缩放。-->
+
+<title></title>
+
+<!--样式文件引用-->
+
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    
-        <asp:Label ID="Label2" runat="server" Text="当前位置：用户间短消息"></asp:Label>
+        <br />
+    <asp:Label ID="Label11" runat="server" Text="当前位置：短消息管理&gt;&gt;用户与用户" 
+            Font-Size="10pt"></asp:Label>
+        <br />
+        <asp:Image ID="Image5" runat="server" Height="1px" Width="97%" 
+            BackColor="Blue" />
+        <br />
+        <br />
+    </div>
+    <div>
     
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
-            AutoGenerateColumns="False" DataKeyNames="SMSID" DataSourceID="SqlDataSource1" 
-            EnableModelValidation="True" 
-            onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="4" 
-            ForeColor="#333333" GridLines="None">
-            <AlternatingRowStyle BackColor="White" />
+            AutoGenerateColumns="False" DataKeyNames="SMSID"  
+            EnableModelValidation="True" Width="100%"
+            onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="3" 
+            GridLines="None" onrowdeleting="GridView1_RowDeleting" BackColor="White" 
+            BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
+            PageSize="5" onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" />
-                <asp:ButtonField CommandName="select" Text="查看" ButtonType="Link" 
-                                HeaderText="具体信息" >
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:ButtonField>
-                <asp:BoundField DataField="SMSID" HeaderText="存根号" InsertVisible="False" 
-                    ReadOnly="True" SortExpression="SMSID" />
+
                 <asp:BoundField DataField="SenderUserID" HeaderText="发送方ID" 
                     SortExpression="SenderUserID" />
                 <asp:BoundField DataField="ReceiverUserID" HeaderText="接受方ID" 
@@ -34,13 +47,20 @@
                     SortExpression="SMSDate" />
                 <asp:CheckBoxField DataField="SMSReaded" HeaderText="是否已读" 
                     SortExpression="SMSReaded" />
+                <asp:ButtonField CommandName="select" Text="查看" ButtonType="Link" 
+                                HeaderText="具体信息" >
+                            <ItemStyle HorizontalAlign="Center" />
+                            </asp:ButtonField>
+                <asp:ButtonField CommandName="delete" Text="&lt;div id=&quot;de&quot; onclick=&quot;JavaScript:return confirm('确定删除吗？')&quot;&gt;删除&lt;/div&gt; "
+                                HeaderText="删除信息" >
+                            <ItemStyle HorizontalAlign="Center" />
+                            </asp:ButtonField>
             </Columns>
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+            <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#DEDFDE" ForeColor="Black" HorizontalAlign="Center" />
+            <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:AlumniSNSConnectionString %>" 
@@ -67,11 +87,15 @@
                 <asp:Parameter Name="SMSID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
+        <asp:Label ID="Label12" runat="server" Text="现在没有用户与用户的短消息" Visible="False"></asp:Label>
         <asp:Label ID="Label1" runat="server"></asp:Label>
         <asp:TextBox ID="TextBox1" runat="server" Visible="False"></asp:TextBox>
         <br />
     
     </div>
     </form>
+    <script type="text/javascript" src="../bootstrap/js/jquery-2.1.3.min.js"></script>
+
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

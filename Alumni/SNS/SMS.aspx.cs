@@ -25,7 +25,7 @@ namespace Alumni.SNS
             string userName;
             if (Session["SNS_SignInUserName"] == null || string.IsNullOrEmpty(userName = Session["SNS_SignInUserName"].ToString()))
             {
-                Response.Redirect("/SNS/ControlPanel.aspx", true);
+                Response.Redirect("/SNS/ControlPanel.aspx?ErrorID=1", true);
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace Alumni.SNS
             {
                 int userID;
                 if (!int.TryParse(Request["UserID"], out userID))
-                    goto invalid;
+                    userID = 0; // Admin
 
                 var user = snsContext.User.Where(u => u.UserID == userID).SingleOrDefault();
                 if (user == null && userID != 0) goto invalid; // FUCK IT.

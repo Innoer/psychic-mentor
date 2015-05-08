@@ -11,7 +11,15 @@ namespace Alumni.Manage.tag
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Session["logged"].ToString() != "true")
+                    Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
+            catch (Exception)
+            {
+                Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -21,7 +29,7 @@ namespace Alumni.Manage.tag
             {
                 Name = TextBox1.Text,
                 Amount = TextBox2.Text,
-                Date = Calendar1.SelectedDate.Date
+                Date = Convert.ToDateTime(TextBox19.Text.ToString())
             };
             context.Donations.InsertOnSubmit(don);
             context.SubmitChanges();
@@ -32,11 +40,11 @@ namespace Alumni.Manage.tag
         {
             if (CheckBox1.Checked == true)
             {
-                Calendar2.Enabled = true;
+                TextBox5.Enabled = true;
             }
             else
             {
-                Calendar2.Enabled = false;
+                TextBox5.Enabled = false;
             }
         }
 
@@ -57,6 +65,8 @@ namespace Alumni.Manage.tag
 
         protected void Button3_Click(object sender, EventArgs e)
         {
+            panel1.Visible = true;
+            panel2.Visible = false;
             DBDataContext context = new DBDataContext();
             var ID = int.Parse(Label2.Text);
             var don = context.Donations.Single(item => item.DonationId == ID);
@@ -64,7 +74,7 @@ namespace Alumni.Manage.tag
             don.Amount = TextBox4.Text;
             if (CheckBox1.Checked == true)
             {
-                don.Date = Calendar2.SelectedDate.Date;
+                don.Date = Convert.ToDateTime(TextBox5.Text.ToString());
             }
             else
             {
@@ -88,10 +98,10 @@ namespace Alumni.Manage.tag
             int donID = Convert.ToInt32(GridView1.SelectedValue);
             var don = context.Donations.First(ar => ar.DonationId == donID);
 
-            Label1.Text = donID.ToString();
+            Label2.Text = donID.ToString();
             TextBox3.Text = don.Name;
             TextBox4.Text = don.Amount;
-            Label2.Text = don.Date.ToString();
+            Label1.Text = don.Date.ToString();
         }
 
         protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
@@ -106,6 +116,11 @@ namespace Alumni.Manage.tag
 
             //context.SubmitChanges();
             //GridView.DataBind();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
         }
     }
 }

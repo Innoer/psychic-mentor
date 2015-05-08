@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Alumni" EntityNamespace="AlumniDB" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Alumni.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Alumni.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AlumniConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Articles" Member="Articles">
     <Type Name="Articles">
       <Column Name="ArticleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -14,18 +14,19 @@
       <Column Name="Keywords" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Source" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="Users_Articles" Member="Users" ThisKey="PublishUserID" OtherKey="UserID" Type="Users" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Columns_Articles" Member="Columns" ThisKey="ColumnID" OtherKey="ColumnID" Type="Columns" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Users_Articles" Member="Users" ThisKey="PublishUserID" OtherKey="UserID" Type="Users" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="Users">
-      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PassWord" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Users_Articles" Member="Articles" ThisKey="UserID" OtherKey="PublishUserID" Type="Articles" />
-      <Association Name="Users_Videos" Member="Videos" ThisKey="UserID" OtherKey="VideoUploaderID" Type="Videos" />
+  <Table Name="dbo.Videos" Member="Videos">
+    <Type Name="Videos">
+      <Column Name="VideoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="VideoTitle" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="VideoIntroduction" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="VideoUploadTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="VideoUploaderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VideoURL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Users_Videos" Member="Users" ThisKey="VideoUploaderID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Columns" Member="Columns">
@@ -81,15 +82,14 @@
       <Association Name="Templates_Configs" Member="Configs" ThisKey="TemplateID" OtherKey="GlobalTemplateID" Type="Configs" />
     </Type>
   </Table>
-  <Table Name="dbo.Videos" Member="Videos">
-    <Type Name="Videos">
-      <Column Name="VideoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="VideoTitle" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="VideoIntroduction" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="VideoUploadTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="VideoUploaderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="VideoURL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="Users_Videos" Member="Users" ThisKey="VideoUploaderID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PassWord" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Users_Articles" Member="Articles" ThisKey="UserID" OtherKey="PublishUserID" Type="Articles" />
+      <Association Name="Users_Videos" Member="Videos" ThisKey="UserID" OtherKey="VideoUploaderID" Type="Videos" />
     </Type>
   </Table>
 </Database>

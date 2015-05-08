@@ -1,11 +1,16 @@
 ﻿/* Code by Shindo. March, 2015. */
 
-function setProgramBySchool(schoolID, selectedProgram) {
+function setProgramBySchool(schoolID, selectedProgram, isSearch) {
     var frag = $(document.createDocumentFragment());
+    if (isSearch) {
+        var all = $('<option value="0" schoolID="0">（全部）</option>');
+        if (selectedProgram == 0) all.attr('selected', 'selected');
+        frag.append(all);
+    }
     $("#programData option").each(function () {
         var prog = $(this).clone();
 
-        if (prog.attr('schoolID') == schoolID) {
+        if (prog.attr('schoolID') == "0" || prog.attr('schoolID') == schoolID) {
             if (prog.val() == selectedProgram)
                 prog.attr('selected', 'selected');
 
