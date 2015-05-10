@@ -224,6 +224,9 @@
 .box1 .center 
 {
     width: 100%; height: 234px;
+    /* fix for ie8, fuck it */
+    position: absolute;
+    left: 0; top: 40px;
 }
 
 .box1 .center .inner 
