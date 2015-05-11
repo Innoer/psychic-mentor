@@ -36,7 +36,7 @@
             CellPadding="3" EnableModelValidation="True" 
             GridLines="None" onpageindexchanging="GridView1_PageIndexChanging" 
             Width="100%" BackColor="White" BorderColor="White" BorderStyle="Ridge" 
-            BorderWidth="2px" CellSpacing="1" PageSize="5">
+            BorderWidth="2px" CellSpacing="1" PageSize="15">
             <Columns>
             
                     <asp:BoundField DataField="VideoTitle" HeaderText="标题" 

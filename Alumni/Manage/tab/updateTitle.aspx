@@ -50,7 +50,7 @@
         onselectedindexchanged="newsGridView_SelectedIndexChanged" 
          AllowPaging="True" CellPadding="3" GridLines="None" BackColor="White" BorderColor="White" 
                         BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            PageSize="5">
+            PageSize="15">
         <Columns>
            
             <asp:BoundField DataField="ColumnID" HeaderText="栏目编号" 

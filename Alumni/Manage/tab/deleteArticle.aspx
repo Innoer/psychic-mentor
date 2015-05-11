@@ -34,7 +34,7 @@
         EnableModelValidation="True" GridLines="None" 
         AllowPaging="True" onrowdeleting="GridView_RowDeleting" BackColor="White" 
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            Width="100%" PageSize="5">
+            Width="100%" PageSize="15">
         <Columns>
             
             <asp:TemplateField HeaderText="序号" InsertVisible="False">

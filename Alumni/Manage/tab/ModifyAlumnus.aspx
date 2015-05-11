@@ -50,7 +50,7 @@
             DataKeyNames="UserID" CellPadding="3" GridLines="None" 
             AllowPaging="True" onpageindexchanging="GridView1_PageIndexChanging" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="White" 
-            BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" PageSize="5">
+            BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" PageSize="15">
             <Columns>
             
                             

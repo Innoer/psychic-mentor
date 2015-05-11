@@ -51,7 +51,7 @@
             AllowPaging="True" Width="100%" onrowdeleting="GridView1_RowDeleting" 
             BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" 
             CellSpacing="1" onselectedindexchanged="GridView1_SelectedIndexChanged" 
-            PageSize="5" onpageindexchanging="GridView1_PageIndexChanging">
+            PageSize="15" onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
              
                 <asp:BoundField DataField="Name" HeaderText="校友名" SortExpression="Name" />

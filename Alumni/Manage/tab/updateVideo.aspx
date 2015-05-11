@@ -35,7 +35,7 @@
             onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="3" 
             DataKeyNames="VideoID" GridLines="None" BackColor="White" 
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            PageSize="5">
+            PageSize="15">
             <Columns>
             
                 <asp:BoundField DataField="VideoTitle" HeaderText="标题" 

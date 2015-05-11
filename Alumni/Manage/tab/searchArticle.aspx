@@ -50,7 +50,7 @@
             Width="100%"
             DataKeyNames="ArticleID" AutoGenerateColumns="False" BackColor="White" 
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            PageSize="5">
+            PageSize="15">
             <Columns>
                 <asp:TemplateField HeaderText="序号" InsertVisible="False">
                     <ItemStyle HorizontalAlign="Center" />

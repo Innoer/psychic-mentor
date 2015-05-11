@@ -36,7 +36,7 @@
             AllowPaging="True" CellPadding="3" GridLines="None" 
             onpageindexchanging="GridView1_PageIndexChanging" Width="100%" 
             BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" 
-            CellSpacing="1" PageSize="5">
+            CellSpacing="1" PageSize="15">
             <Columns>
             
             <asp:BoundField DataField="VideoID" HeaderText="ID" 

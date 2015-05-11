@@ -58,7 +58,7 @@
         onselectedindexchanged="UsersGridView_SelectedIndexChanged" 
         onrowdeleting="UsersGridView_RowDeleting" BackColor="White" 
         BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-        PageSize="5">
+        PageSize="15">
             <Columns>
             
             

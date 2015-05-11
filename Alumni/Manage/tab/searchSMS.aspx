@@ -36,7 +36,7 @@
             onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="3" 
             GridLines="None" onrowdeleting="GridView1_RowDeleting" BackColor="White" 
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            PageSize="5" onpageindexchanging="GridView1_PageIndexChanging">
+            PageSize="15" onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
 
                 <asp:BoundField DataField="SenderUserID" HeaderText="发送方ID" 
@@ -62,31 +62,6 @@
             <RowStyle BackColor="#DEDFDE" ForeColor="Black" HorizontalAlign="Center" />
             <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:AlumniSNSConnectionString %>" 
-            DeleteCommand="DELETE FROM [SMS] WHERE [SMSID] = @SMSID" 
-            InsertCommand="INSERT INTO [SMS] ([SenderUserID], [ReceiverUserID], [SMSContent], [SMSDate], [SMSReaded]) VALUES (@SenderUserID, @ReceiverUserID, @SMSContent, @SMSDate, @SMSReaded)" 
-            SelectCommand="SELECT * FROM [SMS]" 
-            UpdateCommand="UPDATE [SMS] SET [SenderUserID] = @SenderUserID, [ReceiverUserID] = @ReceiverUserID, [SMSContent] = @SMSContent, [SMSDate] = @SMSDate, [SMSReaded] = @SMSReaded WHERE [SMSID] = @SMSID">
-            <DeleteParameters>
-                <asp:Parameter Name="SMSID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="SenderUserID" Type="Int32" />
-                <asp:Parameter Name="ReceiverUserID" Type="Int32" />
-                <asp:Parameter Name="SMSContent" Type="String" />
-                <asp:Parameter Name="SMSDate" Type="DateTime" />
-                <asp:Parameter Name="SMSReaded" Type="Boolean" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="SenderUserID" Type="Int32" />
-                <asp:Parameter Name="ReceiverUserID" Type="Int32" />
-                <asp:Parameter Name="SMSContent" Type="String" />
-                <asp:Parameter Name="SMSDate" Type="DateTime" />
-                <asp:Parameter Name="SMSReaded" Type="Boolean" />
-                <asp:Parameter Name="SMSID" Type="Int32" />
-            </UpdateParameters>
-        </asp:SqlDataSource>
         <asp:Label ID="Label12" runat="server" Text="现在没有用户与用户的短消息" Visible="False"></asp:Label>
         <asp:Label ID="Label1" runat="server"></asp:Label>
         <asp:TextBox ID="TextBox1" runat="server" Visible="False"></asp:TextBox>

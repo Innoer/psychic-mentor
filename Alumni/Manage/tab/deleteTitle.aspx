@@ -36,7 +36,7 @@
             GridLines="None" Width="100%" 
             onrowdeleting="GridView1_RowDeleting" BackColor="White" 
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            PageSize="5">
+            PageSize="15">
             <Columns>
             
                 <asp:BoundField DataField="ColumnName" HeaderText="栏目名" 

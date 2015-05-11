@@ -53,7 +53,7 @@
         EnableModelValidation="True" 
         GridLines="None" onselectedindexchanged="GridView1_SelectedIndexChanged" 
         Width="100%" BackColor="White" BorderColor="White" BorderStyle="Ridge" 
-        BorderWidth="2px" CellSpacing="1" PageSize="5" 
+        BorderWidth="2px" CellSpacing="1" PageSize="15" 
             onpageindexchanging="GridView1_PageIndexChanging">
 
         <Columns>
@@ -77,10 +77,6 @@
         <RowStyle BackColor="#DEDFDE" ForeColor="Black" HorizontalAlign="Center" />
         <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
     </asp:GridView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:AlumniSNSConnectionString %>" 
-        SelectCommand="SELECT [CommentID], [CommentUserID], [CommentDate], [AdminReplyDate] FROM [Comment]">
-    </asp:SqlDataSource>
         <asp:Label ID="Label12" runat="server" Text="现在没有用户与管理员的短消息" Visible="False"></asp:Label>
     <asp:Label ID="Label5" runat="server" Text="Label" Visible="False"></asp:Label>
     </div>

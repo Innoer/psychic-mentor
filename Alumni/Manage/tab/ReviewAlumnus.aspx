@@ -67,7 +67,7 @@
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
             DataKeyNames="UserID" 
             onselectedindexchanged="GridView1_SelectedIndexChanged" 
-            onrowdeleting="GridView1_RowDeleting" PageSize="5" AllowPaging="True" 
+            onrowdeleting="GridView1_RowDeleting" PageSize="15" AllowPaging="True" 
             onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
                 

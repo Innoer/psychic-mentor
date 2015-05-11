@@ -46,7 +46,7 @@
             GridLines="None" Width="100%" onrowdeleting="GridView1_RowDeleting" 
             onselectedindexchanged="GridView1_SelectedIndexChanged" BackColor="White" 
             BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            PageSize="5">
+            PageSize="15">
             <Columns>
                
                 

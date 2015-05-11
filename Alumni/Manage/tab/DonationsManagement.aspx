@@ -59,7 +59,7 @@
             onselectedindexchanged="GridView1_SelectedIndexChanged1" 
             onrowdeleted="GridView1_RowDeleted" BackColor="White" BorderColor="White" 
             BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
-            DataKeyNames="DonationId" PageSize="5" AllowPaging="True" 
+            DataKeyNames="DonationId" PageSize="15" AllowPaging="True" 
             onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
             
