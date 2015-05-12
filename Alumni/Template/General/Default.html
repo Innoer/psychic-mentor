@@ -40,17 +40,17 @@
         <div class="box1" style="margin-top: 20px;">
             <div class="container">
                 <div class="buttons">
-                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友新闻" control-div="news_mate"
-                        clicked="clicked" src="/Template/Common/Image/Button/校友新闻h.png" normal-state="/Template/Common/Image/Button/校友新闻.png"
-                        click-state="/Template/Common/Image/Button/校友新闻h.png" />
                     <img name="btnChangeCol" onclick="changeColumn(this);" alt="校区新闻" control-div="news_school"
-                        src="/Template/Common/Image/Button/校区新闻.png" normal-state="/Template/Common/Image/Button/校区新闻.png"
+                        clicked="clicked" src="/Template/Common/Image/Button/校区新闻h.png" normal-state="/Template/Common/Image/Button/校区新闻.png"
                         click-state="/Template/Common/Image/Button/校区新闻h.png" />
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友新闻" control-div="news_mate"
+                        src="/Template/Common/Image/Button/校友新闻.png" normal-state="/Template/Common/Image/Button/校友新闻.png"
+                        click-state="/Template/Common/Image/Button/校友新闻h.png" />
                     <img name="btnChangeCol" onclick="changeColumn(this);" alt="通知公告" control-div="news_noti"
                         src="/Template/Common/Image/Button/通知公告.png" normal-state="/Template/Common/Image/Button/通知公告.png"
                         click-state="/Template/Common/Image/Button/通知公告h.png" />
                 </div>
-                <div id="news_mate">{% assign column = Column['校友新闻'] -%}
+                <div id="news_mate" style="display: none;">{% assign column = Column['校友新闻'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -72,7 +72,7 @@
                     </div>
                     <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
                 </div>
-                <div id="news_school" style="display: none;">{% assign column = Column['校区新闻'] -%}
+                <div id="news_school">{% assign column = Column['校区新闻'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -148,17 +148,17 @@
         <div class="box1" style="margin-top: 10px;">
             <div class="container">
                 <div class="buttons">
-                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="工大回忆" control-div="hit_memory"
-                        clicked="clicked" src="/Template/Common/Image/Button/工大回忆h.png" normal-state="/Template/Common/Image/Button/工大回忆.png"
-                        click-state="/Template/Common/Image/Button/工大回忆h.png" />
                     <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友人物" control-div="mate_celebrity"
-                        src="/Template/Common/Image/Button/校友人物.png" normal-state="/Template/Common/Image/Button/校友人物.png"
+                        clicked="clicked" src="/Template/Common/Image/Button/校友人物h.png" normal-state="/Template/Common/Image/Button/校友人物.png"
                         click-state="/Template/Common/Image/Button/校友人物h.png" />
+                    <img name="btnChangeCol" onclick="changeColumn(this);" alt="工大回忆" control-div="hit_memory"
+                        src="/Template/Common/Image/Button/工大回忆.png" normal-state="/Template/Common/Image/Button/工大回忆.png"
+                        click-state="/Template/Common/Image/Button/工大回忆h.png" />
                     <img name="btnChangeCol" onclick="changeColumn(this);" alt="校友组织" control-div="hit_alumni"
                         src="/Template/Common/Image/Button/校友组织.png" normal-state="/Template/Common/Image/Button/校友组织.png"
                         click-state="/Template/Common/Image/Button/校友组织h.png" />
                 </div>
-                <div id="hit_memory">{% assign column = Column['工大回忆'] -%}
+                <div id="hit_memory" style="display: none;">{% assign column = Column['工大回忆'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">
@@ -180,7 +180,7 @@
                     </div>
                     <a href="/ShowColumn.aspx?ColumnID={{ column.ColumnID }}"><img alt="More" class="more" src="/Template/Common/Image/more.png" /></a>
                 </div>
-                <div id="mate_celebrity" style="display: none;">{% assign column = Column['校友人物'] -%}
+                <div id="mate_celebrity">{% assign column = Column['校友人物'] -%}
                     <div class="center">
                         <div class="inner">
                             <div class="picArticle">

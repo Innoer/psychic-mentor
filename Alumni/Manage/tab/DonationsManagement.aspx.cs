@@ -20,6 +20,18 @@ namespace Alumni.Manage.tag
             {
                 Response.Write(" <script> parent.parent.window.location.href= 'overTime.htm' </script> ");
             }
+            DBDataContext context = new DBDataContext();
+            var cols = from item in context.Donations
+                       select new
+                       {
+                           DonationId = item.DonationId,
+                           Name = item.Name,
+                           Amount = item.Amount,
+                           Date = item.Date
+                       };
+
+            GridView1.DataSource = cols;
+            GridView1.DataBind();
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -34,6 +46,7 @@ namespace Alumni.Manage.tag
             context.Donations.InsertOnSubmit(don);
             context.SubmitChanges();
             GridView1.DataBind();
+            Response.Redirect("/Manage/tab/DonationsManagement.aspx", true);
         }
 
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -82,6 +95,7 @@ namespace Alumni.Manage.tag
             }
             context.SubmitChanges();
             GridView1.DataBind();
+            Response.Redirect("/Manage/tab/DonationsManagement.aspx", true);
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -120,7 +134,33 @@ namespace Alumni.Manage.tag
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            DBDataContext context = new DBDataContext();
+            var cols = from item in context.Donations
+                       select new
+                       {
+                           DonationId=item.DonationId,
+                           Name = item.Name,
+                           Amount = item.Amount,
+                           Date = item.Date
+                       };
 
+            GridView1.DataSource = cols;
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+
+        }
+
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            e.Cancel = true;
+
+            int articleID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
+            DBDataContext context = new DBDataContext();
+            var article = context.Donations.Single(item => item.DonationId == articleID);
+            context.Donations.DeleteOnSubmit(article);
+
+            context.SubmitChanges();
+            Response.Redirect("/Manage/tab/DonationsManagement.aspx", true);
         }
     }
 }

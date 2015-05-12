@@ -54,7 +54,7 @@ namespace Alumni.Manage.tab
         {
             e.Cancel = true;
 
-            int articleID = Convert.ToInt32(e.Keys[0]);
+            int articleID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
             SNSDataContext context = new SNSDataContext();
             var article = context.SMS.Single(item => item.SMSID == articleID);
             context.SMS.DeleteOnSubmit(article);

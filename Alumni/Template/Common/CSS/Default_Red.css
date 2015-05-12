@@ -248,11 +248,11 @@
 }
 
 .timeline .icon30
-{
+{  
+    background: white url(/Template/Common/Image/icon30.png) no-repeat center center;
     position: relative;
     margin: -80px auto;
     width: 160px; height: 160px;
-    background-color: #efdede;
     text-align: center;
     color: #330000;
     overflow: hidden;

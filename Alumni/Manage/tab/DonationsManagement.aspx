@@ -20,14 +20,6 @@
         {
             width: 100%;
         }
-        .style2
-        {
-            width: 152px;
-        }
-        .style4
-        {
-            width: 156px;
-        }
         .style5
         {
             width: 185px;
@@ -54,13 +46,14 @@
     
     
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-            CellPadding="3" DataSourceID="SqlDataSource1" EnableModelValidation="True" 
+            CellPadding="3"  EnableModelValidation="True" 
             GridLines="None" Width="100%" 
             onselectedindexchanged="GridView1_SelectedIndexChanged1" 
             onrowdeleted="GridView1_RowDeleted" BackColor="White" BorderColor="White" 
             BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1" 
             DataKeyNames="DonationId" PageSize="15" AllowPaging="True" 
-            onpageindexchanging="GridView1_PageIndexChanging">
+            onpageindexchanging="GridView1_PageIndexChanging" 
+            onrowdeleting="GridView1_RowDeleting">
             <Columns>
             
                 <asp:TemplateField HeaderText="序号" InsertVisible="False">
@@ -78,6 +71,10 @@
                                 HeaderText="信息修改" >
                             <ItemStyle HorizontalAlign="Center" />
                             </asp:ButtonField>
+                <asp:ButtonField CommandName="delete" Text="&lt;div id=&quot;de&quot; onclick=&quot;JavaScript:return confirm('确定删除吗？')&quot;&gt;删除&lt;/div&gt; "
+                                HeaderText="删除信息" >
+                            <ItemStyle HorizontalAlign="Center" />
+                            </asp:ButtonField>
             </Columns>
             <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
             <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
@@ -85,9 +82,6 @@
             <RowStyle BackColor="#DEDFDE" ForeColor="Black" HorizontalAlign="Center" />
             <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:AlumniConnectionString %>" 
-            SelectCommand="SELECT * FROM [Donations]"></asp:SqlDataSource>
                     <asp:Label ID="Label2" runat="server" Text="Label" Visible="False"></asp:Label>
         <br />
         <asp:Button ID="Button1" runat="server" Text="添加捐献记录" onclick="Button1_Click" />
@@ -118,7 +112,7 @@
                 <td>
                     <asp:TextBox ID="TextBox19" runat="server"></asp:TextBox>
                     <asp:RangeValidator ID="RangeValidator1" runat="server" 
-                        ControlToValidate="TextBox19" ErrorMessage="RangeValidator" 
+                        ControlToValidate="TextBox19" ErrorMessage="请按****/**/**格式输入" 
                         MaximumValue="2111/12/31" MinimumValue="1900/01/01" Type="Date"></asp:RangeValidator>
                     <br />
                     <asp:Button ID="Button2" runat="server" onclick="Button2_Click" Text="确认添加" />
@@ -159,7 +153,7 @@
                 <td>
                     <asp:TextBox ID="TextBox5" runat="server" Enabled="False"></asp:TextBox>
                     <asp:RangeValidator ID="RangeValidator2" runat="server" 
-                        ControlToValidate="TextBox5" ErrorMessage="RangeValidator" 
+                        ControlToValidate="TextBox5" ErrorMessage="请按****/**/**格式输入" 
                         MaximumValue="2111/12/31" MinimumValue="1900/01/01" Type="Date"></asp:RangeValidator>
                     <br />
                     <asp:Button ID="Button3" runat="server" Text="确认修改" onclick="Button3_Click" />
