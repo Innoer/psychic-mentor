@@ -26,6 +26,15 @@ namespace Alumni
             public int ArticlesPerPage { get; set; }
         }
 
+        private class VideoType : DotLiquid.Drop
+        {
+            public String VideoTitle { get; set; }
+            public String VideoIntroduction { get; set; }
+            public DateTime VideoUploadTime { get; set; }
+            public String VideoUploader { get; set; }
+            public String VideoURL { get; set; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DBDataContext context = new DBDataContext();
@@ -71,6 +80,16 @@ namespace Alumni
                 if (pageID < 1) pageID = 1;
                 else if (pageID > totalPageCount) pageID = totalPageCount;
 
+                var videos = from item in context.Videos
+                             select new VideoType
+                             {
+                                 VideoTitle = item.VideoTitle,
+                                 VideoIntroduction = item.VideoIntroduction,
+                                 VideoUploadTime = item.VideoUploadTime,
+                                 VideoUploader = item.Users.UserName,
+                                 VideoURL = item.VideoURL
+                             };
+
                 Template template = TemplateHelper.GetSubTemplate(context, column.TemplateID);
                 var dataToRender = Hash.FromAnonymousObject(
                     new
@@ -88,6 +107,7 @@ namespace Alumni
                                     }),
                         SubColumnList = subColumns.ToList(),
                         UnionArticleGetter = new TableGetter<ArticleType>(query.Skip((pageID - 1) * articlesPerPage).Take(articlesPerPage)),
+                        Videos = new TableGetter<VideoType>(videos),
 
                         Pager = new PagerType
                         {

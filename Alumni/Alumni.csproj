@@ -1130,6 +1130,7 @@
     <Content Include="Template\Common\Image\gradient.png" />
     <Content Include="Template\Common\Image\header_bk.png" />
     <Content Include="Template\Common\Image\header_bk_red.png" />
+    <Content Include="Template\Common\Image\icon30.png" />
     <Content Include="Template\Common\Image\left_arrow.png" />
     <Content Include="Template\Common\Image\left_separator_blue.png" />
     <Content Include="Template\Common\Image\left_separator_red.png" />

@@ -22,10 +22,13 @@ namespace Alumni.Manage.tab
             }
             SNSDataContext context = new SNSDataContext();
             var cols = from item in context.SMS
+                       join item1 in context.User on item.SenderUserID equals item1.UserID
+                       join item2 in context.User on item.ReceiverUserID equals item2.UserID
                        select new
                        {
-                           SenderUserID = item.SenderUserID,
-                           ReceiverUserID = item.ReceiverUserID,
+                           SMSID=item.SMSID,
+                           SenderUserID = item1.UserName,
+                           ReceiverUserID = item2.UserName,
                            SMSDate = item.SMSDate,
                            SMSReaded = item.SMSReaded
                        };
@@ -67,10 +70,13 @@ namespace Alumni.Manage.tab
         {
             SNSDataContext context = new SNSDataContext();
             var cols = from item in context.SMS
+                       join item1 in context.User on item.SenderUserID equals item1.UserID
+                       join item2 in context.User on item.ReceiverUserID equals item2.UserID
                        select new
                        {
-                           SenderUserID = item.SenderUserID,
-                           ReceiverUserID = item.ReceiverUserID,
+                           SMSID = item.SMSID,
+                           SenderUserID = item1.UserName,
+                           ReceiverUserID = item2.UserName,
                            SMSDate = item.SMSDate,
                            SMSReaded = item.SMSReaded
                        };

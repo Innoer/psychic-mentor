@@ -59,7 +59,7 @@
         <Columns>
         
             
-            <asp:BoundField DataField="CommentUserID" HeaderText="用户ID" 
+            <asp:BoundField DataField="CommentUserID" HeaderText="用户名" 
                 SortExpression="CommentUserID" />
             <asp:BoundField DataField="CommentDate" HeaderText="发送时间" 
                 SortExpression="CommentDate" />
@@ -87,7 +87,7 @@
         <table class="style1">
             <tr>
                 <td class="style3">
-                    发送短消息的信息用户ID：</td>
+                    发送短消息的用户：</td>
                 <td class="style4">
                     <asp:Label ID="Label1" runat="server"></asp:Label>
                 </td>
@@ -109,14 +109,14 @@
                 <td class="style2">
                     管理员回复内容：</td>
                 <td>
-                    <asp:TextBox ID="TextBox1" runat="server" Height="187px" TextMode="MultiLine" 
+                    <asp:TextBox ID="TextBox1" runat="server" Height="100px" TextMode="MultiLine" 
                         Width="267px"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-            <td>管理员回复时间：</td>
+            <td>&nbsp;</td>
             <td>
-                <asp:Label ID="Label4" runat="server"></asp:Label>
+                <asp:Label ID="Label4" runat="server" Visible="False"></asp:Label>
                 </td>
             </tr>
             <tr>

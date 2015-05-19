@@ -22,9 +22,11 @@ namespace Alumni.Manage.tag
             }
             SNSDataContext context = new SNSDataContext();
             var cols = from item in context.Comment
+                       join item1 in context.User on item.CommentUserID equals item1.UserID
                        select new
                        {
-                           CommentUserID = item.CommentUserID,
+                           CommentID=item.CommentID,
+                           CommentUserID = item1.UserName,
                            CommentDate = item.CommentDate,
                            AdminReplyDate = item.AdminReplyDate,
                        };
@@ -46,7 +48,7 @@ namespace Alumni.Manage.tag
 
             Label5.Text = comID.ToString();
 
-            Label1.Text = com.CommentUserID.ToString();
+            Label1.Text = com.User.UserName.ToString();
             Label2.Text = com.CommentContent.ToString();
             Label3.Text = com.CommentDate.ToString();
             if (com.AdminReply != null)
@@ -71,9 +73,11 @@ namespace Alumni.Manage.tag
         {
             SNSDataContext context = new SNSDataContext();
             var cols = from item in context.Comment
+                       join item1 in context.User on item.CommentUserID equals item1.UserID
                        select new
                        {
-                           CommentUserID = item.CommentUserID,
+                           CommentID = item.CommentID,
+                           CommentUserID = item1.UserName,
                            CommentDate = item.CommentDate,
                            AdminReplyDate = item.AdminReplyDate,
                        };

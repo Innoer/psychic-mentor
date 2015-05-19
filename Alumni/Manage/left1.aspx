@@ -39,6 +39,7 @@ padding-top:10px;
 .xy {position: absolute; height: 20px; width: 20px; left: 20px; top: 10px; background:url(images/2.png);}
 .dxx {position: absolute; height: 20px; width: 20px; left: 20px; top: 10px; background:url(images/8.png);}
 .oth {position: absolute; height: 20px; width: 20px; left: 20px; top: 10px; background:url(images/1.png);}
+.oth2 {position: absolute; height: 20px; width: 20px; left: 20px; top: 10px; background:url(images/8.png);}
 .div3{display: none;cursor:pointer; font-size:13px;}
 .div3 ul{margin:0;padding:0;}
 .div3 li{ height:30px; line-height:30px; list-style:none; border-bottom:#ccc 1px dotted; text-align:center;}
@@ -112,7 +113,15 @@ padding-top:10px;
         <li onclick="redirectContent('tab/UserManagement.aspx')"> 用户管理</li>
          </ul>
   </div>
-  <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx" Target="main.aspx">校友会主页</asp:HyperLink>
+  
+  <div class="div2">
+        <asp:LinkButton ID="LinkButton1" runat="server" Text="退出登陆" onclick="LinkButton1_Click" ForeColor="Black">退出登陆</asp:LinkButton>
+  </div>
+  <div class="div2">
+        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Default.aspx" Target="main.aspx" ForeColor="Black" >返回主页</asp:HyperLink>
+  </div>
+            
+            <br />
 </div>
 
 

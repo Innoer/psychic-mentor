@@ -22,5 +22,15 @@ namespace Alumni.Manage
             }
             Label1.Text = "当前用户："+Session["UserName"].ToString() ;
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Write(" <script> parent.parent.window.location.href= 'LoginManage.aspx' </script> ");
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Write(" <script> parent.parent.window.location.href= 'LoginManage.aspx' </script> ");
+        }
     }
 }

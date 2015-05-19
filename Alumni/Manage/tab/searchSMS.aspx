@@ -39,9 +39,9 @@
             PageSize="15" onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
 
-                <asp:BoundField DataField="SenderUserID" HeaderText="发送方ID" 
+                <asp:BoundField DataField="SenderUserID" HeaderText="发送方" 
                     SortExpression="SenderUserID" />
-                <asp:BoundField DataField="ReceiverUserID" HeaderText="接受方ID" 
+                <asp:BoundField DataField="ReceiverUserID" HeaderText="接受方" 
                     SortExpression="ReceiverUserID" />
                 <asp:BoundField DataField="SMSDate" HeaderText="发送时间" 
                     SortExpression="SMSDate" />

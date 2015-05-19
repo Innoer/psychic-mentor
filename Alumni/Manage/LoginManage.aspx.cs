@@ -18,7 +18,7 @@ namespace Alumni.Manage
                 Response.Write("<script>alert('账号和密码错误，请重新输入')</script>"); 
                 Label1.Text = Session["message"].ToString();
             }
-            Session["message"] = "";
+            Session["message"] = null;
             //TextBox1.Focus();
             
         }
@@ -54,6 +54,7 @@ namespace Alumni.Manage
                     {
                         Session["logged"] = "true";
                         Session["UserName"] = name;
+                        Session["message"] = null;
                         Response.Redirect("main.aspx", false);
                     }
                     else
